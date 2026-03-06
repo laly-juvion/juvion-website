@@ -14,7 +14,7 @@
       theme: {
         extend: {
           colors: {
-            brand: '#E8621A',
+            brand: '#FF6600',
           },
           fontFamily: {
             display: ['"Playfair Display"', 'Georgia', 'serif'],
@@ -27,6 +27,16 @@
 </head>
 <body class="bg-[#080808] text-[#F2EFE9] font-sans antialiased">
 
+  <!-- SVG filters for logo -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <!-- Tints white pixels to brand orange #FF6600, sRGB to avoid gamma shift -->
+      <filter id="logo-tint-orange" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="1.0 0 0 0 0  0 0.4 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+      </filter>
+    </defs>
+  </svg>
+
   <!-- GRAIN OVERLAY -->
   <div class="grain-overlay" aria-hidden="true"></div>
 
@@ -34,8 +44,7 @@
   <nav id="nav">
     <div class="nav-inner">
       <a href="#home" class="nav-brand">
-        <div class="nav-logo-mark">J</div>
-        <span class="nav-wordmark">Juvion Health Sciences</span>
+        <img src="assets/JuvionLogo.png" alt="Juvion Health Sciences" class="nav-logo-img">
       </a>
       <div class="nav-links">
         <a href="#flygym" class="nav-link">FlyGym</a>
@@ -382,28 +391,28 @@
           </div>
           <div class="team-card reveal" style="--delay:0.2s">
             <div class="team-photo">
-              <img src="https://placehold.co/220x220/141414/2a2a2a?text=LR" alt="Laïly Robur">
+              <img src="https://placehold.co/220x220/141414/2a2a2a?text=LR" alt="Laly Robyr">
             </div>
             <div class="team-info">
-              <div class="team-name">Laïly Robur</div>
+              <div class="team-name">Laly Robyr</div>
               <div class="team-role">Lab Head</div>
             </div>
           </div>
           <div class="team-card reveal" style="--delay:0.25s">
             <div class="team-photo">
-              <img src="https://placehold.co/220x220/141414/2a2a2a?text=NT" alt="Nancy Thacker">
+              <img src="https://placehold.co/220x220/141414/2a2a2a?text=MT" alt="Manoj Thacker">
             </div>
             <div class="team-info">
-              <div class="team-name">Nancy Thacker</div>
+              <div class="team-name">Manoj Thacker</div>
               <div class="team-role">Product Commercialization</div>
             </div>
           </div>
           <div class="team-card reveal" style="--delay:0.3s">
             <div class="team-photo">
-              <img src="https://placehold.co/220x220/141414/2a2a2a?text=SQ" alt="Sebastian Quiles">
+              <img src="https://placehold.co/220x220/141414/2a2a2a?text=SG" alt="Sebastian Guilmot">
             </div>
             <div class="team-info">
-              <div class="team-name">Sebastian Quiles</div>
+              <div class="team-name">Sebastian Guilmot</div>
               <div class="team-role">Platform Manager</div>
             </div>
           </div>
@@ -412,8 +421,8 @@
               <img src="https://placehold.co/220x220/141414/2a2a2a?text=SB2" alt="Dr. Subhash Bandyopadhyay">
             </div>
             <div class="team-info">
-              <div class="team-name">Dr. Subhash Bandyopadhyay</div>
-              <div class="team-role">Alliance Affairs &amp; Business Development</div>
+              <div class="team-name">Dr. Subhasri Bandyopadhyay</div>
+              <div class="team-role">Medical Affairs and Business Commercialization</div>
             </div>
           </div>
         </div>
@@ -435,10 +444,10 @@
             </div>
             <div class="advisor-card reveal" style="--delay:0.1s">
               <div class="advisor-photo">
-                <img src="https://placehold.co/72x72/141414/2a2a2a?text=SG" alt="Dr. Sanjeev Girgria">
+                <img src="https://placehold.co/72x72/141414/2a2a2a?text=SG" alt="Dr. Sanjeev Ganguly">
               </div>
               <div>
-                <div class="team-name">Dr. Sanjeev Girgria</div>
+                <div class="team-name">Dr. Sanjeev Ganguly</div>
                 <div class="team-role">Medical</div>
               </div>
             </div>
@@ -459,10 +468,10 @@
           <div class="advisor-list">
             <div class="advisor-card reveal">
               <div class="advisor-photo">
-                <img src="https://placehold.co/72x72/141414/2a2a2a?text=SB" alt="Dr. Sournaa Banerjee">
+                <img src="https://placehold.co/72x72/141414/2a2a2a?text=SB" alt="Dr. Soumya Banerjee">
               </div>
               <div>
-                <div class="team-name">Dr. Sournaa Banerjee</div>
+                <div class="team-name">Dr. Soumya Banerjee</div>
                 <div class="team-role">CEO &amp; Co-Founder</div>
               </div>
             </div>
@@ -475,14 +484,6 @@
                 <div class="team-role">Board Member</div>
               </div>
             </div>
-            <div class="advisor-card reveal" style="--delay:0.2s">
-              <div class="advisor-photo">
-                <img src="https://placehold.co/72x72/141414/2a2a2a?text=PD" alt="Priyanka Dutta Passecker">
-              </div>
-              <div>
-                <div class="team-name">Priyanka Dutta Passecker</div>
-                <div class="team-role">Board Member</div>
-              </div>
             </div>
           </div>
         </div>
@@ -555,8 +556,7 @@
       <!-- Brand -->
       <div class="footer-col">
         <a href="#home" class="nav-brand footer-brand">
-          <div class="nav-logo-mark">J</div>
-          <span class="nav-wordmark">Juvion Health Sciences</span>
+          <img src="assets/JuvionLogo.png" alt="Juvion Health Sciences" class="nav-logo-img">
         </a>
         <p class="footer-tagline">Science to Sustain Motion.</p>
         <p class="footer-location">Lausanne, Switzerland</p>

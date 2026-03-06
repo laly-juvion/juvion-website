@@ -4,9 +4,9 @@
   --surface:     #0f0f0f;
   --elevated:    #141414;
   --border:      rgba(255, 255, 255, 0.09);
-  --brand:       #E8621A;
-  --brand-dim:   rgba(232, 98, 26, 0.12);
-  --brand-glow:  rgba(232, 98, 26, 0.18);
+  --brand:       #FF6600;
+  --brand-dim:   rgba(255, 102, 0, 0.12);
+  --brand-glow:  rgba(255, 102, 0, 0.18);
   --text:        #F2EFE9;
   --text-sec:    #9A9590;
   --text-muted:  #4A4845;
@@ -80,7 +80,7 @@ a { text-decoration: none; color: inherit; }
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
-  height: 72px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,19 +93,12 @@ a { text-decoration: none; color: inherit; }
   flex-shrink: 0;
 }
 
-.nav-logo-mark {
-  width: 32px;
-  height: 32px;
-  background: var(--brand);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 15px;
-  color: #fff;
+.nav-logo-img {
+  height: 62px;
+  width: auto;
+  object-fit: contain;
   flex-shrink: 0;
+  filter: url('#logo-tint-orange');
 }
 
 .nav-wordmark {
