@@ -52,6 +52,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ── Active nav highlight ───────────────────────────────────── */
+// Page-based highlight for sub-pages (flygym.html, news.html, contact.html)
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('.nav-link, .nav-mobile-link').forEach(link => {
+  const href = link.getAttribute('href');
+  if (href && !href.startsWith('#') && currentPage === href) {
+    link.classList.add('nav-link--active');
+  }
+});
+
+// Section-based highlight for index.html anchor links
 const sections = document.querySelectorAll('section[id], footer[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -116,17 +126,20 @@ if (newsletterForm) {
 /* ── Render: Team ───────────────────────────────────────────── */
 function teamCardHTML(m, delay) {
   const style = delay ? ` style="--delay:${delay}"` : '';
+  const imgSrc = m.photo
+    ? m.photo
+    : `https://placehold.co/220x220/141414/2a2a2a?text=${encodeURIComponent(m.initials)}`;
   return `
     <div class="team-card reveal"${style}>
       <div class="team-photo">
-        <img src="https://placehold.co/220x220/141414/2a2a2a?text=${encodeURIComponent(m.initials)}" alt="${m.name}" loading="lazy">
+        <img src="${imgSrc}" alt="${m.name}" loading="lazy">
       </div>
       <div class="team-info">
         <div class="team-name">${m.name}</div>
         <div class="team-role">${m.role}</div>
         <div class="team-socials">
-          <a href="${m.linkedin || '#'}" class="team-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">${ICON_LINKEDIN}</a>
-          <a href="${m.email ? 'mailto:' + m.email : '#'}" class="team-social-link" aria-label="Email">${ICON_EMAIL}</a>
+          <a href="${m.linkedin || '#'}" class="team-social-link${m.linkedin ? '' : ' team-social-link--disabled'}" aria-label="LinkedIn" ${m.linkedin ? 'target="_blank" rel="noopener"' : ''}>${ICON_LINKEDIN}</a>
+          <a href="${m.email ? 'mailto:' + m.email : '#'}" class="team-social-link${m.email ? '' : ' team-social-link--disabled'}" aria-label="Email">${ICON_EMAIL}</a>
         </div>
       </div>
     </div>`;
@@ -146,6 +159,14 @@ function advisorCardHTML(m, delay) {
     </div>`;
 }
 
+function getRowCount() {
+  const grid = document.getElementById('teamCoreGrid');
+  if (!grid) return 4;
+  // Read actual column count from the computed grid layout
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+  return Math.max(1, cols);
+}
+
 function renderTeam() {
   const coreGrid      = document.getElementById('teamCoreGrid');
   const expandedEl    = document.getElementById('teamExpanded');
@@ -155,15 +176,33 @@ function renderTeam() {
   const expandBtn     = document.getElementById('teamExpandBtn');
   if (!coreGrid) return;
 
-  const featured = TEAM_MEMBERS.filter(m => m.featured);
-  const rest     = TEAM_MEMBERS.filter(m => !m.featured);
+  const sorted = [...TEAM_MEMBERS].sort((a, b) => a.rank - b.rank);
 
-  coreGrid.innerHTML = featured.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
-  coreGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  function applyVisibleCount() {
+    const count = getRowCount();
+    const visible = sorted.slice(0, count);
+    const rest    = sorted.slice(count);
 
-  if (expandedGrid) {
-    expandedGrid.innerHTML = rest.map((m, i) => teamCardHTML(m, `${i * 0.06}s`)).join('');
+    coreGrid.innerHTML = visible.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
+    coreGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    if (expandedGrid) {
+      expandedGrid.innerHTML = rest.map((m, i) => teamCardHTML(m, `${i * 0.06}s`)).join('');
+    }
+
+    if (expandBtn) {
+      expandBtn.style.display = rest.length > 0 ? '' : 'none';
+    }
   }
+
+  applyVisibleCount();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyVisibleCount, 150);
+  }, { passive: true });
+
   if (advisorList) {
     advisorList.innerHTML = ADVISORS.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
   }

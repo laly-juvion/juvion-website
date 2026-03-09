@@ -4,14 +4,78 @@
 ──────────────────────────────────────────────────────────────── */
 
 const TEAM_MEMBERS = [
-  { name: 'Dr. Soumya Banerjee',        role: 'CEO & Co-Founder',                               initials: 'SB',  featured: true  },
-  { name: 'Prof. Dr. Brian D. McCabe',  role: 'Co-Founder, PhD',                                initials: 'BM',  featured: true  },
-  { name: 'Dr. Victor Lobato Rios',     role: 'Head of Engineering',                             initials: 'VL',  featured: true  },
-  { name: 'Priyanka Dutta Passecker',   role: 'Chief, Platform Operations',                      initials: 'PD',  featured: true  },
-  { name: 'Laly Robyr',                 role: 'Lab Head',                                        initials: 'LR',  featured: false },
-  { name: 'Manoj Thacker',              role: 'Product Commercialization',                       initials: 'MT',  featured: false },
-  { name: 'Sebastian Guilmot',          role: 'Platform Manager',                                initials: 'SG',  featured: false },
-  { name: 'Dr. Subhasri Bandyopadhyay', role: 'Medical Affairs & Business Commercialization',   initials: 'SB2', featured: false },
+  { 
+    name: 'Dr. Soumya Banerjee',        
+    role: 'CEO & Co-Founder',                               
+    rank: 1, 
+    initials: 'SB',  
+    photo: null,                          
+    linkedin: 'https://www.linkedin.com/in/soumya-banerjee83/',      
+    email: 's.banerjee@juvionls.com' 
+  },
+  { 
+    name: 'Prof. Dr. Brian D. McCabe',  
+    role: 'Co-Founder, PhD',                                
+    rank: 2, 
+    initials: 'BM',  
+    photo: null,                          
+    linkedin: 'https://www.linkedin.com/in/briandmccabe/',           
+    email: 'b.mccabe@juvionls.com' 
+  },
+  { 
+    name: 'Laly Robyr', 
+    role: 'Lab Head',                                        
+    rank: 3, 
+    initials: 'LR',  
+    photo: 'assets/team/laly-robyr.png', 
+    linkedin: 'https://www.linkedin.com/in/laly-robyr-121024305/',  
+    email: 'l.robyr@juvionls.com' 
+  },
+  { 
+    name: 'Sebastien Guilmot',          
+    role: 'Platform Manager',                                
+    rank: 4, 
+    initials: 'SG',  
+    photo: null,                         
+    linkedin: 'https://www.linkedin.com/in/sebastien-guilmot/', 
+    email: null 
+  },
+  { 
+    name: 'Dr. Victor Lobato Rios',     
+    role: 'Head of Engineering',                             
+    rank: 5, 
+    initials: 'VL',  
+    photo: null,                         
+    linkedin: null, 
+    email: null 
+  },
+  { 
+    name: 'Priyanka Dutta Passecker',   
+    role: 'Chief, Platform Operations',                      
+    rank: 6, 
+    initials: 'PD',  
+    photo: null,                         
+    linkedin: null, 
+    email: null 
+  },
+  { 
+    name: 'Manoj Thacker',              
+    role: 'Product Commercialization',                       
+    rank: 7, 
+    initials: 'MT',  
+    photo: null,                         
+    linkedin: null, 
+    email: null 
+  },
+  { 
+    name: 'Dr. Subhasri Bandyopadhyay', 
+    role: 'Medical Affairs & Business Commercialization',   
+    rank: 8, 
+    initials: 'SB2', 
+    photo: null,                         
+    linkedin: null, 
+    email: null 
+  },
 ];
 
 const ADVISORS = [

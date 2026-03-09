@@ -1,0 +1,4 @@
+* When we are on a specific tab e.g. Flygym can we have the selected option in the nav-link be highlighted
+* Have the users that have a non empty reference to a picture (located in assets/team) have the picture and not their initials, also add the linkedin and email address in data.js, also we should have each team member (core member) ranked and according to the page width display whatever fits (in the phone option keep 4)
+* We can remove the nav-link for the "team" and "our science" (we have nav-links only for the pages)
+* Wire the newsletter, so when an email is added it's being recorded, same for the contact us
