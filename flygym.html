@@ -48,8 +48,9 @@
         <span class="logo-sub" style="margin-left:0">Juvion Health Sciences</span>
       </a>
       <div class="nav-links">
+        <a href="index.html"   class="nav-link">Home</a>
         <a href="flygym.html"  class="nav-link">FlyGym</a>
-        <a href="news.html"    class="nav-link">News</a>
+        <a href="news.html"    class="nav-link">News &amp; Publications</a>
         <a href="contact.html" class="nav-cta">Contact</a>
       </div>
       <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
@@ -57,28 +58,47 @@
       </button>
     </div>
     <div class="nav-mobile" id="navMobile">
+      <a href="index.html"   class="nav-mobile-link">Home</a>
       <a href="flygym.html"  class="nav-mobile-link">FlyGym</a>
-      <a href="news.html"    class="nav-mobile-link">News</a>
+      <a href="news.html"    class="nav-mobile-link">News &amp; Publications</a>
       <a href="contact.html" class="nav-mobile-link">Contact</a>
     </div>
   </nav>
 
   <!-- ── PAGE HERO ──────────────────────────────────────────── -->
-  <section class="page-hero">
+  <section class="page-hero page-hero--split">
     <div class="container">
       <div class="page-hero-inner reveal">
-        <div class="page-breadcrumb">
-          <a href="index.html">Home</a>
-          <span>→</span>
-          <span>FlyGym Platform</span>
+
+        <!-- Left: text -->
+        <div class="page-hero-text">
+          <div class="page-breadcrumb">
+            <a href="index.html">Home</a>
+            <span>→</span>
+            <span>FlyGym Platform</span>
+          </div>
+          <h1 class="page-hero-heading"><em>FlyGym</em> Platform</h1>
+          <p class="page-hero-sub">High-throughput motor function screening using <em>Drosophila melanogaster</em> — the most genetically validated model for human aging.</p>
         </div>
-        <h1 class="page-hero-heading">The <em>FlyGym</em> Platform</h1>
-        <p class="page-hero-sub">High-throughput motor function screening using <em>Drosophila melanogaster</em> — the most genetically validated model for human aging.</p>
+
+        <!-- Right: fly-tube simulation -->
+        <div class="fly-tube-wrap" aria-hidden="true">
+          <svg id="flyTubeSvg" class="fly-tube-svg" viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Young tube -->
+            <rect x="10" y="20" width="440" height="100" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <text x="22" y="15" fill="#9A9590" font-size="10" font-family="Inter,sans-serif" letter-spacing="0.08em" text-transform="uppercase" style="text-transform:uppercase;letter-spacing:0.08em">YOUNG</text>
+            <!-- Old tube -->
+            <rect x="10" y="178" width="440" height="100" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <text x="22" y="173" fill="#9A9590" font-size="10" font-family="Inter,sans-serif" letter-spacing="0.08em" style="text-transform:uppercase;letter-spacing:0.08em">OLD</text>
+            <!-- Fly dots injected by script -->
+          </svg>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ── OVERVIEW ───────────────────────────────────────────── -->
+  <!-- ── WHAT IS FLYGYM ──────────────────────────────────────── -->
   <section class="section">
     <div class="container">
       <div class="split-grid">
@@ -88,84 +108,28 @@
             FlyGym is Juvion's proprietary robotics and AI platform for high-throughput screening of compounds that affect motor function. It uses <em>Drosophila melanogaster</em> — the common fruit fly — as a validated, cost-effective model for human neuromuscular aging.
           </p>
           <p class="body-text" style="margin-top:1rem">
-            The fruit fly shares <strong style="color:var(--brand)">75%</strong> of human disease genes, enabling rapid compound discovery at a scale impossible with vertebrate models. Our platform quantifies motor function across four key dimensions simultaneously.
+            The fruit fly shares <strong style="color:var(--brand)">75%</strong> of human disease genes, enabling rapid compound discovery at a scale impossible with vertebrate models. Our platform quantifies motor function across three key dimensions simultaneously.
           </p>
           <p class="body-text" style="margin-top:1rem">
             FlyGym combines computer vision, robotics, and machine learning to automatically track, score, and analyse thousands of flies across experimental conditions — generating publication-quality data in days rather than months.
           </p>
         </div>
-        <div class="split-visuals reveal" style="--delay:0.15s">
-          <div class="visual-grid">
-            <div class="visual-card vc-tall">
-              <img src="https://placehold.co/320x420/101010/252525?text=Fly+Vials" alt="FlyGym vials" loading="lazy">
-              <div class="visual-label">Vial tracking</div>
-            </div>
-            <div class="visual-card vc-square">
-              <img src="https://placehold.co/320x320/101010/252525?text=Movement+Plot" alt="Movement analysis" loading="lazy">
-              <div class="visual-label">Movement analysis</div>
-            </div>
-            <div class="visual-card vc-wide">
-              <img src="https://placehold.co/640x260/101010/252525?text=Locomotion+Data" alt="Locomotion data" loading="lazy">
-              <div class="visual-label">Locomotion metrics</div>
-            </div>
+        <div class="reveal" style="--delay:0.15s">
+          <div class="approach-media" style="margin-bottom:1rem">
+            <img src="https://placehold.co/560x300/101010/1a1a1a?text=Fly+on+Treadmill" alt="Fly on treadmill" loading="lazy" class="approach-img">
+            <p class="approach-media-caption">Fly on a treadmill — video coming soon</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FOUR PILLARS ───────────────────────────────────────── -->
-  <section class="section section--surface">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2 class="section-heading">Four Measurement Dimensions</h2>
-        <p class="body-text" style="max-width:600px;margin-top:0.5rem">FlyGym simultaneously quantifies motor performance across four key biological dimensions relevant to human healthy aging.</p>
-      </div>
-      <div class="metrics-grid metrics-grid--tall">
-        <div class="metric-card metric-card--detail reveal">
-          <div class="metric-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M9 3h6M10 3v6l-4 8a2 2 0 001.8 3h8.4a2 2 0 001.8-3L14 9V3"/>
-            </svg>
+          <div class="approach-media">
+            <img src="https://placehold.co/560x260/101010/1a1a1a?text=FlyGym+at+a+Glance" alt="FlyGym at a glance" loading="lazy" class="approach-img">
+            <p class="approach-media-caption">FlyGym at a glance — image coming soon</p>
           </div>
-          <div class="metric-title">Toxicity</div>
-          <div class="metric-desc">Compound safety screening at scale. Rapid identification of toxic compounds before progressing to further stages, dramatically reducing R&D risk.</div>
-        </div>
-        <div class="metric-card metric-card--detail reveal" style="--delay:0.1s">
-          <div class="metric-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-            </svg>
-          </div>
-          <div class="metric-title">Sleep</div>
-          <div class="metric-desc">Circadian rhythm and rest quality quantification. Sleep disruption is a hallmark of aging — FlyGym tracks activity cycles with millisecond precision.</div>
-        </div>
-        <div class="metric-card metric-card--detail reveal" style="--delay:0.2s">
-          <div class="metric-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <circle cx="12" cy="5" r="1.5"/>
-              <path d="M9.5 10l1 3 2.5-1.5 2 4M9 14.5l-1.5 5M15.5 12l1.5 5.5"/>
-            </svg>
-          </div>
-          <div class="metric-title">Mobility</div>
-          <div class="metric-desc">Locomotion and movement pattern analysis. Automated tracking of gait, speed, and endurance — directly mapping to human motor aging endpoints.</div>
-        </div>
-        <div class="metric-card metric-card--detail reveal" style="--delay:0.3s">
-          <div class="metric-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M18 11V7a2 2 0 00-4 0v4M14 10V5a2 2 0 00-4 0v5M10 11V4a2 2 0 00-4 0v7"/>
-              <path d="M6 11v2a6 6 0 0012 0v-3a2 2 0 00-4 0"/>
-            </svg>
-          </div>
-          <div class="metric-title">Grip Strength</div>
-          <div class="metric-desc">Neuromuscular function quantification. Grip strength decline is the most predictive biomarker of overall aging — measured across large populations simultaneously.</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── WHY DROSOPHILA ─────────────────────────────────────── -->
-  <section class="section">
+  <section class="section section--surface">
     <div class="container">
       <div class="section-header reveal">
         <h2 class="section-heading">Why <em>Drosophila</em>?</h2>
@@ -201,26 +165,34 @@
           <p class="pillar-text">Thousands of flies can be screened simultaneously at a fraction of the cost of mammalian studies — enabling statistically robust compound libraries to be tested economically.</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ── STATS ──────────────────────────────────────────────── -->
-  <section class="section section--surface">
-    <div class="container">
-      <div class="science-stats-grid">
-        <div class="science-stat reveal">
+      <!-- Similarity facts -->
+      <h3 class="team-group-label reveal" style="margin-top:3rem">Shared biology with humans</h3>
+      <div class="drosophila-facts reveal" style="--delay:0.1s;margin-top:1rem">
+        <div class="drosophila-fact">~75% of human disease genes conserved</div>
+        <div class="drosophila-fact">Conserved NMJ structure &amp; function</div>
+        <div class="drosophila-fact">Shared signalling pathways (Wnt, Notch, TGF-β)</div>
+        <div class="drosophila-fact">Conserved neurotransmitters (ACh, GABA, dopamine)</div>
+        <div class="drosophila-fact">Orthologous aging genes (InR/IGF-1, TOR, FOXO)</div>
+        <div class="drosophila-fact">Conserved muscle proteins (actin, myosin, troponin)</div>
+      </div>
+
+      <!-- Stats -->
+      <h3 class="team-group-label reveal" style="margin-top:3rem">Drosophila by the numbers</h3>
+      <div class="science-stats-grid reveal" style="--delay:0.1s;margin-top:1rem">
+        <div class="science-stat">
           <div class="science-stat-num">14</div>
           <div class="science-stat-label">Nobel Prizes awarded for research using <em>Drosophila</em></div>
         </div>
-        <div class="science-stat reveal" style="--delay:0.1s">
+        <div class="science-stat">
           <div class="science-stat-num">100K+</div>
           <div class="science-stat-label">Publications on <em>Drosophila</em> neuroscience</div>
         </div>
-        <div class="science-stat reveal" style="--delay:0.2s">
+        <div class="science-stat">
           <div class="science-stat-num">75%</div>
           <div class="science-stat-label">of human disease genes conserved in <em>Drosophila</em></div>
         </div>
-        <div class="science-stat reveal" style="--delay:0.3s">
+        <div class="science-stat">
           <div class="science-stat-num">3</div>
           <div class="science-stat-label">Peer-reviewed Juvion publications validating the platform</div>
         </div>
@@ -228,17 +200,95 @@
     </div>
   </section>
 
-  <!-- ── COLLABORATORS ──────────────────────────────────────── -->
+  <!-- ── WHAT FLYGYM MEASURES ────────────────────────────────── -->
   <section class="section">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-heading">Collaborators</h2>
+        <h2 class="section-heading">What FlyGym Measures</h2>
+        <p class="body-text" style="max-width:600px;margin-top:0.5rem">FlyGym simultaneously quantifies motor performance across key biological dimensions directly relevant to human healthy aging.</p>
       </div>
-      <div class="partners-grid reveal" style="--delay:0.1s">
-        <div class="partner-logo">CSEM</div>
-        <div class="partner-logo">EPFL</div>
-        <div class="partner-logo">Partner 3</div>
-        <div class="partner-logo">Partner 4</div>
+
+      <!-- Box 1: Toxicity & Lifespan -->
+      <div class="measurement-box reveal">
+        <div class="measurement-text">
+          <div class="metric-icon" style="margin-bottom:1.25rem">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M9 3h6M10 3v6l-4 8a2 2 0 001.8 3h8.4a2 2 0 001.8-3L14 9V3"/>
+            </svg>
+          </div>
+          <h3 class="measurement-title">Toxicity &amp; Lifespan</h3>
+          <p class="measurement-desc">Rapid identification of toxic compounds and lifespan effects at scale. Screen thousands of compounds for safety and longevity impact before advancing to costly vertebrate studies — dramatically reducing R&amp;D risk and timeline.</p>
+        </div>
+        <div class="approach-media">
+          <img src="https://placehold.co/400x240/101010/1a1a1a?text=Lifespan+Graph" alt="Lifespan graph" loading="lazy" class="approach-img">
+          <p class="approach-media-caption">Survival curves — graph coming soon</p>
+        </div>
+      </div>
+
+      <!-- Box 2: Mobility & Grip Strength -->
+      <div class="measurement-box reveal" style="--delay:0.1s">
+        <div class="measurement-text">
+          <div class="metric-icon" style="margin-bottom:1.25rem">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="12" cy="5" r="1.5"/>
+              <path d="M9.5 10l1 3 2.5-1.5 2 4M9 14.5l-1.5 5M15.5 12l1.5 5.5"/>
+            </svg>
+          </div>
+          <h3 class="measurement-title">Mobility &amp; Grip Strength</h3>
+          <p class="measurement-desc">Automated locomotion tracking and neuromuscular function quantification. Gait, speed, endurance, and grip strength decline are the most predictive biomarkers of aging — measured simultaneously across large fly populations.</p>
+        </div>
+        <div class="approach-media">
+          <img src="https://placehold.co/400x240/101010/1a1a1a?text=Mobility+Graph" alt="Mobility graph" loading="lazy" class="approach-img">
+          <p class="approach-media-caption">Locomotion metrics — graph coming soon</p>
+        </div>
+      </div>
+
+      <!-- Box 3: Humanized Drosophila in vivo -->
+      <div class="measurement-box reveal" style="--delay:0.2s">
+        <div class="measurement-text">
+          <div class="metric-icon" style="margin-bottom:1.25rem">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="measurement-title">Humanized <em>Drosophila</em> in vivo</h3>
+          <p class="measurement-desc">Disease-relevant fly models expressing human genes enable direct translational studies. Test compounds in a genetically humanized context that faithfully recapitulates human neuromuscular pathways and aging phenotypes.</p>
+        </div>
+        <div class="approach-media">
+          <img src="https://placehold.co/400x240/101010/1a1a1a?text=In+Vivo+Graph" alt="In vivo graph" loading="lazy" class="approach-img">
+          <p class="approach-media-caption">In vivo phenotype data — graph coming soon</p>
+        </div>
+      </div>
+
+      <!-- Additional features -->
+      <h3 class="team-group-label reveal" style="margin-top:2.5rem">Additional Features</h3>
+      <div class="additional-features reveal" style="--delay:0.1s;margin-top:1rem">
+        <div class="additional-feature">
+          <div class="af-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+          </div>
+          <span class="af-label">Sleep</span>
+        </div>
+        <div class="additional-feature">
+          <div class="af-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <span class="af-label">Circadian Rhythm</span>
+        </div>
+        <div class="additional-feature">
+          <div class="af-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M9.5 2A2.5 2.5 0 0112 4.5v0A2.5 2.5 0 019.5 7h-5a2.5 2.5 0 010-5h5zM14.5 7A2.5 2.5 0 0117 4.5v0A2.5 2.5 0 0114.5 7h-1M9 12h6M9 16h4"/>
+              <path d="M5 12v8M19 7v13"/>
+            </svg>
+          </div>
+          <span class="af-label">Memory</span>
+        </div>
       </div>
     </div>
   </section>
@@ -264,10 +314,11 @@
       <div class="footer-col">
         <h4 class="footer-heading">Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="index.html#flygym">FlyGym Platform</a></li>
-          <li><a href="index.html#science">Our Science</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="flygym.html">FlyGym</a></li>
           <li><a href="index.html#team">The Team</a></li>
           <li><a href="news.html">News &amp; Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -278,20 +329,106 @@
           <button type="submit" class="newsletter-btn" aria-label="Subscribe">→</button>
         </form>
         <div class="footer-contact-info">
-          <p>contact@juvionls.com</p>
+          <p>info@juvionls.com</p>
           <p>Lausanne, Switzerland</p>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>© 2025 Juvion Health Sciences. All rights reserved.</p>
+        <p>© 2026 Juvion Health Sciences. All rights reserved.</p>
         <p>Privacy Policy · Terms of Use</p>
       </div>
     </div>
   </footer>
 
+  <!-- ── CUSTOMER FLY LAYER ──────────────────────────────────── -->
+  <div id="flyLayer" class="fly-layer" aria-hidden="true"></div>
+  <div id="flyTooltip" class="fly-tooltip-global">
+    <div class="fly-tooltip-name"></div>
+    <div class="fly-tooltip-location"></div>
+    <div class="fly-tooltip-date"></div>
+    <a class="fly-tooltip-link" target="_blank" rel="noopener">Visit →</a>
+  </div>
+
   <script src="data.js"></script>
   <script src="app.js"></script>
+
+  <!-- ── FLY TUBE ANIMATION ─────────────────────────────────── -->
+  <script>
+  (function() {
+    const svg = document.getElementById('flyTubeSvg');
+    if (!svg) return;
+
+    // Tube dimensions (matching SVG viewBox rects)
+    const tubes = [
+      { y: 20,  h: 100, color: '#fe6603', opacity: 0.9,  minSpeed: 1.0, maxSpeed: 2.0, drift: 0.35, count: 10 },
+      { y: 178, h: 100, color: '#4A4845', opacity: 0.45, minSpeed: 0.4, maxSpeed: 0.9, drift: 0.15, count: 10 },
+    ];
+    const W = 460;
+    const PAD = 18;
+
+    function rand(min, max) { return min + Math.random() * (max - min); }
+
+    // Create fly dot elements
+    const flies = [];
+    tubes.forEach(tube => {
+      for (let i = 0; i < tube.count; i++) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        const r = rand(2.5, 4.5);
+        circle.setAttribute('r', r);
+        circle.setAttribute('fill', tube.color);
+        circle.setAttribute('opacity', tube.opacity);
+        svg.appendChild(circle);
+
+        const midY = tube.y + tube.h / 2;
+        flies.push({
+          el: circle,
+          x: rand(PAD, W - PAD),
+          y: rand(tube.y + 14, tube.y + tube.h - 14),
+          vx: rand(-0.5, 0.5) + tube.drift,
+          vy: rand(-0.3, 0.3),
+          tube,
+          r,
+        });
+      }
+    });
+
+    function tick() {
+      flies.forEach(f => {
+        // Brownian noise
+        f.vx += rand(-0.25, 0.25);
+        f.vy += rand(-0.2, 0.2);
+
+        // Rightward drift
+        f.vx += f.tube.drift * 0.08;
+
+        // Clamp speed
+        const speed = Math.sqrt(f.vx * f.vx + f.vy * f.vy);
+        const maxS = f.tube.maxSpeed;
+        if (speed > maxS) { f.vx = (f.vx / speed) * maxS; f.vy = (f.vy / speed) * maxS; }
+
+        f.x += f.vx;
+        f.y += f.vy;
+
+        // Wrap x
+        if (f.x > W - PAD + 10) f.x = PAD - 10;
+        if (f.x < PAD - 10) f.x = W - PAD + 10;
+
+        // Bounce y within tube
+        const yMin = f.tube.y + 10 + f.r;
+        const yMax = f.tube.y + f.tube.h - 10 - f.r;
+        if (f.y < yMin) { f.y = yMin; f.vy *= -0.6; }
+        if (f.y > yMax) { f.y = yMax; f.vy *= -0.6; }
+
+        f.el.setAttribute('cx', f.x.toFixed(1));
+        f.el.setAttribute('cy', f.y.toFixed(1));
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+  </script>
+
 </body>
 </html>

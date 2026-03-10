@@ -62,17 +62,6 @@
   <!-- GRAIN OVERLAY -->
   <div class="grain-overlay" aria-hidden="true"></div>
 
-  <!-- FLY LAYER -->
-  <div class="fly-layer" id="flyLayer" aria-hidden="true"></div>
-  <div class="fly-tooltip-global" id="flyTooltip">
-    <div class="fly-tooltip-name"></div>
-    <div class="fly-tooltip-meta">
-      <span class="fly-tooltip-location"></span>
-      <span class="fly-tooltip-date"></span>
-    </div>
-    <a class="fly-tooltip-link" target="_blank" rel="noopener">Visit →</a>
-  </div>
-
   <!-- ── NAVIGATION ─────────────────────────────────────────── -->
   <nav id="nav">
     <div class="nav-inner">
@@ -81,8 +70,9 @@
         <span class="logo-sub" style="margin-left:0">Juvion Health Sciences</span>
       </a>
       <div class="nav-links">
+        <a href="index.html"   class="nav-link">Home</a>
         <a href="flygym.html"  class="nav-link">FlyGym</a>
-        <a href="news.html"    class="nav-link">News</a>
+        <a href="news.html"    class="nav-link">News &amp; Publications</a>
         <a href="contact.html" class="nav-cta">Contact</a>
       </div>
       <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
@@ -90,8 +80,9 @@
       </button>
     </div>
     <div class="nav-mobile" id="navMobile">
+      <a href="index.html"   class="nav-mobile-link">Home</a>
       <a href="flygym.html"  class="nav-mobile-link">FlyGym</a>
-      <a href="news.html"    class="nav-mobile-link">News</a>
+      <a href="news.html"    class="nav-mobile-link">News &amp; Publications</a>
       <a href="contact.html" class="nav-mobile-link">Contact</a>
     </div>
   </nav>
@@ -104,10 +95,9 @@
         <h1 class="hero-heading reveal">
           The Future<br><em>of Aging</em>
         </h1>
-        <p class="hero-subtitle reveal">Preserving neuro-muscular pathways for active aging</p>
+        <p class="hero-subtitle reveal">neuro-muscular pathways for active aging</p>
         <p class="hero-sub reveal">
-          Transmission between neurons and muscles breaks down with age.
-          Our goal: preserve brain-to-muscle communication.
+          Maintain brain to muscle communication for active aging and delay associated diseases.
         </p>
         <div class="hero-ctas reveal">
           <a href="contact.html" class="btn-primary">Contact us</a>
@@ -145,129 +135,65 @@
     </div>
   </section>
 
-  <!-- ── THREE PILLARS ──────────────────────────────────────── -->
-  <section class="section">
+  <!-- ── OUR DIFFERENTIATED APPROACH ───────────────────────── -->
+  <section id="approach" class="section section--surface">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-heading">Science-Backed Solutions<br>for Healthy Aging</h2>
+        <h2 class="section-heading">Our Differentiated Approach</h2>
       </div>
-      <div class="pillars-grid">
-        <div class="pillar-card reveal">
-          <div class="pillar-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M12 2v20M8 6c0 0-4 2-4 6s4 6 4 6M16 6c0 0 4 2 4 6s-4 6-4 6"/>
-            </svg>
-          </div>
-          <h3 class="pillar-title">Neuroscience</h3>
-          <p class="pillar-text">Motor terminal deterioration during aging disrupts muscle control. We target the neuromuscular junction to restore the signaling pathways that keep people moving.</p>
+
+      <!-- Box 1: Science -->
+      <div class="approach-box reveal">
+        <div class="approach-text">
+          <h3 class="approach-box-title">Science to preserve<br>neuro-muscular pathways</h3>
+          <p class="approach-box-body">
+            The neuromuscular junction (NMJ) is the critical synapse where motor neurons communicate with muscle fibres to initiate movement. With age, the structural integrity of the NMJ degrades — motor terminals retract, acetylcholine release diminishes, and post-synaptic receptors disperse. This progressive breakdown in neural-muscle communication underlies age-related loss of strength, balance, and mobility.
+          </p>
+          <p class="approach-box-body" style="margin-top:1rem">
+            Juvion targets this fundamental mechanism, developing therapeutics designed to preserve and restore NMJ integrity before irreversible decline sets in.
+          </p>
         </div>
-        <div class="pillar-card reveal" style="--delay:0.1s">
-          <div class="pillar-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-              <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-              <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-              <circle cx="17.5" cy="17.5" r="3.5"/>
-            </svg>
-          </div>
-          <h3 class="pillar-title">Technology</h3>
-          <p class="pillar-text">Proprietary screening platform combining robotics, machine vision, and AI to quantify motor function with unprecedented throughput and precision.</p>
+        <div class="approach-media">
+          <img src="./assets/flygym/NCOMMS-20-34381B_adjusted.jpeg" alt="Young vs Aging NMJ comparison" loading="lazy" class="approach-img">
+          <p class="approach-media-caption">Young vs. aging NMJ</p>
         </div>
-        <div class="pillar-card reveal" style="--delay:0.2s">
-          <div class="pillar-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M9 3h6M10 3v6l-4 8a2 2 0 001.8 3h8.4a2 2 0 001.8-3L14 9V3"/>
-              <line x1="10" y1="12" x2="14" y2="12"/>
-            </svg>
-          </div>
-          <h3 class="pillar-title">Therapeutics</h3>
-          <p class="pillar-text">Plant-derived compounds with reduced regulatory complexity. Juvion-001 increases motor ability during middle and old age, validated across our platform.</p>
+      </div>
+
+      <!-- Box 2: FlyGym -->
+      <div class="approach-box approach-box--reverse reveal" style="--delay:0.1s">
+        <div class="approach-media">
+          <img src="https://placehold.co/560x380/101010/1a1a1a?text=Fly+Tracking+Video" alt="FlyGym fly tracking" loading="lazy" class="approach-img">
+          <p class="approach-media-caption">Real-time locomotion tracking — video coming soon</p>
+        </div>
+        <div class="approach-text">
+          <h3 class="approach-box-title">Our technology:<br>FlyGym</h3>
+          <p class="approach-box-body">
+            FlyGym is our proprietary robotics and AI platform for high-throughput compound screening using <em>Drosophila melanogaster</em>. Sharing 75% of human disease genes, the fruit fly enables rapid, cost-effective drug discovery at a scale impossible with vertebrate models.
+          </p>
+          <p class="approach-box-body" style="margin-top:1rem">
+            FlyGym quantifies motor function — mobility, grip strength, lifespan, and sleep — across thousands of compounds simultaneously, dramatically compressing the discovery timeline.
+          </p>
+          <a href="flygym.html" class="btn-outline" style="margin-top:1.75rem;display:inline-block">Discover FlyGym →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── FLYGYM ─────────────────────────────────────────────── -->
-  <section id="flygym" class="section section--surface">
+  <!-- ── LAB IMAGE ──────────────────────────────────────────── -->
+  <section class="lab-image-section">
     <div class="container">
-      <div class="split-grid">
-        <div class="split-text reveal">
-          <h2 class="section-heading">Powered by<br><em>Drosophila</em> Research</h2>
-          <p class="body-text">
-            FlyGym is our proprietary robotics and AI platform for high-throughput screening of compounds that affect motor function — using <em>Drosophila melanogaster</em> as a validated model for human aging.
-          </p>
-          <p class="body-text" style="margin-top:1rem">
-            The fruit fly shares 75% of human disease genes, enabling rapid, cost-effective discovery at a scale impossible with vertebrate models.
-          </p>
-          <a href="flygym.html" class="btn-outline" style="margin-top:2rem;display:inline-block">See our science →</a>
-        </div>
-        <div class="split-visuals reveal" style="--delay:0.15s">
-          <div class="visual-grid">
-            <div class="visual-card vc-tall">
-              <img src="https://placehold.co/320x420/101010/252525?text=Fly+Vials" alt="FlyGym vials" loading="lazy">
-              <div class="visual-label">Vial tracking</div>
-            </div>
-            <div class="visual-card vc-square">
-              <img src="https://placehold.co/320x320/101010/252525?text=Movement+Plot" alt="Movement analysis" loading="lazy">
-              <div class="visual-label">Movement analysis</div>
-            </div>
-            <div class="visual-card vc-wide">
-              <img src="https://placehold.co/640x260/101010/252525?text=Locomotion+Data" alt="Locomotion data" loading="lazy">
-              <div class="visual-label">Locomotion metrics</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Metrics row -->
-      <div class="metrics-grid" style="margin-top:5rem">
-        <div class="metric-card reveal">
-          <div class="metric-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M9 3h6M10 3v6l-4 8a2 2 0 001.8 3h8.4a2 2 0 001.8-3L14 9V3"/>
-            </svg>
-          </div>
-          <div class="metric-title">Toxicity</div>
-          <div class="metric-desc">Compound safety screening at scale</div>
-        </div>
-        <div class="metric-card reveal" style="--delay:0.1s">
-          <div class="metric-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-            </svg>
-          </div>
-          <div class="metric-title">Sleep</div>
-          <div class="metric-desc">Circadian rhythm &amp; rest quality</div>
-        </div>
-        <div class="metric-card reveal" style="--delay:0.2s">
-          <div class="metric-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <circle cx="12" cy="5" r="1.5"/>
-              <path d="M9.5 10l1 3 2.5-1.5 2 4M9 14.5l-1.5 5M15.5 12l1.5 5.5"/>
-            </svg>
-          </div>
-          <div class="metric-title">Mobility</div>
-          <div class="metric-desc">Locomotion &amp; movement patterns</div>
-        </div>
-        <div class="metric-card reveal" style="--delay:0.3s">
-          <div class="metric-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M18 11V7a2 2 0 00-4 0v4M14 10V5a2 2 0 00-4 0v5M10 11V4a2 2 0 00-4 0v7"/>
-              <path d="M6 11v2a6 6 0 0012 0v-3a2 2 0 00-4 0"/>
-            </svg>
-          </div>
-          <div class="metric-title">Grip Strength</div>
-          <div class="metric-desc">Neuromuscular function quantification</div>
-        </div>
+      <div class="lab-image-wrap reveal">
+        <img src="https://placehold.co/1160x340/0d0d0d/1a1a1a?text=Lab+Work" alt="Juvion laboratory" loading="lazy">
+        <div class="lab-image-overlay"></div>
       </div>
     </div>
   </section>
 
   <!-- ── PUBLICATIONS ───────────────────────────────────────── -->
-  <section id="science" class="section">
+  <section id="science" class="section section--surface">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-heading">We Are Backed by Science</h2>
+        <h2 class="section-heading">Our innovation in<br>scientific journals</h2>
       </div>
       <div id="pubGrid" class="pub-grid"></div>
       <div class="section-footer-cta reveal">
@@ -277,7 +203,7 @@
   </section>
 
   <!-- ── NEWS ───────────────────────────────────────────────── -->
-  <section id="news" class="section section--surface">
+  <section id="news" class="section">
     <div class="container">
       <div class="section-header-row reveal">
         <h2 class="section-heading">News &amp; Views</h2>
@@ -288,19 +214,19 @@
   </section>
 
   <!-- ── TEAM ───────────────────────────────────────────────── -->
-  <section id="team" class="section">
+  <section id="team" class="section section--surface">
     <div class="container">
       <div class="section-header reveal">
         <h2 class="section-heading">The Team</h2>
       </div>
 
-      <!-- Featured 4 always visible -->
-      <h3 class="team-group-label reveal">Core Team</h3>
-      <div id="teamCoreGrid" class="team-grid"></div>
+      <!-- Featured founders — always visible -->
+      <div id="teamFeatured" class="team-featured-list"></div>
 
       <!-- Rest hidden behind expander -->
       <div id="teamExpanded" hidden>
-        <div id="teamExpandedGrid" class="team-grid" style="margin-top:2rem"></div>
+        <h3 class="team-group-label" style="margin-top:3rem">Core Team</h3>
+        <div id="teamCoreGrid" class="team-grid"></div>
 
         <div class="team-secondary-grid" style="margin-top:3rem">
           <div class="team-group">
@@ -324,7 +250,24 @@
   <section class="partners-bar">
     <div class="container">
       <p class="partners-label reveal">Trusted by leading institutions &amp; partners</p>
-      <div class="partners-grid reveal" style="--delay:0.1s">
+    </div>
+    <div class="partners-outer">
+      <div class="partners-track">
+        <div class="partner-logo">CSEM</div>
+        <div class="partner-logo">EPFL</div>
+        <div class="partner-logo">Partner 3</div>
+        <div class="partner-logo">Partner 4</div>
+        <div class="partner-logo">Partner 5</div>
+        <div class="partner-logo">CSEM</div>
+        <div class="partner-logo">EPFL</div>
+        <div class="partner-logo">Partner 3</div>
+        <div class="partner-logo">Partner 4</div>
+        <div class="partner-logo">Partner 5</div>
+        <div class="partner-logo">CSEM</div>
+        <div class="partner-logo">EPFL</div>
+        <div class="partner-logo">Partner 3</div>
+        <div class="partner-logo">Partner 4</div>
+        <div class="partner-logo">Partner 5</div>
         <div class="partner-logo">CSEM</div>
         <div class="partner-logo">EPFL</div>
         <div class="partner-logo">Partner 3</div>
@@ -356,12 +299,11 @@
       <div class="footer-col">
         <h4 class="footer-heading">Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="#flygym">FlyGym Platform</a></li>
-          <li><a href="#science">Our Science</a></li>
-          <li><a href="#team">The Team</a></li>
-          <li><a href="#news">News &amp; Views</a></li>
-          <li><a href="flygym.html">FlyGym Details</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="flygym.html">FlyGym</a></li>
+          <li><a href="index.html#team">The Team</a></li>
           <li><a href="news.html">News &amp; Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
 
@@ -373,7 +315,7 @@
           <button type="submit" class="newsletter-btn" aria-label="Subscribe">→</button>
         </form>
         <div class="footer-contact-info">
-          <p>contact@juvionls.com</p>
+          <p>info@juvionls.com</p>
           <p>Lausanne, Switzerland</p>
         </div>
       </div>
@@ -381,7 +323,7 @@
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>© 2025 Juvion Health Sciences. All rights reserved.</p>
+        <p>© 2026 Juvion Health Sciences. All rights reserved.</p>
         <p>Privacy Policy · Terms of Use</p>
       </div>
     </div>
