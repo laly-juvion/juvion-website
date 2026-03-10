@@ -52,11 +52,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ── Active nav highlight ───────────────────────────────────── */
-// Page-based highlight for sub-pages (flygym.html, news.html, contact.html)
+// Page-based highlight for all pages
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const effectivePage = currentPage === '' ? 'index.html' : currentPage;
 document.querySelectorAll('.nav-link, .nav-mobile-link').forEach(link => {
   const href = link.getAttribute('href');
-  if (href && !href.startsWith('#') && currentPage === href) {
+  if (href && !href.startsWith('#') && effectivePage === href) {
     link.classList.add('nav-link--active');
   }
 });
@@ -123,6 +124,30 @@ if (newsletterForm) {
   });
 }
 
+/* ── Render: Team Featured Panel ────────────────────────────── */
+function teamFeaturedPanelHTML(m, delay) {
+  const style = delay ? ` style="--delay:${delay}"` : '';
+  const imgSrc = m.photo
+    ? m.photo
+    : `https://placehold.co/260x260/141414/2a2a2a?text=${encodeURIComponent(m.initials)}`;
+  const bio = m.bio || 'Placeholder bio — short description of background, expertise, and role at Juvion Health Sciences. To be updated.';
+  return `
+    <div class="team-featured-panel reveal"${style}>
+      <div class="tfp-photo">
+        <img src="${imgSrc}" alt="${m.name}" loading="lazy">
+      </div>
+      <div class="tfp-content">
+        <div class="tfp-name">${m.name}</div>
+        <div class="tfp-role">${m.role}</div>
+        <p class="tfp-bio">${bio}</p>
+        <div class="tfp-links">
+          <a href="${m.linkedin || '#'}" class="team-social-link${m.linkedin ? '' : ' team-social-link--disabled'}" aria-label="LinkedIn" ${m.linkedin ? 'target="_blank" rel="noopener"' : ''}>${ICON_LINKEDIN}</a>
+          <a href="${m.email ? 'mailto:' + m.email : '#'}" class="team-social-link${m.email ? '' : ' team-social-link--disabled'}" aria-label="Email">${ICON_EMAIL}</a>
+        </div>
+      </div>
+    </div>`;
+}
+
 /* ── Render: Team ───────────────────────────────────────────── */
 function teamCardHTML(m, delay) {
   const style = delay ? ` style="--delay:${delay}"` : '';
@@ -159,49 +184,28 @@ function advisorCardHTML(m, delay) {
     </div>`;
 }
 
-function getRowCount() {
-  const grid = document.getElementById('teamCoreGrid');
-  if (!grid) return 4;
-  // Read actual column count from the computed grid layout
-  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-  return Math.max(1, cols);
-}
 
 function renderTeam() {
-  const coreGrid      = document.getElementById('teamCoreGrid');
-  const expandedEl    = document.getElementById('teamExpanded');
-  const expandedGrid  = document.getElementById('teamExpandedGrid');
-  const advisorList   = document.getElementById('teamAdvisorList');
-  const boardList     = document.getElementById('teamBoardList');
-  const expandBtn     = document.getElementById('teamExpandBtn');
-  if (!coreGrid) return;
+  const featuredEl  = document.getElementById('teamFeatured');
+  const coreGrid    = document.getElementById('teamCoreGrid');
+  const expandedEl  = document.getElementById('teamExpanded');
+  const advisorList = document.getElementById('teamAdvisorList');
+  const boardList   = document.getElementById('teamBoardList');
+  const expandBtn   = document.getElementById('teamExpandBtn');
+  if (!expandedEl) return;
 
   const sorted = [...TEAM_MEMBERS].sort((a, b) => a.rank - b.rank);
+  const featured = sorted.slice(0, 2);
+  const rest     = sorted.slice(2);
 
-  function applyVisibleCount() {
-    const count = getRowCount();
-    const visible = sorted.slice(0, count);
-    const rest    = sorted.slice(count);
-
-    coreGrid.innerHTML = visible.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
-    coreGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    if (expandedGrid) {
-      expandedGrid.innerHTML = rest.map((m, i) => teamCardHTML(m, `${i * 0.06}s`)).join('');
-    }
-
-    if (expandBtn) {
-      expandBtn.style.display = rest.length > 0 ? '' : 'none';
-    }
+  if (featuredEl) {
+    featuredEl.innerHTML = featured.map((m, i) => teamFeaturedPanelHTML(m, i ? `${i * 0.1}s` : null)).join('');
+    featuredEl.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   }
 
-  applyVisibleCount();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(applyVisibleCount, 150);
-  }, { passive: true });
+  if (coreGrid) {
+    coreGrid.innerHTML = rest.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
+  }
 
   if (advisorList) {
     advisorList.innerHTML = ADVISORS.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
@@ -210,7 +214,7 @@ function renderTeam() {
     boardList.innerHTML = BOARD_MEMBERS.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
   }
 
-  if (expandBtn && expandedEl) {
+  if (expandBtn) {
     expandBtn.addEventListener('click', () => {
       const isHidden = expandedEl.hasAttribute('hidden');
       if (isHidden) {
@@ -242,9 +246,12 @@ function renderPublications(containerEl) {
 }
 
 /* ── Render: News ───────────────────────────────────────────── */
-function renderNews(containerEl) {
+function renderNews(containerEl, limit) {
   if (!containerEl) return;
-  containerEl.innerHTML = NEWS_ITEMS.map((n, i) => `
+  // Filter to news-only (exclude Use Case and Publication tags)
+  let items = NEWS_ITEMS.filter(n => n.tag !== 'Use Case' && n.tag !== 'Publication');
+  if (limit) items = items.slice(0, limit);
+  containerEl.innerHTML = items.map((n, i) => `
     <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
       <div class="news-image">
         <img src="${n.image}" alt="" loading="lazy">
@@ -258,25 +265,47 @@ function renderNews(containerEl) {
   containerEl.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
+/* ── Render: News Accordion (news.html) ─────────────────────── */
+function renderNewsAccordion(containerEl) {
+  if (!containerEl) return;
+  const items = NEWS_ITEMS.filter(n => n.tag !== 'Use Case' && n.tag !== 'Publication');
+  containerEl.innerHTML = items.map((n, i) => `
+    <div class="news-row${i === 0 ? ' news-row--expanded' : ''}" data-idx="${i}">
+      <div class="news-row-summary" role="button" tabindex="0" aria-expanded="${i === 0}">
+        <span class="news-row-tag">${n.tag}</span>
+        <h3 class="news-row-title">${n.title}</h3>
+        <span class="news-row-date">${n.date}</span>
+        <span class="news-row-chevron">↓</span>
+      </div>
+      <div class="news-row-body${n.image ? '' : ' news-row-body--text-only'}">
+        ${n.image ? `<img src="${n.image}" alt="" class="news-row-img" loading="lazy">` : ''}
+        <div class="news-row-content">
+          <p class="news-row-excerpt">${n.excerpt || ''}</p>
+          ${n.href && n.href !== '#' ? `<a href="${n.href}" class="btn-ghost news-row-link" target="_blank" rel="noopener">Read more →</a>` : ''}
+        </div>
+      </div>
+    </div>`).join('');
+
+  containerEl.querySelectorAll('.news-row-summary').forEach(summary => {
+    const toggle = () => {
+      const row = summary.closest('.news-row');
+      const expanded = row.classList.toggle('news-row--expanded');
+      summary.setAttribute('aria-expanded', expanded);
+    };
+    summary.addEventListener('click', toggle);
+    summary.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+}
+
 /* ── Render: News Hub (news.html) ───────────────────────────── */
 function renderNewsHub() {
-  const newsEl      = document.getElementById('hubNewsGrid');
+  const accordionEl = document.getElementById('hubNewsAccordion');
   const useCaseEl   = document.getElementById('hubUseCaseGrid');
   const pubEl       = document.getElementById('hubPubGrid');
-  if (!newsEl && !useCaseEl && !pubEl) return;
+  if (!accordionEl && !useCaseEl && !pubEl) return;
 
-  if (newsEl) {
-    const items = NEWS_ITEMS.filter(n => n.tag !== 'Use Case');
-    newsEl.innerHTML = items.map((n, i) => `
-      <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
-        <div class="news-image"><img src="${n.image}" alt="" loading="lazy"></div>
-        <div class="news-body">
-          <div class="news-tag">${n.tag}</div>
-          <h3 class="news-title">${n.title}</h3>
-          <p class="news-date">${n.date}</p>
-        </div>
-      </a>`).join('');
-    newsEl.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  if (accordionEl) {
+    renderNewsAccordion(accordionEl);
   }
 
   if (useCaseEl) {
@@ -285,7 +314,7 @@ function renderNewsHub() {
       <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
         <div class="news-image"><img src="${n.image}" alt="" loading="lazy"></div>
         <div class="news-body">
-          <div class="news-tag">${n.tag}</div>
+          ${n.id ? `<div class="pipeline-meta"><span class="pipeline-id">${n.id}</span><span class="pipeline-status">${n.status}</span></div>` : ''}
           <h3 class="news-title">${n.title}</h3>
           <p class="news-date">${n.date}</p>
         </div>
@@ -299,22 +328,7 @@ function renderNewsHub() {
 }
 
 /* ── Drosophila Flies ───────────────────────────────────────── */
-const FLY_SVG = `
-<svg class="fly-svg" viewBox="-13 -15 26 30" width="26" height="30" xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="-8" cy="-3" rx="7" ry="4" fill="rgba(255,102,0,0.18)" stroke="rgba(255,102,0,0.5)" stroke-width="0.5" transform="rotate(-15,-8,-3)"/>
-  <ellipse cx="8" cy="-3" rx="7" ry="4" fill="rgba(255,102,0,0.18)" stroke="rgba(255,102,0,0.5)" stroke-width="0.5" transform="rotate(15,8,-3)"/>
-  <ellipse cx="0" cy="-2" rx="2.5" ry="4" fill="#FF6600"/>
-  <ellipse cx="0" cy="6" rx="2.2" ry="6" fill="#E05500"/>
-  <circle cx="0" cy="-8" r="2.5" fill="#FF6600"/>
-  <g stroke="rgba(255,102,0,0.6)" stroke-width="0.5" stroke-linecap="round">
-    <line x1="-2" y1="-3" x2="-7" y2="-1"/>
-    <line x1="-2" y1="-1" x2="-7" y2=" 2"/>
-    <line x1="-2" y1=" 1" x2="-6" y2=" 5"/>
-    <line x1=" 2" y1="-3" x2=" 7" y2="-1"/>
-    <line x1=" 2" y1="-1" x2=" 7" y2=" 2"/>
-    <line x1=" 2" y1=" 1" x2=" 6" y2=" 5"/>
-  </g>
-</svg>`;
+const FLY_SVG = `<img src="assets/drosophila.svg" width="28" height="28" alt="" style="display:block;">`;
 
 function parseCsv(text) {
   const [header, ...rows] = text.trim().split('\n');
@@ -464,6 +478,6 @@ async function initFlies() {
 /* ── Init ────────────────────────────────────────────────────── */
 renderTeam();
 renderPublications(document.getElementById('pubGrid'));
-renderNews(document.getElementById('newsGrid'));
+renderNews(document.getElementById('newsGrid'), 3);
 renderNewsHub();
-initFlies();
+if (document.getElementById('flyLayer')) initFlies();

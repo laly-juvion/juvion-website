@@ -131,14 +131,14 @@ a { text-decoration: none; color: inherit; }
 
 .nav-link {
   font-size: 13.5px;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--text-sec);
   letter-spacing: 0.01em;
   transition: color 0.2s ease;
 }
 
 .nav-link:hover { color: var(--text); }
-.nav-link--active { color: var(--text) !important; }
+.nav-link--active { color: var(--text) !important; text-decoration: underline; text-underline-offset: 7px; text-decoration-color: rgba(255,255,255,0.4) !important; }
 
 .nav-cta {
   display: inline-flex;
@@ -241,9 +241,9 @@ a { text-decoration: none; color: inherit; }
 
 .hero-heading {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 5.5vw, 4.5rem);
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
   font-weight: 700;
-  line-height: 1.07;
+  line-height: 1.05;
   letter-spacing: -0.035em;
   color: var(--text);
 }
@@ -256,16 +256,16 @@ a { text-decoration: none; color: inherit; }
 .hero-subtitle {
   font-size: 15px;
   font-weight: 400;
-  color: var(--brand);
-  letter-spacing: 0.01em;
-  opacity: 0.85;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .hero-sub {
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.75;
   color: var(--text-sec);
-  max-width: 460px;
+  max-width: 480px;
 }
 
 .hero-ctas {
@@ -418,6 +418,206 @@ a { text-decoration: none; color: inherit; }
   0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
   60%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
   100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+}
+
+/* ── NMJ Comparison (hero-right) ────────────────────────────── */
+.nmj-compare {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nmj-svg {
+  width: 100%;
+  height: auto;
+}
+
+.nmj-caption {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Approach Section ───────────────────────────────────────── */
+.approach-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 4rem;
+  padding: 3rem;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.approach-box:last-child { margin-bottom: 0; }
+
+.approach-box--reverse .approach-text { order: 2; }
+.approach-box--reverse .approach-media { order: 1; }
+
+.approach-box-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.approach-box-body {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-sec);
+}
+
+.approach-media { position: relative; }
+
+.approach-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.approach-media-caption {
+  margin-top: 0.5rem;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* ── Lab Image ──────────────────────────────────────────────── */
+.lab-image-section {
+  padding: 3rem 0;
+  background: var(--bg);
+}
+
+.lab-image-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 340px;
+  border: 1px solid var(--border);
+}
+
+.lab-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lab-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(8,8,8,0.4) 0%, transparent 40%, transparent 60%, rgba(8,8,8,0.4) 100%);
+  pointer-events: none;
+}
+
+/* ── Team Featured Panels ───────────────────────────────────── */
+.team-featured-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 0;
+}
+
+.team-featured-panel {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  padding: 2rem;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.25s ease;
+}
+
+.team-featured-panel:hover {
+  border-color: rgba(232, 98, 26, 0.2);
+}
+
+.tfp-photo {
+  width: 260px;
+  height: 260px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.tfp-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.tfp-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 0.25rem;
+}
+
+.tfp-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+
+.tfp-role {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.tfp-bio {
+  font-size: 14.5px;
+  line-height: 1.78;
+  color: var(--text-sec);
+  margin-bottom: 1.5rem;
+}
+
+.tfp-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ── Partners Carousel ──────────────────────────────────────── */
+.partners-outer {
+  overflow: hidden;
+  margin-top: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.partners-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: partners-scroll 22s linear infinite;
+  padding: 0.5rem 0;
+}
+
+@keyframes partners-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* ── Buttons ─────────────────────────────────────────────────── */
@@ -1040,6 +1240,9 @@ a { text-decoration: none; color: inherit; }
   gap: 3rem;
 }
 
+/* partners-bar label spacing when using carousel */
+.partners-bar .container { padding-bottom: 1.5rem; }
+
 .partner-logo {
   font-size: 15px;
   font-weight: 600;
@@ -1048,6 +1251,8 @@ a { text-decoration: none; color: inherit; }
   text-transform: uppercase;
   opacity: 0.5;
   transition: opacity 0.2s ease;
+  padding: 0 2rem;
+  flex-shrink: 0;
 }
 
 .partner-logo:hover { opacity: 1; }
@@ -1512,6 +1717,226 @@ a { text-decoration: none; color: inherit; }
   transform: translateY(0);
 }
 
+/* ── FlyGym Hero Split ───────────────────────────────────────── */
+.page-hero--split .page-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 100%;
+}
+
+.fly-tube-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.fly-tube-svg {
+  width: 100%;
+  height: 300px;
+  overflow: visible;
+}
+
+/* ── Drosophila Facts Grid ───────────────────────────────────── */
+.drosophila-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.drosophila-fact {
+  padding: 0.875rem 1rem;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  color: var(--text-sec);
+  line-height: 1.5;
+}
+
+/* ── Measurement Boxes ───────────────────────────────────────── */
+.measurement-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2.5rem;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+  transition: border-color 0.25s ease;
+}
+
+.measurement-box:hover {
+  border-color: rgba(254, 102, 3, 0.2);
+}
+
+.measurement-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.measurement-desc {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-sec);
+}
+
+/* ── Additional Features ─────────────────────────────────────── */
+.additional-features {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.additional-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  transition: border-color 0.25s ease;
+}
+
+.additional-feature:hover {
+  border-color: rgba(254, 102, 3, 0.25);
+}
+
+.af-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--brand-dim);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  flex-shrink: 0;
+}
+
+.af-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-sec);
+}
+
+/* ── News Accordion ───────────────────────────────────────────── */
+.news-accordion {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.news-row {
+  border-bottom: 1px solid var(--border);
+}
+.news-row:last-child { border-bottom: none; }
+
+.news-row-summary {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+.news-row-summary:hover { background: var(--elevated); }
+
+.news-row-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+  background: var(--brand-dim);
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.news-row-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.news-row-date {
+  font-size: 13px;
+  color: var(--text-sec);
+  white-space: nowrap;
+}
+
+.news-row-chevron {
+  font-size: 14px;
+  color: var(--text-sec);
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+.news-row--expanded .news-row-chevron { transform: rotate(180deg); }
+
+.news-row-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2.5rem;
+  align-items: start;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 1.5rem;
+}
+.news-row--expanded .news-row-body {
+  max-height: 600px;
+  padding: 0 1.5rem 1.75rem;
+}
+
+.news-row-img {
+  width: 100%;
+  border-radius: var(--radius);
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.news-row-excerpt {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-sec);
+  margin-bottom: 1rem;
+}
+
+.news-row-body--text-only { grid-template-columns: 1fr; }
+
+/* ── Pipeline Meta ────────────────────────────────────────────── */
+.pipeline-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.pipeline-id {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand);
+}
+.pipeline-status {
+  font-size: 12px;
+  color: var(--text-sec);
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.5rem;
+  border-radius: 100px;
+}
+
 /* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -1520,6 +1945,14 @@ a { text-decoration: none; color: inherit; }
   .split-grid { grid-template-columns: 1fr; gap: 3rem; }
   .team-grid { grid-template-columns: repeat(3, 1fr); }
   .science-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .approach-box { grid-template-columns: 1fr; gap: 2rem; }
+  .approach-box--reverse .approach-text { order: 0; }
+  .approach-box--reverse .approach-media { order: 0; }
+  .team-featured-panel { grid-template-columns: 200px 1fr; gap: 1.75rem; }
+  .tfp-photo { width: 200px; height: 200px; }
+  .page-hero--split .page-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .measurement-box { grid-template-columns: 1fr; gap: 1.75rem; }
+  .drosophila-facts { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1527,12 +1960,15 @@ a { text-decoration: none; color: inherit; }
   .section { padding: 5rem 0; }
   .nav-links { display: none; }
   .nav-burger { display: flex; }
-  .hero-heading { font-size: 2.75rem; }
+  .hero-heading { font-size: 3rem; }
   .hero-grid { padding-top: 2rem; padding-bottom: 4rem; }
   .pillars-grid { grid-template-columns: 1fr; gap: 1rem; }
   .pub-grid { grid-template-columns: 1fr; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .news-grid { grid-template-columns: 1fr; }
+  .news-row-summary { grid-template-columns: 1fr auto; }
+  .news-row-tag, .news-row-date { display: none; }
+  .news-row-body { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
   .science-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .pub-grid--full .pub-card { grid-template-columns: 1fr; }
@@ -1540,6 +1976,15 @@ a { text-decoration: none; color: inherit; }
   .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .footer-bottom-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
   .section-header-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .approach-box { padding: 2rem 1.5rem; }
+  .approach-img { height: 240px; }
+  .drosophila-facts { grid-template-columns: 1fr; }
+  .measurement-box { padding: 1.75rem 1.5rem; }
+  .additional-features { gap: 1rem; }
+  .team-featured-list { grid-template-columns: 1fr; }
+  .team-featured-panel { grid-template-columns: 1fr; gap: 1.5rem; }
+  .tfp-photo { width: 100%; height: 220px; }
+  .lab-image-wrap { height: 220px; }
 }
 
 @media (max-width: 480px) {
