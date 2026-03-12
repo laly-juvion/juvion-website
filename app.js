@@ -96,10 +96,10 @@ if (newsletterForm) {
     btn.textContent = '…';
     btn.disabled = true;
     try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const res = await fetch('https://formspree.io/f/mvzwaebj', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email: input.value }),
+        body: JSON.stringify({ email: input.value, _replyto: input.value }),
       });
       if (res.ok) {
         btn.textContent = '✓';
@@ -248,13 +248,12 @@ function renderPublications(containerEl) {
 /* ── Render: News ───────────────────────────────────────────── */
 function renderNews(containerEl, limit) {
   if (!containerEl) return;
-  // Filter to news-only (exclude Use Case and Publication tags)
-  let items = NEWS_ITEMS.filter(n => n.tag !== 'Use Case' && n.tag !== 'Publication');
+  let items = NEWS_ITEMS;
   if (limit) items = items.slice(0, limit);
   containerEl.innerHTML = items.map((n, i) => `
     <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
       <div class="news-image">
-        <img src="${n.image}" alt="" loading="lazy">
+        <img src="${n.previewImage}" alt="" loading="lazy">
       </div>
       <div class="news-body">
         <div class="news-tag">${n.tag}</div>
@@ -268,7 +267,7 @@ function renderNews(containerEl, limit) {
 /* ── Render: News Accordion (news.html) ─────────────────────── */
 function renderNewsAccordion(containerEl) {
   if (!containerEl) return;
-  const items = NEWS_ITEMS.filter(n => n.tag !== 'Use Case' && n.tag !== 'Publication');
+  const items = NEWS_ITEMS;
   containerEl.innerHTML = items.map((n, i) => `
     <div class="news-row${i === 0 ? ' news-row--expanded' : ''}" data-idx="${i}">
       <div class="news-row-summary" role="button" tabindex="0" aria-expanded="${i === 0}">
@@ -277,8 +276,10 @@ function renderNewsAccordion(containerEl) {
         <span class="news-row-date">${n.date}</span>
         <span class="news-row-chevron">↓</span>
       </div>
-      <div class="news-row-body${n.image ? '' : ' news-row-body--text-only'}">
-        ${n.image ? `<img src="${n.image}" alt="" class="news-row-img" loading="lazy">` : ''}
+      <div class="news-row-body${n.media && n.media.src ? '' : ' news-row-body--text-only'}">
+        ${n.media && n.media.src ? (n.media.type === 'video'
+          ? `<video src="${n.media.src}" class="news-row-img" controls playsinline preload="metadata"></video>`
+          : `<img src="${n.media.src}" alt="" class="news-row-img" loading="lazy">`) : ''}
         <div class="news-row-content">
           <p class="news-row-excerpt">${n.excerpt || ''}</p>
           ${n.href && n.href !== '#' ? `<a href="${n.href}" class="btn-ghost news-row-link" target="_blank" rel="noopener">Read more →</a>` : ''}
@@ -309,8 +310,7 @@ function renderNewsHub() {
   }
 
   if (useCaseEl) {
-    const items = NEWS_ITEMS.filter(n => n.tag === 'Use Case');
-    useCaseEl.innerHTML = items.map((n, i) => `
+    useCaseEl.innerHTML = USE_CASES.map((n, i) => `
       <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
         <div class="news-image"><img src="${n.image}" alt="" loading="lazy"></div>
         <div class="news-body">
