@@ -2003,7 +2003,7 @@ a { text-decoration: none; color: inherit; }
 
 .news-row-body {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 460px 1fr;
   gap: 2.5rem;
   align-items: start;
   max-height: 0;
@@ -2019,7 +2019,7 @@ a { text-decoration: none; color: inherit; }
 .news-row-img {
   width: 100%;
   border-radius: var(--radius);
-  aspect-ratio: 16/9;
+  aspect-ratio: 6/5;
   object-fit: cover;
 }
 

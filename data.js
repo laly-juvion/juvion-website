@@ -120,7 +120,7 @@ const NEWS_ITEMS = [
     date:         "June 28 2025",
     excerpt:      "JUVION-001, a naturally derived compound, shows new preclinical evidence of preserving age-related mobility across fly and rodent models.",
     previewImage: "https://placehold.co/760x400/101010/222222?text=JUVION-001+Preview",
-    media:        { type: "video", src: null },
+    media:        { type: "video", src: "./assets/news/mobility_performance.mp4" },
     href:         "#",
   },
   {
