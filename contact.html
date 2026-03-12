@@ -97,6 +97,10 @@
               <input type="email" id="contactEmail" name="email" placeholder="your@email.com" class="contact-input" required>
             </div>
             <div class="contact-field">
+              <label for="contactCompany" class="contact-label">Company <span class="contact-label-optional">(optional)</span></label>
+              <input type="text" id="contactCompany" name="company" placeholder="Your organisation" class="contact-input">
+            </div>
+            <div class="contact-field">
               <label for="contactSubject" class="contact-label">Subject <span class="contact-label-optional">(optional)</span></label>
               <input type="text" id="contactSubject" name="subject" placeholder="e.g. Partnership inquiry" class="contact-input">
             </div>
@@ -202,6 +206,7 @@
             body: JSON.stringify({
               name:     contactForm.querySelector('[name="name"]').value,
               email:    contactForm.querySelector('[name="email"]').value,
+              company:  contactForm.querySelector('[name="company"]').value,
               subject:  contactForm.querySelector('[name="subject"]').value,
               message:  contactForm.querySelector('[name="message"]').value,
               _replyto: contactForm.querySelector('[name="email"]').value,
