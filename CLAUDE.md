@@ -1,8 +1,5 @@
 # CLAUDE.md — Frontend Website Rules
 
-## Always Do First
-- **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
-
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
 - If no reference image: design from scratch with high craft (see guardrails below).
@@ -31,7 +28,7 @@
 - Mobile-first responsive
 
 ## Brand Assets
-- Always check the `brand_assets/` folder before designing. It may contain logos, color guides, style guides, or images.
+- Always check the `assets/` folder before designing. It may contain logos, color guides, style guides, or images.
 - If assets exist there, use them. Do not use placeholders where real assets are available.
 - If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
 
@@ -52,3 +49,8 @@
 - Do not stop after one screenshot pass
 - Do not use `transition-all`
 - Do not use default Tailwind blue/indigo as primary color
+
+## Tracking
+- **Errors** append in the `Error.md` any technical issue faced in order to navigate and implement seamlessly in this project
+- **Tasks** keep track of all the todos of the project in a `Tasks.md` file
+- **State** keep an updated summary of the state of the project in a `Project.md`, with recent changes and next steps if any after each long implementation so that any future agent can easily pick up the work

@@ -179,7 +179,6 @@
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <p>© 2026 Juvion Health Sciences. All rights reserved.</p>
-        <p>Privacy Policy · Terms of Use</p>
       </div>
     </div>
   </footer>
@@ -197,14 +196,15 @@
         btn.textContent = 'Sending…';
         btn.disabled = true;
         try {
-          const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+          const res = await fetch('https://formspree.io/f/mreyqnyz', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
-              name:    contactForm.querySelector('[name="name"]').value,
-              email:   contactForm.querySelector('[name="email"]').value,
-              subject: contactForm.querySelector('[name="subject"]').value,
-              message: contactForm.querySelector('[name="message"]').value,
+              name:     contactForm.querySelector('[name="name"]').value,
+              email:    contactForm.querySelector('[name="email"]').value,
+              subject:  contactForm.querySelector('[name="subject"]').value,
+              message:  contactForm.querySelector('[name="message"]').value,
+              _replyto: contactForm.querySelector('[name="email"]').value,
             }),
           });
           if (res.ok) {
