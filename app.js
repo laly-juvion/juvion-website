@@ -194,9 +194,11 @@ function renderTeam() {
   const expandBtn   = document.getElementById('teamExpandBtn');
   if (!expandedEl) return;
 
-  const sorted = [...TEAM_MEMBERS].sort((a, b) => a.rank - b.rank);
-  const featured = sorted.slice(0, 2);
-  const rest     = sorted.slice(2);
+  const sorted        = [...TEAM_MEMBERS].sort((a, b) => a.rank - b.rank);
+  const featured      = sorted.slice(0, 2);
+  const rest          = sorted.slice(2);
+  const coreMembers   = rest.filter(m => m.group !== 'collaborator');
+  const collaborators = rest.filter(m => m.group === 'collaborator');
 
   if (featuredEl) {
     featuredEl.innerHTML = featured.map((m, i) => teamFeaturedPanelHTML(m, i ? `${i * 0.1}s` : null)).join('');
@@ -204,7 +206,12 @@ function renderTeam() {
   }
 
   if (coreGrid) {
-    coreGrid.innerHTML = rest.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
+    coreGrid.innerHTML = coreMembers.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
+  }
+
+  const collabGrid = document.getElementById('teamCollaboratorsGrid');
+  if (collabGrid) {
+    collabGrid.innerHTML = collaborators.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
   }
 
   if (advisorList) {

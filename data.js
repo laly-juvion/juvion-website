@@ -40,41 +40,45 @@ const TEAM_MEMBERS = [
     linkedin: 'https://www.linkedin.com/in/sebastien-guilmot/', 
     email: null 
   },
-  { 
-    name: 'Dr. Victor Lobato Rios',     
-    role: 'Head of Engineering',                             
-    rank: 5, 
-    initials: 'VL',  
-    photo: null,                         
-    linkedin: null, 
-    email: null 
+  {
+    name: 'Dr. Victor Lobato Rios',
+    role: 'Head of Engineering',
+    rank: 5,
+    initials: 'VL',
+    photo: null,
+    linkedin: null,
+    email: null,
+    group: 'collaborator',
   },
-  { 
-    name: 'Priyanka Dutta Passecker',   
-    role: 'Chief, Platform Operations',                      
-    rank: 6, 
-    initials: 'PD',  
-    photo: null,                         
-    linkedin: null, 
-    email: null 
+  {
+    name: 'Priyanka Dutta Passecker',
+    role: 'Chief, Platform Operations',
+    rank: 6,
+    initials: 'PD',
+    photo: null,
+    linkedin: null,
+    email: null,
+    group: 'collaborator',
   },
-  { 
-    name: 'Manoj Thacker',              
-    role: 'Product Commercialization',                       
-    rank: 7, 
-    initials: 'MT',  
-    photo: null,                         
-    linkedin: null, 
-    email: null 
+  {
+    name: 'Manoj Thacker',
+    role: 'Product Commercialization',
+    rank: 7,
+    initials: 'MT',
+    photo: null,
+    linkedin: null,
+    email: null,
+    group: 'collaborator',
   },
-  { 
-    name: 'Dr. Subhasri Bandyopadhyay', 
-    role: 'Medical Affairs & Business Commercialization',   
-    rank: 8, 
-    initials: 'SB2', 
-    photo: null,                         
-    linkedin: null, 
-    email: null 
+  {
+    name: 'Dr. Subhasri Bandyopadhyay',
+    role: 'Medical Affairs & Business Commercialization',
+    rank: 8,
+    initials: 'SB2',
+    photo: null,
+    linkedin: null,
+    email: null,
+    group: 'collaborator',
   },
 ];
 
