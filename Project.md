@@ -26,6 +26,7 @@ All content is driven by four arrays — edit this file to update the site witho
 | Array | Purpose |
 |-------|---------|
 | `TEAM_MEMBERS` | Founders + core team (rank, photo, linkedin, email) |
+| `COLLABORATORS` | People collaborating with us |
 | `ADVISORS` | Legal, medical, strategic advisors |
 | `BOARD_MEMBERS` | Board composition |
 | `PUBLICATIONS` | Peer-reviewed papers (journal, title, excerpt, year, doi) |
@@ -43,7 +44,7 @@ Each `NEWS_ITEMS` entry has two separate image/media fields:
 
 | Function | What it does |
 |----------|-------------|
-| `renderTeam()` | Renders founders as featured panels + core team grid + advisors/board |
+| `renderTeam()` | Renders founders as featured panels + core team grid + collaborators/advisors/board |
 | `renderPublications(el)` | Renders pub cards into any container |
 | `renderNews(el, limit)` | Renders news cards (uses `previewImage`); `limit` used on home page (shows 3) |
 | `renderNewsAccordion(el)` | Renders expandable news rows on `news.html`; first row expanded by default |
