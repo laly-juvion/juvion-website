@@ -96,24 +96,24 @@ const BOARD_MEMBERS = [
 const PUBLICATIONS = [
   {
     journal: 'Cell Reports',
-    title:   'This neuroscience model predicts and prolongs motor neuron activity during aging',
-    excerpt: 'A landmark study demonstrating conserved mechanisms of neuromuscular decline across species, providing the foundation for targeted therapeutic intervention.',
-    year:    '2023',
-    doi:     '#',
-  },
-  {
-    journal: 'Nature Aging',
-    title:   'Combining age-related Drosophila studies for targeted drug discovery',
-    excerpt: 'Comprehensive validation of Drosophila as a high-throughput screening model, confirming translational relevance to human motor aging processes.',
-    year:    '2022',
-    doi:     '#',
-  },
-  {
-    journal: 'eLife',
-    title:   'Plant-derived compounds restore neuromuscular function in aged Drosophila models',
-    excerpt: 'Identification and validation of key plant-derived compounds that reverse age-related motor decline, directly supporting the Juvion-001 pipeline.',
+    title:   'Trio preserves motor synapses and prolongs motor ability during aging',
+    excerpt: 'increasing Trio expression in adult Drosophila can abrogate age-dependent synaptic structural fragmentation, postpone the decline of motor ability, and maintain the capacity of motor synapses to sustain high-intensity neurotransmitter release.',
     year:    '2024',
-    doi:     '#',
+    doi:     'https://doi.org/10.1016/j.celrep.2024.114256',
+  },
+  {
+    journal: 'Nature Communications',
+    title:   'Miniature neurotransmission is required to maintain Drosophila synaptic structures during ageing',
+    excerpt: 'Our results establish that miniature neurotransmission, formerly viewed as an epiphenomenon, is necessary for the long-term stability of synaptic connections.',
+    year:    '2021',
+    doi:     'https://doi.org/10.1038/s41467-021-24490-1',
+  },
+  {
+    journal: 'TheScientist',
+    title:   'Combating Age-Related Motor Decline',
+    excerpt: 'When [the researchers] genetically decreased Trio levels, synaptic boutons broke up much more rapidly as the flies got older. When they overexpressed the protein, the synaptic structures were almost entirely preserved',
+    year:    '2024',
+    doi:     'https://www.the-scientist.com/combating-age-related-motor-decline-72095',
   },
 ];
 
