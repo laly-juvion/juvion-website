@@ -64,7 +64,7 @@ const PUBLICATIONS = [
   {
     journal: 'Cell Reports',
     title:   'Trio preserves motor synapses and prolongs motor ability during aging',
-    excerpt: 'increasing Trio expression in adult Drosophila can abrogate age-dependent synaptic structural fragmentation, postpone the decline of motor ability, and maintain the capacity of motor synapses to sustain high-intensity neurotransmitter release.',
+    excerpt: 'We demonstrate that increasing Trio expression in adult Drosophila can abrogate age-dependent synaptic structural fragmentation, postpone the decline of motor ability, and maintain the capacity of motor synapses to sustain high-intensity neurotransmitter release.',
     year:    '2024',
     doi:     'https://doi.org/10.1016/j.celrep.2024.114256',
   },
