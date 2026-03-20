@@ -615,7 +615,7 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   align-items: center;
   width: max-content;
-  animation: partners-scroll 22s linear infinite;
+  animation: partners-scroll 45s linear infinite;
   padding: 0.5rem 0;
 }
 
