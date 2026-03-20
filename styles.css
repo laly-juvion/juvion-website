@@ -1161,6 +1161,8 @@ a { text-decoration: none; color: inherit; }
   transition: border-color 0.2s ease;
 }
 
+.advisor-info { flex: 1; min-width: 0; }
+
 .advisor-card:hover { border-color: rgba(232, 98, 26, 0.2); }
 
 .advisor-photo {
@@ -1248,18 +1250,23 @@ a { text-decoration: none; color: inherit; }
 .partners-bar .container { padding-bottom: 1.5rem; }
 
 .partner-logo {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  opacity: 0.45;
   transition: opacity 0.2s ease;
   padding: 0 2rem;
   flex-shrink: 0;
 }
 
-.partner-logo:hover { opacity: 1; }
+.partner-logo img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: grayscale(1) brightness(2);
+}
+
+.partner-logo:hover { opacity: 0.85; }
 
 /* ── News ─────────────────────────────────────────────────────── */
 .news-grid {
@@ -2785,4 +2792,150 @@ body { position: relative; }
   border-top: 5.5px solid transparent;
   border-bottom: 5.5px solid transparent;
   border-left: 6px solid #141414;
+}
+
+/* ── Pipeline solid bars (3 fill levels matching reference image) ── */
+.pipeline-bar--solid .pb-body {
+  flex: 1;
+  height: 100%;
+}
+
+.pipeline-bar--solid .pb-tip {
+  width: 0;
+  flex-shrink: 0;
+}
+
+/* Level 3 — full progress (JUVION-001) */
+.pipeline-bar--l3 .pb-body {
+  background: rgba(254, 102, 3, 0.82);
+}
+.pipeline-bar--l3 .pb-tip {
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 18px solid rgba(254, 102, 3, 0.82);
+}
+
+/* Level 2 — mid progress (JUVION-002) */
+.pipeline-bar--l2 .pb-body {
+  background: rgba(254, 102, 3, 0.52);
+}
+.pipeline-bar--l2 .pb-tip {
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 18px solid rgba(254, 102, 3, 0.52);
+}
+
+/* Level 1 — early (JUVION-003) */
+.pipeline-bar--l1 .pb-body {
+  background: rgba(254, 102, 3, 0.28);
+}
+.pipeline-bar--l1 .pb-tip {
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 18px solid rgba(254, 102, 3, 0.28);
+}
+
+/* Legend swatches for solid levels */
+.pipeline-legend-swatch--l3 .pb-body { background: rgba(254,102,3,0.82); }
+.pipeline-legend-swatch--l3 .pb-tip  { border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 9px solid rgba(254,102,3,0.82); }
+
+.pipeline-legend-swatch--l2 .pb-body { background: rgba(254,102,3,0.52); }
+.pipeline-legend-swatch--l2 .pb-tip  { border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 9px solid rgba(254,102,3,0.52); }
+
+.pipeline-legend-swatch--l1 .pb-body { background: rgba(254,102,3,0.28); }
+.pipeline-legend-swatch--l1 .pb-tip  { border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 9px solid rgba(254,102,3,0.28); }
+
+/* ── Compound detail section ────────────────────────────────── */
+.pipeline-compound-detail {
+  max-width: 760px;
+}
+
+.pcd-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.pcd-tag {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.pcd-id {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.pcd-area {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-top: 0.25rem;
+}
+
+.pcd-stages {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 2rem;
+}
+
+.pcd-stage {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+}
+
+.pcd-stage--reached {
+  background: rgba(254, 102, 3, 0.15);
+  color: var(--brand);
+  border: 1px solid rgba(254, 102, 3, 0.35);
+}
+
+.pcd-stage--next {
+  background: rgba(254, 102, 3, 0.06);
+  color: rgba(254, 102, 3, 0.6);
+  border: 1px solid rgba(254, 102, 3, 0.2);
+}
+
+.pcd-stage--future {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.pcd-stage-arrow {
+  color: var(--brand);
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.pcd-stage-arrow--muted {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+.pcd-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pcd-body p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-sec);
 }

@@ -61,20 +61,20 @@ const TEAM_MEMBERS = [
 ];
 
 const COLLABORATORS = [
-  { name: 'Dr. Victor Lobato Rios', role: 'Head of Engineering', initials: 'VL'},
-  { name: 'Manoj Thacker', role: 'Product Commercialization', initials: 'MT'},
-  { name: 'Dr. Subhasri Bandyopadhyay', role: 'Medical Affairs & Business Commercialization (India)', initials: 'SB2'},
+  { name: 'Dr. Victor Lobato Rios', role: 'Head of Engineering', initials: 'VL', linkedin: "https://www.linkedin.com/in/victor-lobato-rios-986756301" },
+  { name: 'Manoj Thacker', role: 'Product Commercialization', initials: 'MT', linkedin: "https://www.linkedin.com/in/manojthacker" },
+  { name: 'Dr. Subhasri Bandyopadhyay', role: 'Medical Affairs & Business Commercialization (India)', initials: 'SB2', linkedin: null },
 ];
 
 const ADVISORS = [
-  { name: 'Nicolas F. Krauer',   role: 'Legal Advisor',     initials: 'NK' },
-  { name: 'Dr. Sanjeev Ganguly', role: 'Medical Advisor',   initials: 'SG' },
-  { name: 'Joe Jankow',          role: 'Strategic Advisor', initials: 'JJ' },
+  { name: 'Nicolas F. Krauer',   role: 'Legal Advisor',     initials: 'NK', linkedin: "https://www.linkedin.com/in/nicolas-f-krauer-450956157" },
+  { name: 'Dr. Sanjeev Ganguly', role: 'Medical Advisor',   initials: 'SG', linkedin: "https://www.linkedin.com/in/sanjeevganguly" },
+  { name: 'Joe Jankow',          role: 'Strategic Advisor', initials: 'JJ', linkedin: "https://www.linkedin.com/in/joeljankow/" },
 ];
 
 const BOARD_MEMBERS = [
-  { name: 'Dr. Soumya Banerjee',  role: 'CEO & Co-Founder', initials: 'SB' },
-  { name: 'Prof. Michael Friese', role: 'Board Member',      initials: 'MF' },
+  { name: 'Dr. Soumya Banerjee',  role: 'CEO & Co-Founder', initials: 'SB', linkedin: 'https://www.linkedin.com/in/soumya-banerjee83/' },
+  { name: 'Prof. Michael Friese', role: 'Board Member',      initials: 'MF', linkedin: "https://www.linkedin.com/in/michaelfriebe/" },
 ];
 
 const PUBLICATIONS = [

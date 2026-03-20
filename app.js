@@ -142,7 +142,6 @@ function teamFeaturedPanelHTML(m, delay) {
         <p class="tfp-bio">${bio}</p>
         <div class="tfp-links">
           <a href="${m.linkedin || '#'}" class="team-social-link${m.linkedin ? '' : ' team-social-link--disabled'}" aria-label="LinkedIn" ${m.linkedin ? 'target="_blank" rel="noopener"' : ''}>${ICON_LINKEDIN}</a>
-          <a href="${m.email ? 'mailto:' + m.email : '#'}" class="team-social-link${m.email ? '' : ' team-social-link--disabled'}" aria-label="Email">${ICON_EMAIL}</a>
         </div>
       </div>
     </div>`;
@@ -164,7 +163,6 @@ function teamCardHTML(m, delay) {
         <div class="team-role">${m.role}</div>
         <div class="team-socials">
           <a href="${m.linkedin || '#'}" class="team-social-link${m.linkedin ? '' : ' team-social-link--disabled'}" aria-label="LinkedIn" ${m.linkedin ? 'target="_blank" rel="noopener"' : ''}>${ICON_LINKEDIN}</a>
-          <a href="${m.email ? 'mailto:' + m.email : '#'}" class="team-social-link${m.email ? '' : ' team-social-link--disabled'}" aria-label="Email">${ICON_EMAIL}</a>
         </div>
       </div>
     </div>`;
@@ -177,10 +175,11 @@ function advisorCardHTML(m, delay) {
       <div class="advisor-photo">
         <img src="https://placehold.co/72x72/141414/2a2a2a?text=${encodeURIComponent(m.initials)}" alt="${m.name}" loading="lazy">
       </div>
-      <div>
+      <div class="advisor-info">
         <div class="team-name">${m.name}</div>
         <div class="team-role">${m.role}</div>
       </div>
+      <a href="${m.linkedin || '#'}" class="team-social-link${m.linkedin ? '' : ' team-social-link--disabled'}" aria-label="LinkedIn" ${m.linkedin ? 'target="_blank" rel="noopener"' : ''}>${ICON_LINKEDIN}</a>
     </div>`;
 }
 
@@ -527,6 +526,6 @@ if (pageSubnav) {
 /* ── Init ────────────────────────────────────────────────────── */
 renderTeam();
 renderPublications(document.getElementById('pubGrid'));
-renderNews(document.getElementById('newsGrid'), 3);
+renderNews(document.getElementById('newsGrid'), 4);
 renderNewsHub();
 if (document.getElementById('flyLayer')) initFlies();
