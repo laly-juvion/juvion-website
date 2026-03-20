@@ -2640,24 +2640,70 @@ body { position: relative; }
   color: var(--text-muted);
 }
 
-/* Arrow bars — positioned via inline grid-column */
+/* Arrow bars — body + tip flex layout, positioned via inline grid-column */
 .pipeline-bar {
-  height: 30px;
+  display: flex;
+  align-items: center;
   align-self: center;
-  /* arrow chevron shape */
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
+  height: 30px;
 }
 
-.pipeline-bar--filled {
-  background: rgba(254,102,3,0.22);
-  outline: 1.5px solid rgba(254,102,3,0.55);
-  outline-offset: -1px;
+.pb-body {
+  flex: 1;
+  height: 100%;
 }
 
-/* Outline arrow: use a pseudo-element trick via box-shadow instead */
-.pipeline-bar--outline {
+.pb-tip {
+  width: 0;
+  flex-shrink: 0;
+}
+
+/* Filled (JUVION-001) */
+.pipeline-bar--filled .pb-body {
+  background: rgba(254,102,3,0.2);
+  border-top: 1.5px solid rgba(254,102,3,0.6);
+  border-bottom: 1.5px solid rgba(254,102,3,0.6);
+  border-left: 1.5px solid rgba(254,102,3,0.6);
+}
+
+.pipeline-bar--filled .pb-tip {
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 16px solid rgba(254,102,3,0.55);
+}
+
+/* Outline (JUVION-002, JUVION-003) — double-triangle trick for hollow tip */
+.pipeline-bar--outline .pb-body {
   background: transparent;
-  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.15);
+  border-top: 1.5px solid rgba(255,255,255,0.18);
+  border-bottom: 1.5px solid rgba(255,255,255,0.18);
+  border-left: 1.5px solid rgba(255,255,255,0.18);
+}
+
+.pipeline-bar--outline .pb-tip {
+  position: relative;
+  width: 16px;
+  height: 30px;
+}
+
+.pipeline-bar--outline .pb-tip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 16px solid rgba(255,255,255,0.18);
+}
+
+.pipeline-bar--outline .pb-tip::after {
+  content: '';
+  position: absolute;
+  top: 1.5px; left: 0;
+  width: 0;
+  border-top: 13.5px solid transparent;
+  border-bottom: 13.5px solid transparent;
+  border-left: 14px solid #141414; /* matches var(--elevated) = pipeline-wrap bg */
 }
 
 /* Legend */
@@ -2680,19 +2726,63 @@ body { position: relative; }
 }
 
 .pipeline-legend-swatch {
-  display: inline-block;
-  width: 32px;
-  height: 12px;
-  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%);
+  display: inline-flex;
+  align-items: center;
+  width: 36px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
-.pipeline-legend-swatch--filled {
-  background: rgba(254,102,3,0.3);
-  outline: 1.5px solid rgba(254,102,3,0.6);
-  outline-offset: -1px;
+.pipeline-legend-swatch .pb-body {
+  flex: 1;
+  height: 100%;
 }
 
-.pipeline-legend-swatch--outline {
+.pipeline-legend-swatch .pb-tip {
+  width: 0;
+  flex-shrink: 0;
+}
+
+.pipeline-legend-swatch--filled .pb-body {
+  background: rgba(254,102,3,0.25);
+  border-top: 1.5px solid rgba(254,102,3,0.6);
+  border-bottom: 1.5px solid rgba(254,102,3,0.6);
+  border-left: 1.5px solid rgba(254,102,3,0.6);
+}
+
+.pipeline-legend-swatch--filled .pb-tip {
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 8px solid rgba(254,102,3,0.55);
+}
+
+.pipeline-legend-swatch--outline .pb-body {
   background: transparent;
-  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.2);
+  border-top: 1.5px solid rgba(255,255,255,0.18);
+  border-bottom: 1.5px solid rgba(255,255,255,0.18);
+  border-left: 1.5px solid rgba(255,255,255,0.18);
+}
+
+.pipeline-legend-swatch--outline .pb-tip {
+  position: relative;
+  width: 8px;
+  height: 14px;
+}
+
+.pipeline-legend-swatch--outline .pb-tip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 8px solid rgba(255,255,255,0.18);
+}
+
+.pipeline-legend-swatch--outline .pb-tip::after {
+  content: '';
+  position: absolute;
+  top: 1.5px; left: 0;
+  border-top: 5.5px solid transparent;
+  border-bottom: 5.5px solid transparent;
+  border-left: 6px solid #141414;
 }
