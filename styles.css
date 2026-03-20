@@ -830,7 +830,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .pillar-text {
-  font-size: 14.5px;
+  font-size: 15.5px;
   line-height: 1.75;
   color: var(--text-sec);
 }
@@ -1522,7 +1522,8 @@ a { text-decoration: none; color: inherit; }
 /* ── Science Stats ────────────────────────────────────────────── */
 .science-stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 320px));
+  justify-content: center;
   gap: 2rem;
 }
 
@@ -2485,4 +2486,90 @@ body { position: relative; }
 .page-subnav-link.active {
   color: var(--brand);
   border-bottom-color: var(--brand);
+}
+
+/* ── Pillar header (icon + title inline) ─────────────────────── */
+.pillar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.pillar-header .pillar-icon-wrap {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.pillar-header .pillar-title {
+  margin-bottom: 0;
+}
+
+/* ── Disease table ────────────────────────────────────────────── */
+.disease-table-wrap {
+  overflow-x: auto;
+}
+
+.disease-table-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-sec);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.disease-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.disease-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.disease-table td {
+  padding: 0.75rem 1rem;
+  color: var(--text-sec);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.disease-table td:first-child {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.disease-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.disease-table tbody tr:hover td {
+  background: var(--elevated);
+}
+
+/* ── Survival chart ───────────────────────────────────────────── */
+.survival-chart-wrap {
+  position: relative;
+  width: 100%;
+  background: var(--elevated);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.25rem 0.75rem;
+  height: 340px;
+}
+
+/* Standardise all measurement-box graph containers */
+.measurement-box .approach-img {
+  height: 340px;
+  object-fit: contain;
+  background: var(--elevated);
+  padding: 1rem;
+  border-radius: var(--radius);
 }

@@ -35,6 +35,7 @@
       }
     }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 </head>
 <body class="bg-[#080808] text-[#F2EFE9] font-sans antialiased">
 
@@ -95,13 +96,48 @@
         <!-- Right: fly-tube simulation -->
         <div class="fly-tube-wrap" aria-hidden="true">
           <svg id="flyTubeSvg" class="fly-tube-svg" viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <symbol id="fly-shape" viewBox="0 0 230 230" overflow="visible">
+                <g transform="translate(0,-236.14582)">
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 139.21827,332.03946 37.28607,37.28607 13.98227,32.62531"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 148.53979,313.39643 h 55.92909"/>
+                  <path style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 115.91448,420.59387 c -27.964549,0 -27.964549,-55.9291 -27.964549,-55.9291 0,0 0,-23.30379 27.964549,-23.30379 27.96455,0 27.96455,23.30379 27.96455,23.30379 0,0 0,55.9291 -27.96455,55.9291 z"/>
+                  <path style="fill:currentColor;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 90.746386,387.96857 4.660758,16.77872 5.592906,9.32152 8.38937,5.59291 8.38936,0.93215 7.45722,-2.79646 4.66076,-3.7286 6.52506,-9.32152 3.7286,-10.25367 0.93216,-6.52505 z"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 87.949931,360.00401 H 143.87903"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 87.949931,373.98628 H 143.87903"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 90.746386,387.96857 H 141.08258"/>
+                  <circle style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" cx="115.91447" cy="311.53214" r="33.593773"/>
+                  <path style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 115.91448,276.11037 H 87.949931 c 0,0 0,-23.30379 27.964549,-23.30379 27.96455,0 27.96455,23.30379 27.96455,23.30379 h -27.96455"/>
+                  <path style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 143.87903,276.11037 c -4.93874,2.64313 -10.58217,-4.86995 -13.98227,-9.32152 -2.98209,-3.90429 -7.99881,-10.37758 -4.66076,-13.98227 4.35227,-4.69993 14.70095,-0.38817 18.64303,4.66076 3.82437,4.89817 5.47902,15.71074 0,18.64303 z"/>
+                  <path style="fill:none;fill-opacity:1;stroke:currentColor;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 147.93997,292.1488 c 17.27296,11.6661 34.93169,30.24164 47.31396,49.38253 13.61416,21.0452 26.42826,44.70528 28.1967,69.70766 0.57047,8.06547 1.38507,19.91387 -5.84018,23.54332 -15.82876,7.95123 -35.01044,-9.68299 -49.01548,-20.52874 -13.54969,-10.49312 -23.42938,-25.61608 -31.09519,-40.94366 -4.90011,-9.79761 -9.87174,-20.68104 -9.0182,-31.60237 0.87346,-11.17613 12.78439,-19.3854 14.1408,-30.51324 0.59445,-4.87675 -4.86552,-10.01037 -2.80345,-14.46953 1.30417,-2.82021 5.54614,-6.31504 8.12104,-4.57597 z"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 140.17344,295.45508 c -0.28226,0.41434 23.32086,56.47482 30.37499,82.38954 3.28979,12.08567 -0.22617,37.57556 -0.22617,37.57556"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 142.96425,292.81258 c 0,0 22.46111,55.68145 35.8083,82.53787 10.37137,20.86867 34.31978,60.90775 34.31978,60.90775"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 179.23015,376.16257 -8.68172,1.68205"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 143.77635,292.35499 27.55892,50.80798 c 21.5446,28.77409 38.94787,56.44409 52.10821,82.98285"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 171.33527,343.16297 -5.68471,3.20319"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 160.24985,321.5907 48.87979,43.07407"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 139.21827,285.43188 27.96455,-32.6253 18.64303,-4.66076"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 92.610689,332.03946 55.324625,369.32553 41.34235,401.95084"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 83.289174,313.39643 H 27.360077"/>
+                  <path style="fill:currentColor;fill-opacity:1;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 87.949931,276.11037 c 4.938735,2.64313 10.582177,-4.86995 13.982279,-9.32152 2.98208,-3.90429 7.9988,-10.37758 4.66076,-13.98227 -4.35229,-4.69993 -14.70095,-0.38817 -18.643039,4.66076 -3.824375,4.89817 -5.479029,15.71074 0,18.64303 z"/>
+                  <path style="fill:none;fill-opacity:1;stroke:currentColor;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 83.888995,292.1488 c -17.272975,11.6661 -34.931693,30.24164 -47.313966,49.38253 -13.614159,21.0452 -26.42826,44.70528 -28.1966917,69.70766 -0.5704768,8.06547 -1.3850841,19.91387 5.8401817,23.54332 15.828755,7.95123 35.010431,-9.68299 49.015477,-20.52874 13.549691,-10.49312 23.42938,-25.61608 31.095189,-40.94366 4.900098,-9.79761 9.871735,-20.68104 9.018195,-31.60237 -0.87346,-11.17613 -12.784386,-19.3854 -14.140796,-30.51324 -0.594452,-4.87675 4.865514,-10.01037 2.803445,-14.46953 -1.304173,-2.82021 -5.546143,-6.31504 -8.121034,-4.57597 z"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 91.655522,295.45508 c 0.282256,0.41434 -23.320857,56.47482 -30.374989,82.38954 -3.289787,12.08567 0.226167,37.57556 0.226167,37.57556"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 88.864708,292.81258 c 0,0 -22.461107,55.68145 -35.808297,82.53787 C 42.68504,396.21912 18.73663,436.2582 18.73663,436.2582"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 52.598818,376.16257 8.681715,1.68205"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 88.052608,292.35499 60.493685,343.16297 C 38.949098,371.93706 21.545818,399.60706 8.3854775,426.14582"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 60.493685,343.16297 5.684717,3.20319"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 71.579111,321.5907 22.699318,364.66477"/>
+                  <path style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 92.610689,285.43188 64.646141,252.80658 46.003108,248.14582"/>
+                </g>
+              </symbol>
+            </defs>
             <!-- Young tube -->
             <rect x="10" y="20" width="440" height="100" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
             <text x="22" y="15" fill="#9A9590" font-size="10" font-family="Inter,sans-serif" letter-spacing="0.08em" text-transform="uppercase" style="text-transform:uppercase;letter-spacing:0.08em">YOUNG</text>
             <!-- Old tube -->
             <rect x="10" y="178" width="440" height="100" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
             <text x="22" y="173" fill="#9A9590" font-size="10" font-family="Inter,sans-serif" letter-spacing="0.08em" style="text-transform:uppercase;letter-spacing:0.08em">OLD</text>
-            <!-- Fly dots injected by script -->
+            <!-- Flies injected by script -->
           </svg>
         </div>
 
@@ -126,12 +162,8 @@
           </p>
         </div>
         <div class="reveal" style="--delay:0.15s">
-          <div class="approach-media" style="margin-bottom:1rem">
-            <img src="https://placehold.co/560x300/101010/1a1a1a?text=Fly+on+Treadmill" alt="Fly on treadmill" loading="lazy" class="approach-img">
-            <p class="approach-media-caption">Fly on a treadmill — video coming soon</p>
-          </div>
           <div class="approach-media">
-            <img src="./assets/flygym/FlyGym_at_a_glance_whiteBG.png" alt="FlyGym at a glance" loading="lazy" class="approach-img">
+            <img src="./assets/flygym/FlyGym_at_a_glance_whiteBG.png" alt="FlyGym at a glance" loading="lazy" class="approach-img" style="height:auto;object-fit:contain;">
             <p class="approach-media-caption">FlyGym at a glance</p>
           </div>
         </div>
@@ -147,33 +179,36 @@
       </div>
       <div class="pillars-grid">
         <div class="pillar-card reveal">
-          <div class="pillar-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Biological Relevance</h3>
           </div>
-          <h3 class="pillar-title">Biological Relevance</h3>
-          <p class="pillar-text">Along with conserved structural and functional features of NMJs, about <strong style="color:var(--brand)">75%</strong>of genes involved in human neurodegeneration and aging pathways have homologs in fruit flies.</p>
+          <p class="pillar-text">Along with conserved structural and functional features of NMJs, about <strong style="color:var(--brand)">75%</strong> of genes involved in human neurodegeneration and aging pathways have homologs in fruit flies.</p>
         </div>
         <div class="pillar-card reveal" style="--delay:0.1s">
-          <div class="pillar-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Speed and Scale</h3>
           </div>
-          <h3 class="pillar-title">Speed and Scale</h3>
           <p class="pillar-text">A 50-day lifespan enables affordable long term aging studies while capturing whole organism brain function and tissue interactions that cell culture models cannot replicate.</p>
         </div>
         <div class="pillar-card reveal" style="--delay:0.2s">
-          <div class="pillar-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <line x1="12" y1="1" x2="12" y2="23"/>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            </svg>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap">
+              <img src="./assets/drosophila.svg" alt="" aria-hidden="true" style="width:20px;height:20px;object-fit:contain;">
+            </div>
+            <h3 class="pillar-title">Rich, relevant behavior</h3>
           </div>
-          <h3 class="pillar-title">Rich, relevant behavior</h3>
-          <p class="pillar-text">Aggression, mating, drunkenness, memory, sociability, sleep, circadian rythms, neurodegenerative diseases, and many more.</p>
+          <p class="pillar-text">Aggression, mating, drunkenness, memory, sociability, sleep, circadian rhythms, neurodegenerative diseases, and many more.</p>
         </div>
       </div>
 
@@ -196,48 +231,25 @@
 
       <!-- Shared biology -->
       <h3 class="team-group-label reveal" style="margin-top:3rem">Shared biology with humans</h3>
-      <div class="bio-columns-grid reveal" style="--delay:0.1s;margin-top:1rem">
-        <div class="bio-column-box">
-          <h4 class="bio-column-title">Diseases shared with humans</h4>
-          <ul class="bio-column-list">
-            <li>Alzheimer's disease &amp; tauopathies <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7246467/" class="bio-ref" target="_blank" rel="noopener" title="Bolus et al., 2020 — Modeling Neurodegenerative Disorders in Drosophila">↗</a></li>
-            <li>Parkinson's disease <a href="https://pubmed.ncbi.nlm.nih.gov/16818890/" class="bio-ref" target="_blank" rel="noopener" title="Yang et al., 2006 — Mitochondrial pathology and muscle and dopaminergic neuron degeneration">↗</a></li>
-            <li>ALS / motor neuron disease <a href="https://pubmed.ncbi.nlm.nih.gov/33477509/" class="bio-ref" target="_blank" rel="noopener" title="Layalle et al., 2021 — Amyotrophic Lateral Sclerosis Genes in Drosophila">↗</a></li>
-            <li>Huntington's disease / polyQ disorders <a href="https://pubmed.ncbi.nlm.nih.gov/12576549/" class="bio-ref" target="_blank" rel="noopener" title="Hockly et al., 2003 — SAHA, a histone deacetylase inhibitor, ameliorates motor deficits in a mouse model of Huntington's disease">↗</a></li>
-            <li>Genetic epilepsies &amp; seizure disorders <a href="https://pubmed.ncbi.nlm.nih.gov/36873106/" class="bio-ref" target="_blank" rel="noopener" title="Fischer et al., 2023 — Drosophila melanogaster as a versatile model organism to study genetic epilepsies">↗</a></li>
-            <li>Fragile X syndrome <a href="https://pubmed.ncbi.nlm.nih.gov/12086633/" class="bio-ref" target="_blank" rel="noopener" title="Gao, 2002 — Understanding fragile X syndrome: insights from retarded flies">↗</a></li>
-            <li>Broader neurodegeneration (FTD, mitochondrial) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4596656/" class="bio-ref" target="_blank" rel="noopener" title="McGurk et al., 2015 — Drosophila as an In Vivo Model for Human Neurodegenerative Disease">↗</a></li>
-          </ul>
-        </div>
-        <div class="bio-column-box">
-          <h4 class="bio-column-title">Discoveries made through <em>Drosophila</em></h4>
-          <ul class="bio-column-list">
-            <li>PINK1&ndash;Parkin mitochondrial quality control pathway (Parkinson's) <a href="https://pubmed.ncbi.nlm.nih.gov/16818890/" class="bio-ref" target="_blank" rel="noopener" title="Yang et al., 2006; Poole et al., 2008">↗</a></li>
-            <li>Tau toxicity is genetically tractable in vivo (Alzheimer's) <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1462852/" class="bio-ref" target="_blank" rel="noopener" title="Shulman et al., 2003 — Genetic modifiers of tauopathy in Drosophila">↗</a></li>
-            <li>A&beta;&ndash;Tau interaction links AD genetics to pathogenic mechanisms <a href="https://pubmed.ncbi.nlm.nih.gov/24067533/" class="bio-ref" target="_blank" rel="noopener" title="Shulman et al., 2014 — Functional screening in Drosophila identifies Alzheimer's disease susceptibility genes">↗</a></li>
-            <li>Mitochondrial failure as a central neurodegeneration driver <a href="https://pubmed.ncbi.nlm.nih.gov/16818890/" class="bio-ref" target="_blank" rel="noopener" title="Yang et al., 2006 — Pink1/parkin fly models and mitochondrial dynamics">↗</a></li>
-            <li>PolyQ toxicity can be therapeutically modified in vivo (Huntington's) <a href="https://pubmed.ncbi.nlm.nih.gov/12576549/" class="bio-ref" target="_blank" rel="noopener" title="Hockly et al., 2003 — HDAC inhibition rescues polyglutamine disease phenotypes">↗</a></li>
-            <li>Seizure suppressor genetics for monogenic epilepsies <a href="https://pubmed.ncbi.nlm.nih.gov/36873106/" class="bio-ref" target="_blank" rel="noopener" title="Fischer et al., 2023 — Drosophila as a versatile model for genetic epilepsies">↗</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="bio-citations reveal" style="--delay:0.2s;margin-top:2rem">
-        <div class="bio-citation">
-          <span class="bio-citation-label">Review</span>
-          <p class="bio-citation-text">"A large fraction of human disease genes have <em>Drosophila</em> homologs, and flies are broadly useful for disease modeling."</p>
-          <p class="bio-citation-source">Cotterill et al., <em>Role of Drosophila in Human Disease Research 3.0</em>, 2023</p>
-        </div>
-        <div class="bio-citation">
-          <span class="bio-citation-label">Review</span>
-          <p class="bio-citation-text">"Flies model neurodegeneration, tumors, muscle degeneration, and intestinal dysfunction &mdash; across a broad spectrum of human pathology."</p>
-          <p class="bio-citation-source">Verheyen, <em>The power of Drosophila in modeling human disease mechanisms</em>, 2022</p>
-        </div>
-        <div class="bio-citation">
-          <span class="bio-citation-label">Review</span>
-          <p class="bio-citation-text">"<em>Drosophila</em> is increasingly used for rare and ultra-rare disease research, enabling mechanistic insight at scale."</p>
-          <p class="bio-citation-source">Casas-Tint&oacute; et al., 2024</p>
-        </div>
+      <div class="disease-table-wrap reveal" style="--delay:0.1s;margin-top:1rem">
+        <p class="disease-table-title">Interventions for human diseases being discovered in <em>Drosophila</em></p>
+        <table class="disease-table">
+          <thead>
+            <tr>
+              <th>Disease</th>
+              <th><em>Drosophila</em> gene / pathway</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Alzheimer's disease</td><td>tau, A&beta;42, App-like (Appl)</td></tr>
+            <tr><td>Parkinson's disease</td><td>PINK1, parkin (park), LRRK2</td></tr>
+            <tr><td>ALS</td><td>TBPH (TDP-43), cabeza (FUS)</td></tr>
+            <tr><td>Huntington's disease</td><td>huntingtin (htt), polyQ expansion</td></tr>
+            <tr><td>Aging &amp; longevity</td><td>Trio, InR (insulin receptor), dFOXO</td></tr>
+            <tr><td>Epilepsy</td><td>para (SCN1A), eas (KCNQ)</td></tr>
+            <tr><td>Fragile X syndrome</td><td>dfmr1 (FMR1)</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -262,8 +274,10 @@
           <p class="measurement-desc">Rapid identification of toxic compounds and lifespan effects at scale. Screen thousands of compounds for safety and longevity impact before advancing to costly vertebrate studies — dramatically reducing R&amp;D risk and timeline.</p>
         </div>
         <div class="approach-media">
-          <img src="https://placehold.co/400x240/101010/1a1a1a?text=Lifespan+Graph" alt="Lifespan graph" loading="lazy" class="approach-img">
-          <p class="approach-media-caption">Survival curves — graph coming soon</p>
+          <div class="survival-chart-wrap">
+            <canvas id="survivalChart"></canvas>
+          </div>
+          <p class="approach-media-caption">Survival curves — Control vs Life extender vs Toxic compound</p>
         </div>
       </div>
 
@@ -303,8 +317,8 @@
           <p class="measurement-desc">Disease-relevant fly models expressing human genes enable direct translational studies. Test compounds in a genetically humanized context that faithfully recapitulates human neuromuscular pathways and aging phenotypes.</p>
         </div>
         <div class="approach-media">
-          <img src="https://placehold.co/400x240/101010/1a1a1a?text=In+Vivo+Graph" alt="In vivo graph" loading="lazy" class="approach-img">
-          <p class="approach-media-caption">In vivo phenotype data — graph coming soon</p>
+          <img src="./assets/humanised_drosophila_in_vivo.png" alt="Humanised Drosophila in vivo" loading="lazy" class="approach-img">
+          <p class="approach-media-caption">Humanised <em>Drosophila</em> in vivo model</p>
         </div>
       </div>
 
@@ -400,85 +414,199 @@
 
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script>
+    // ── Survival Chart ────────────────────────────────────────────
+    (function () {
+      const canvas = document.getElementById('survivalChart');
+      if (!canvas) return;
+
+      const controlData   = [{x:0,y:100},{x:6,y:96},{x:9,y:96},{x:13,y:96},{x:16,y:96},{x:21,y:96},{x:27,y:96},{x:32,y:89},{x:36,y:89},{x:42,y:50},{x:45,y:39},{x:49,y:13},{x:52,y:3},{x:56,y:0}];
+      const extenderData  = [{x:0,y:100},{x:6,y:95},{x:9,y:95},{x:13,y:92},{x:17,y:92},{x:23,y:92},{x:27,y:92},{x:32,y:84},{x:36,y:84},{x:42,y:73},{x:45,y:68},{x:49,y:57},{x:52,y:43},{x:56,y:30},{x:60,y:11},{x:64,y:0}];
+      const toxicData     = [{x:0,y:100},{x:7,y:100},{x:13,y:92},{x:16,y:87},{x:20,y:65},{x:23,y:60},{x:27,y:40},{x:31,y:26},{x:34,y:5},{x:39,y:0}];
+      const controlCIUp   = [{x:0,y:100},{x:6,y:100},{x:9,y:100},{x:13,y:100},{x:16,y:100},{x:21,y:100},{x:27,y:100},{x:32,y:100},{x:36,y:100},{x:42,y:73},{x:45,y:55},{x:49,y:23},{x:52,y:8},{x:56,y:0}];
+      const controlCILo   = [{x:0,y:100},{x:6,y:87},{x:9,y:87},{x:13,y:87},{x:16,y:87},{x:21,y:87},{x:27,y:87},{x:32,y:67},{x:36,y:67},{x:42,y:20},{x:45,y:13},{x:49,y:0},{x:52,y:0},{x:56,y:0}];
+      const extenderCIUp  = [{x:0,y:100},{x:6,y:100},{x:9,y:100},{x:13,y:100},{x:17,y:100},{x:23,y:100},{x:27,y:100},{x:32,y:91},{x:36,y:91},{x:42,y:76},{x:45,y:69},{x:49,y:66},{x:52,y:50},{x:56,y:46},{x:60,y:22},{x:64,y:0}];
+      const extenderCILo  = [{x:0,y:100},{x:6,y:92},{x:9,y:92},{x:13,y:86},{x:17,y:86},{x:23,y:86},{x:27,y:86},{x:32,y:77},{x:36,y:77},{x:42,y:68},{x:45,y:67},{x:49,y:41},{x:52,y:34},{x:56,y:8},{x:60,y:0},{x:64,y:0}];
+      const toxicCIUp     = [{x:0,y:100},{x:7,y:100},{x:13,y:100},{x:16,y:95},{x:20,y:79},{x:23,y:79},{x:27,y:54},{x:31,y:35},{x:34,y:8},{x:39,y:0}];
+      const toxicCILo     = [{x:0,y:100},{x:7,y:100},{x:13,y:86},{x:16,y:85},{x:20,y:39},{x:23,y:39},{x:27,y:8},{x:31,y:8},{x:34,y:0},{x:39,y:0}];
+
+      function ciDataset(upper, lower, color) {
+        return [
+          { data: upper, borderWidth: 0, pointRadius: 0, tension: 0.3, backgroundColor: color, fill: '+1' },
+          { data: lower, borderWidth: 0, pointRadius: 0, tension: 0.3, backgroundColor: 'transparent', fill: false },
+        ];
+      }
+
+      new Chart(canvas, {
+        type: 'line',
+        data: {
+          datasets: [
+            // CI bands first (indices 0–5)
+            ...ciDataset(extenderCIUp, extenderCILo, 'rgba(254,102,3,0.09)'),
+            ...ciDataset(controlCIUp,  controlCILo,  'rgba(242,239,233,0.05)'),
+            ...ciDataset(toxicCIUp,    toxicCILo,    'rgba(220,70,60,0.07)'),
+            // Main lines (indices 6–8)
+            {
+              label: 'Life extender',
+              data: extenderData,
+              borderColor: '#fe6603',
+              backgroundColor: 'transparent',
+              borderWidth: 2.5,
+              pointRadius: 0,
+              tension: 0.3,
+            },
+            {
+              label: 'Control',
+              data: controlData,
+              borderColor: 'rgba(242,239,233,0.6)',
+              backgroundColor: 'transparent',
+              borderWidth: 2,
+              pointRadius: 0,
+              tension: 0.3,
+              borderDash: [4, 3],
+            },
+            {
+              label: 'Toxic',
+              data: toxicData,
+              borderColor: 'rgba(220,70,60,0.85)',
+              backgroundColor: 'transparent',
+              borderWidth: 2.5,
+              pointRadius: 0,
+              tension: 0.3,
+            },
+          ]
+        },
+        options: {
+          parsing: false,
+          animation: false,
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              position: 'top',
+              align: 'end',
+              labels: {
+                filter: item => item.datasetIndex >= 6,
+                color: 'rgba(154,149,144,0.9)',
+                font: { family: 'Inter', size: 11 },
+                boxWidth: 20,
+                boxHeight: 2,
+                padding: 12,
+              }
+            },
+            tooltip: {
+              filter: item => item.datasetIndex >= 6,
+              backgroundColor: '#141414',
+              borderColor: 'rgba(255,255,255,0.09)',
+              borderWidth: 1,
+              titleColor: '#F2EFE9',
+              bodyColor: '#9A9590',
+              callbacks: {
+                label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%`,
+                title: items => `Day ${items[0].parsed.x}`,
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              title: { display: true, text: 'Age (days)', color: '#4A4845', font: { family: 'Inter', size: 11 } },
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              ticks: { color: '#4A4845', font: { family: 'Inter', size: 11 } },
+            },
+            y: {
+              min: 0,
+              max: 100,
+              title: { display: true, text: 'Survival (%)', color: '#4A4845', font: { family: 'Inter', size: 11 } },
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              ticks: { color: '#4A4845', font: { family: 'Inter', size: 11 }, callback: v => v + '%' },
+            }
+          }
+        }
+      });
+    })();
+  </script>
 
   <!-- ── FLY TUBE ANIMATION ─────────────────────────────────── -->
   <script>
   (function() {
     const svg = document.getElementById('flyTubeSvg');
     if (!svg) return;
+    const NS = 'http://www.w3.org/2000/svg';
 
-    // Tube dimensions (matching SVG viewBox rects)
     const tubes = [
-      { y: 20,  h: 100, color: '#fe6603', opacity: 0.9,  minSpeed: 1.0, maxSpeed: 2.0, drift: 0.35, count: 10 },
-      { y: 178, h: 100, color: '#4A4845', opacity: 0.45, minSpeed: 0.4, maxSpeed: 0.9, drift: 0, gravity: 0.35, count: 10 },
+      { y:20,  h:100, color:'#fe6603', opacity:0.9,  minSpeed:1.0, maxSpeed:2.0, drift:0.35, count:10, isOld:false },
+      { y:178, h:100, color:'#5A5755', opacity:0.6,  minSpeed:0.4, maxSpeed:0.9, drift:0, gravity:0.35, count:10, isOld:true },
     ];
-    const W = 460;
-    const PAD = 18;
+    const W = 460, PAD = 18;
+    function rand(a, b) { return a + Math.random() * (b - a); }
 
-    function rand(min, max) { return min + Math.random() * (max - min); }
-
-    // Create fly dot elements
     const flies = [];
     tubes.forEach(tube => {
       for (let i = 0; i < tube.count; i++) {
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        const r = rand(2.5, 4.5);
-        circle.setAttribute('r', r);
-        circle.setAttribute('fill', tube.color);
-        circle.setAttribute('opacity', tube.opacity);
-        svg.appendChild(circle);
+        const g = document.createElementNS(NS, 'g');
+        g.style.color = tube.color;
+        g.setAttribute('opacity', tube.opacity);
+        const use = document.createElementNS(NS, 'use');
+        use.setAttribute('href', '#fly-shape');
+        use.setAttribute('width', '14');
+        use.setAttribute('height', '14');
+        use.setAttribute('x', '-7');
+        use.setAttribute('y', '-7');
+        g.appendChild(use);
+        svg.appendChild(g);
 
-        const startRange = tube.gravity ? W * 0.35 : W - PAD;
+        const startX = tube.gravity ? rand(PAD, W * 0.5) : rand(PAD, W - PAD);
         flies.push({
-          el: circle,
-          x: rand(PAD, startRange),
-          y: rand(tube.y + 14, tube.y + tube.h - 14),
-          vx: rand(-0.5, 0.5) + tube.drift,
+          el: g,
+          x: startX,
+          y: rand(tube.y + 16, tube.y + tube.h - 16),
+          vx: rand(-0.5, 0.5) + (tube.drift || 0),
           vy: rand(-0.3, 0.3),
           tube,
-          r,
+          stopTimer: 0,
+          stopProb:  tube.isOld ? 0.025 : 0.004,
+          stopMin:   tube.isOld ? 60 : 20,
+          stopMax:   tube.isOld ? 180 : 60,
         });
       }
     });
 
     function tick() {
       flies.forEach(f => {
-        // Brownian noise
-        f.vx += rand(-0.25, 0.25);
-        f.vy += rand(-0.2, 0.2);
-
-        // Rightward drift (young) / Gravity toward start (old)
-        if (f.tube.gravity) {
-          f.vx -= f.tube.gravity * (f.x - PAD) / (W - 2 * PAD);
+        const t = f.tube;
+        if (f.stopTimer > 0) {
+          f.stopTimer--;
         } else {
-          f.vx += f.tube.drift * 0.08;
+          if (Math.random() < f.stopProb) {
+            f.stopTimer = Math.floor(rand(f.stopMin, f.stopMax));
+            f.vx = 0; f.vy = 0;
+          } else {
+            f.vx += rand(-0.25, 0.25);
+            f.vy += rand(-0.2, 0.2);
+            if (t.gravity) {
+              f.vx -= t.gravity * (f.x - PAD) / (W - 2 * PAD);
+            } else {
+              f.vx += t.drift * 0.08;
+            }
+            const speed = Math.sqrt(f.vx * f.vx + f.vy * f.vy);
+            if (speed > t.maxSpeed) { f.vx = f.vx / speed * t.maxSpeed; f.vy = f.vy / speed * t.maxSpeed; }
+            f.x += f.vx;
+            f.y += f.vy;
+            if (t.gravity) {
+              if (f.x > W - PAD) { f.x = W - PAD; f.vx *= -0.5; }
+              if (f.x < PAD)     { f.x = PAD;     f.vx *= -0.5; }
+            } else {
+              if (f.x > W - PAD + 10) f.x = PAD - 10;
+              if (f.x < PAD - 10)     f.x = W - PAD + 10;
+            }
+            const yMin = t.y + 12, yMax = t.y + t.h - 12;
+            if (f.y < yMin) { f.y = yMin; f.vy *= -0.6; }
+            if (f.y > yMax) { f.y = yMax; f.vy *= -0.6; }
+          }
         }
-
-        // Clamp speed
-        const speed = Math.sqrt(f.vx * f.vx + f.vy * f.vy);
-        const maxS = f.tube.maxSpeed;
-        if (speed > maxS) { f.vx = (f.vx / speed) * maxS; f.vy = (f.vy / speed) * maxS; }
-
-        f.x += f.vx;
-        f.y += f.vy;
-
-        // Young: wrap x / Old: bounce off walls
-        if (f.tube.gravity) {
-          if (f.x > W - PAD) { f.x = W - PAD; f.vx *= -0.5; }
-          if (f.x < PAD)     { f.x = PAD;     f.vx *= -0.5; }
-        } else {
-          if (f.x > W - PAD + 10) f.x = PAD - 10;
-          if (f.x < PAD - 10) f.x = W - PAD + 10;
-        }
-
-        // Bounce y within tube
-        const yMin = f.tube.y + 10 + f.r;
-        const yMax = f.tube.y + f.tube.h - 10 - f.r;
-        if (f.y < yMin) { f.y = yMin; f.vy *= -0.6; }
-        if (f.y > yMax) { f.y = yMax; f.vy *= -0.6; }
-
-        f.el.setAttribute('cx', f.x.toFixed(1));
-        f.el.setAttribute('cy', f.y.toFixed(1));
+        const angle = Math.atan2(f.vy, f.vx) * 180 / Math.PI + 90;
+        f.el.setAttribute('transform', `translate(${f.x.toFixed(1)},${f.y.toFixed(1)}) rotate(${angle.toFixed(1)})`);
       });
       requestAnimationFrame(tick);
     }
