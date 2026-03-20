@@ -49,13 +49,21 @@ const TEAM_MEMBERS = [
     linkedin: 'https://www.linkedin.com/in/sofiamelodomingues/', 
     email: null 
   },
+   { 
+    name: 'Priyanka Dutta Passecker',          
+    role: 'Chief, Platform Operations',                                
+    rank: 6, 
+    initials: 'PD',  
+    photo: null,                         
+    linkedin: 'https://www.linkedin.com/in/priyankaduttapassecker/', 
+    email: null 
+  },
 ];
 
 const COLLABORATORS = [
   { name: 'Dr. Victor Lobato Rios', role: 'Head of Engineering', initials: 'VL'},
-  { name: 'Priyanka Dutta Passecker', role: 'Chief, Platform Operations', initials: 'PD'},
   { name: 'Manoj Thacker', role: 'Product Commercialization', initials: 'MT'},
-  { name: 'Dr. Subhasri Bandyopadhyay', role: 'Medical Affairs & Business Commercialization', initials: 'SB2'},
+  { name: 'Dr. Subhasri Bandyopadhyay', role: 'Medical Affairs & Business Commercialization (India)', initials: 'SB2'},
 ];
 
 const ADVISORS = [
