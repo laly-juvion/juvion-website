@@ -86,7 +86,6 @@
           <span>News &amp; Publications</span>
         </div>
         <h1 class="page-hero-heading">News &amp; <em>Publications</em></h1>
-        <p class="page-hero-sub">Updates from the lab, real-world use cases, and peer-reviewed research validating our science.</p>
       </div>
     </div>
   </section>
@@ -108,7 +107,59 @@
         <h2 class="section-heading">Juvion's Pipeline</h2>
         <p class="section-sub">Compounds and targets advancing through our platform.</p>
       </div>
-      <div id="hubUseCaseGrid" class="news-grid"></div>
+
+      <div class="pipeline-wrap reveal" style="--delay:0.1s">
+
+        <!-- Header row -->
+        <div class="pipeline-row pipeline-row--header">
+          <div class="pipeline-compound"></div>
+          <div class="pipeline-stage pipeline-stage--reached"><span>Discovery</span></div>
+          <div class="pipeline-stage pipeline-stage--reached"><span>Pre-clinical</span></div>
+          <div class="pipeline-stage"><span>Regulatory</span></div>
+          <div class="pipeline-stage"><span>Clinical Study</span></div>
+          <div class="pipeline-stage"><span>Market Entry</span></div>
+        </div>
+
+        <!-- JUVION-001: filled, spans Discovery+Pre-clinical, tip into Regulatory -->
+        <div class="pipeline-row">
+          <div class="pipeline-compound">
+            <span class="pipeline-compound-id">JUVION-001</span>
+            <span class="pipeline-compound-area">Mobility</span>
+          </div>
+          <div class="pipeline-bar pipeline-bar--filled" style="grid-column: 2 / 5"></div>
+        </div>
+
+        <!-- JUVION-002: outline, spans Discovery, tip into Pre-clinical -->
+        <div class="pipeline-row">
+          <div class="pipeline-compound">
+            <span class="pipeline-compound-id">JUVION-002</span>
+            <span class="pipeline-compound-area">Mobility &amp; Memory</span>
+          </div>
+          <div class="pipeline-bar pipeline-bar--outline" style="grid-column: 2 / 4"></div>
+        </div>
+
+        <!-- JUVION-003: outline, Discovery only -->
+        <div class="pipeline-row pipeline-row--last">
+          <div class="pipeline-compound">
+            <span class="pipeline-compound-id">JUVION-003</span>
+            <span class="pipeline-compound-area">Sarcopenia</span>
+          </div>
+          <div class="pipeline-bar pipeline-bar--outline" style="grid-column: 2 / 3"></div>
+        </div>
+
+        <!-- Legend -->
+        <div class="pipeline-legend">
+          <div class="pipeline-legend-item">
+            <span class="pipeline-legend-swatch pipeline-legend-swatch--filled"></span>
+            <span>Active stage</span>
+          </div>
+          <div class="pipeline-legend-item">
+            <span class="pipeline-legend-swatch pipeline-legend-swatch--outline"></span>
+            <span>Upcoming stage</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 

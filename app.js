@@ -289,13 +289,13 @@ function renderNewsAccordion(containerEl) {
         <span class="news-row-chevron">↓</span>
       </div>
       <div class="news-row-body${n.media && n.media.src ? '' : ' news-row-body--text-only'}">
-        ${n.media && n.media.src ? (n.media.type === 'video'
-          ? `<video src="${n.media.src}" class="news-row-img" autoplay loop muted playsinline></video>`
-          : `<img src="${n.media.src}" alt="" class="news-row-img" loading="lazy">`) : ''}
         <div class="news-row-content">
           <p class="news-row-excerpt">${n.excerpt || ''}</p>
           ${n.href && n.href !== '#' ? `<a href="${n.href}" class="btn-ghost news-row-link" target="_blank" rel="noopener">Read more →</a>` : ''}
         </div>
+        ${n.media && n.media.src ? (n.media.type === 'video'
+          ? `<video src="${n.media.src}" class="news-row-img" autoplay loop muted playsinline></video>`
+          : `<img src="${n.media.src}" alt="" class="news-row-img" loading="lazy">`) : ''}
       </div>
     </div>`).join('');
 

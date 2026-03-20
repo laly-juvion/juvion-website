@@ -2008,7 +2008,7 @@ a { text-decoration: none; color: inherit; }
 
 .news-row-body {
   display: grid;
-  grid-template-columns: 460px 1fr;
+  grid-template-columns: 1fr 460px;
   gap: 2.5rem;
   align-items: start;
   max-height: 0;
@@ -2572,4 +2572,127 @@ body { position: relative; }
   background: var(--elevated);
   padding: 1rem;
   border-radius: var(--radius);
+}
+
+/* ── Pipeline Chart ───────────────────────────────────────────── */
+.pipeline-wrap {
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem 1.5rem;
+  overflow-x: auto;
+  min-width: 500px;
+}
+
+/* Every row (header + data) shares the same 6-column grid */
+.pipeline-row {
+  display: grid;
+  grid-template-columns: 180px repeat(5, 1fr);
+  align-items: center;
+  min-height: 56px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.pipeline-row--header {
+  min-height: auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.25rem;
+}
+
+.pipeline-row--last {
+  border-bottom: none;
+}
+
+/* Header stage cells */
+.pipeline-stage {
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+  border-left: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.pipeline-stage--reached {
+  color: rgba(254,102,3,0.8);
+}
+
+/* Compound label cell */
+.pipeline-compound {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-right: 1rem;
+}
+
+.pipeline-compound-id {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.pipeline-compound-area {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Arrow bars — positioned via inline grid-column */
+.pipeline-bar {
+  height: 30px;
+  align-self: center;
+  /* arrow chevron shape */
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
+}
+
+.pipeline-bar--filled {
+  background: rgba(254,102,3,0.22);
+  outline: 1.5px solid rgba(254,102,3,0.55);
+  outline-offset: -1px;
+}
+
+/* Outline arrow: use a pseudo-element trick via box-shadow instead */
+.pipeline-bar--outline {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.15);
+}
+
+/* Legend */
+.pipeline-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.pipeline-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.pipeline-legend-swatch {
+  display: inline-block;
+  width: 32px;
+  height: 12px;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 50%, calc(100% - 6px) 100%, 0 100%);
+}
+
+.pipeline-legend-swatch--filled {
+  background: rgba(254,102,3,0.3);
+  outline: 1.5px solid rgba(254,102,3,0.6);
+  outline-offset: -1px;
+}
+
+.pipeline-legend-swatch--outline {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.2);
 }
