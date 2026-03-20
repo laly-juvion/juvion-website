@@ -1,0 +1,41 @@
+group,age_days,survival_pct,ci_lower_pct,ci_upper_pct
+Control,0,100,100,100
+Control,6,96,87,100
+Control,9,96,87,100
+Control,13,96,87,100
+Control,16,96,87,100
+Control,21,96,87,100
+Control,27,96,87,100
+Control,32,89,67,100
+Control,36,89,67,100
+Control,42,50,20,73
+Control,45,39,13,55
+Control,49,13,0,23
+Control,52,3,0,8
+Control,56,0,0,0
+Life extender,0,100,100,100
+Life extender,6,95,92,100
+Life extender,9,95,92,100
+Life extender,13,92,86,100
+Life extender,17,92,86,100
+Life extender,23,92,86,100
+Life extender,27,92,86,100
+Life extender,32,84,77,91
+Life extender,36,84,77,91
+Life extender,42,73,68,76
+Life extender,45,68,67,69
+Life extender,49,57,41,66
+Life extender,52,43,34,50
+Life extender,56,30,8,46
+Life extender,60,11,0,22
+Life extender,64,0,0,0
+Toxic,0,100,100,100
+Toxic,7,100,100,100
+Toxic,13,92,86,100
+Toxic,16,87,85,95
+Toxic,20,65,39,79
+Toxic,23,60,39,79
+Toxic,27,40,8,54
+Toxic,31,26,8,35
+Toxic,34,5,0,8
+Toxic,39,0,0,0
