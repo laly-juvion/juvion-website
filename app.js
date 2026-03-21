@@ -130,7 +130,6 @@ function teamFeaturedPanelHTML(m, delay) {
   const imgSrc = m.photo
     ? m.photo
     : `https://placehold.co/260x260/141414/2a2a2a?text=${encodeURIComponent(m.initials)}`;
-  const bio = m.bio || 'Placeholder bio — short description of background, expertise, and role at Juvion Health Sciences. To be updated.';
   return `
     <div class="team-featured-panel reveal"${style}>
       <div class="tfp-photo">
@@ -139,7 +138,7 @@ function teamFeaturedPanelHTML(m, delay) {
       <div class="tfp-content">
         <div class="tfp-name">${m.name}</div>
         <div class="tfp-role">${m.role}</div>
-        <p class="tfp-bio">${bio}</p>
+        <p class="tfp-bio">${m.bio || 'Neuroscientist with a PhD from Miami University and research experience at Columbia and EPFL. He leads Juvion’s work on therapeutics and healthy aging.'}</p>
         <div class="tfp-links">
           <a href="${m.linkedin || '#'}" class="team-social-link${m.linkedin ? '' : ' team-social-link--disabled'}" aria-label="LinkedIn" ${m.linkedin ? 'target="_blank" rel="noopener"' : ''}>${ICON_LINKEDIN}</a>
         </div>
