@@ -121,27 +121,13 @@
         </div>
       </div>
       <div class="hero-right reveal">
-        <div class="orbit-wrap">
-          <div class="orbit-ring orbit-ring-1" aria-hidden="true"></div>
-          <div class="orbit-ring orbit-ring-2" aria-hidden="true"></div>
-          <div class="orbit-circle">
-            <p class="orbit-text">
-              Animation concept<br>
-              <strong>Spinal cord –</strong><br>
-              <strong>neuromuscular junction</strong>
-            </p>
+        <div class="neuro-wrap" aria-hidden="true">
+          <canvas id="neuroCvs" class="neuro-canvas" width="480" height="300"></canvas>
+          <div class="neuro-controls">
+            <span class="neuro-label">Young</span>
+            <input type="range" id="neuroAge" class="neuro-slider" min="0" max="100" value="0" aria-label="Age slider">
+            <span class="neuro-label">Old</span>
           </div>
-          <div class="signal-dot sd-1" aria-hidden="true"></div>
-          <div class="signal-dot sd-2" aria-hidden="true"></div>
-          <div class="signal-dot sd-3" aria-hidden="true"></div>
-        </div>
-        <div class="hero-label hl-child">
-          <div class="hl-dot"></div>
-          <span>Young — fast, high intensity</span>
-        </div>
-        <div class="hero-label hl-elder">
-          <div class="hl-dot hl-dot--dim"></div>
-          <span>Aging — slow, low intensity</span>
         </div>
       </div>
     </div>
@@ -355,5 +341,261 @@
 
   <script src="data.js"></script>
   <script src="app.js"></script>
+
+  <!-- ── Neural Network Hero Animation ─────────────────────── -->
+  <script>
+  (function() {
+    const cvs = document.getElementById('neuroCvs');
+    if (!cvs) return;
+    const ctx = cvs.getContext('2d');
+    const W = 480, H = 300;
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+
+    // Build nodes
+    const N = 150;
+    const nodes = Array.from({length: N}, () => ({
+      x: rand(20, W - 20),
+      y: rand(20, H - 20),
+      potential: 0,
+      deathAge: Infinity, // assigned below after MST analysis
+      fireTimer: 0,
+      pendingFire: 0,
+      refractory: 0,
+      dead: false,
+    }));
+
+    // All candidate pairs sorted by distance
+    const MAX_DIST = 200;
+    const allPairs = [];
+    for (let i = 0; i < N; i++)
+      for (let j = i + 1; j < N; j++)
+        allPairs.push([i, j, dist(nodes[i], nodes[j])]);
+    allPairs.sort((a, b) => a[2] - b[2]);
+
+    // Kruskal MST — track MST edges separately
+    const ufParent = Array.from({length: N}, (_, i) => i);
+    function find(x) { return ufParent[x] === x ? x : (ufParent[x] = find(ufParent[x])); }
+    function union(a, b) { ufParent[find(a)] = find(b); }
+
+    const mstPairs = []; // MST-only edges
+    const edges = [];
+    for (const [a, b, d] of allPairs) {
+      if (find(a) !== find(b)) { union(a, b); edges.push([a, b, d]); mstPairs.push([a, b]); }
+    }
+
+    // Add extra short edges for visual density (avg degree ≈ 3)
+    const TARGET_EDGES = Math.floor(N * 2.8);
+    for (const [a, b, d] of allPairs) {
+      if (edges.length >= TARGET_EDGES) break;
+      if (!edges.some(e => e[0] === a && e[1] === b)) edges.push([a, b, d]);
+    }
+
+    // Adjacency list (full graph, for signal propagation)
+    const adj = Array.from({length: N}, () => []);
+    edges.forEach(([a, b, d]) => { adj[a].push([b, d]); adj[b].push([a, d]); });
+
+    // ── Designate source: leftmost node, never dies ──────────────
+    const srcIdx = nodes.reduce((best, n, i) => n.x < nodes[best].x ? i : best, 0);
+
+    // ── Assign death ages: peel MST leaves inward ────────────────
+    // Nodes that are MST leaves die first; hub nodes die last.
+    // This guarantees surviving nodes always form a connected subtree.
+    const mstAdj = Array.from({length: N}, () => []);
+    mstPairs.forEach(([a, b]) => { mstAdj[a].push(b); mstAdj[b].push(a); });
+
+    const mstDeg = mstAdj.map(nb => nb.length);
+    const peeled = new Array(N).fill(false);
+    const deathOrder = [];
+    let frontier = nodes.map((_, i) => i).filter(i => i !== srcIdx && mstDeg[i] === 1);
+
+    while (frontier.length) {
+      const next = [];
+      for (const i of frontier) {
+        if (peeled[i] || i === srcIdx) continue;
+        deathOrder.push(i);
+        peeled[i] = true;
+        for (const nb of mstAdj[i]) {
+          if (!peeled[nb] && nb !== srcIdx) {
+            mstDeg[nb]--;
+            if (mstDeg[nb] === 1) next.push(nb);
+          }
+        }
+      }
+      frontier = next;
+    }
+
+    // ~10% of nodes (source + innermost core) survive at max age; rest die 30→95
+    const IMMORTAL = Math.round(N * 0.10) - 1; // extra survivors besides source
+    const mortal = deathOrder.length - IMMORTAL;
+    deathOrder.forEach((nodeIdx, rank) => {
+      if (rank >= mortal) {
+        nodes[nodeIdx].deathAge = Infinity; // core — always alive
+      } else {
+        const t = rank / Math.max(mortal - 1, 1);
+        nodes[nodeIdx].deathAge = 30 + t * 65; // age 30 → 95
+      }
+    });
+    nodes[srcIdx].deathAge = Infinity;
+    let srcTimer = 0;
+    const SRC_INTERVAL = 70; // frames between source pulses (~2.3s at 60fps)
+
+    // Compute median edge length for travel-time scaling
+    const edgeLengths = edges.map(e => e[2]).sort((a, b) => a - b);
+    const medianEdge = edgeLengths[Math.floor(edgeLengths.length / 2)] || 80;
+
+    // Signal packets traveling along edges: {x0,y0,x1,y1,t,speed}
+    const signals = [];
+
+    function fireNode(idx) {
+      const n = nodes[idx];
+      n.fireTimer = 10;
+      n.refractory = 160; // ~2.7s immunity after firing
+      // Schedule each live neighbor to fire after delay proportional to edge length
+      adj[idx].forEach(([nb, d]) => {
+        if (nodes[nb].dead) return;
+        if (nodes[nb].pendingFire > 0) return; // already scheduled
+        if (nodes[nb].refractory > 0) return;  // in refractory period — no echo
+        // Propagation probability: ~70% close, ~40% far — wave attenuates naturally
+        if (Math.random() > 0.7 * (1 - d / MAX_DIST * 0.4)) return;
+        const delay = Math.round(2 + (d / medianEdge) * 2); // 2–4 frames
+        nodes[nb].pendingFire = delay;
+        // Spawn signal packet with matching travel time
+        signals.push({
+          x0: n.x, y0: n.y,
+          x1: nodes[nb].x, y1: nodes[nb].y,
+          t: 0,
+          speed: 1 / delay, // arrives exactly when node fires
+        });
+      });
+    }
+
+    function tick(age) {
+      // Mark dead neurons (source is immortal)
+      nodes.forEach((n, i) => { if (i !== srcIdx) n.dead = n.deathAge < age; });
+
+      // Source fires on fixed interval
+      srcTimer++;
+      if (srcTimer >= SRC_INTERVAL) { srcTimer = 0; fireNode(srcIdx); }
+
+      // Count down pending fires; fire when counter hits 0
+      nodes.forEach((n, idx) => {
+        if (n.fireTimer > 0) n.fireTimer--;
+        if (n.refractory > 0) n.refractory--;
+        if (n.dead || idx === srcIdx) { n.pendingFire = 0; return; }
+        if (n.pendingFire > 0) {
+          n.pendingFire--;
+          if (n.pendingFire === 0) fireNode(idx);
+        }
+      });
+
+      // Advance signal packets
+      for (let i = signals.length - 1; i >= 0; i--) {
+        signals[i].t += signals[i].speed;
+        if (signals[i].t >= 1) { signals.splice(i, 1); }
+      }
+
+      // ── Draw ────────────────────────────────────────────────
+      ctx.clearRect(0, 0, W, H);
+
+      // Resting edges — very faint
+      edges.forEach(([a, b]) => {
+        const na = nodes[a], nb = nodes[b];
+        if (na.dead || nb.dead) return;
+        ctx.strokeStyle = 'rgba(242,239,233,0.09)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(na.x, na.y);
+        ctx.lineTo(nb.x, nb.y);
+        ctx.stroke();
+      });
+
+      // Signal packets — bright travelling dots with a short glow
+      signals.forEach(s => {
+        const x = s.x0 + (s.x1 - s.x0) * s.t;
+        const y = s.y0 + (s.y1 - s.y0) * s.t;
+        const fade = 1 - s.t * 0.6;
+        // Glow halo
+        const grd = ctx.createRadialGradient(x, y, 0, x, y, 8);
+        grd.addColorStop(0, `rgba(254,102,3,${(0.5 * fade).toFixed(2)})`);
+        grd.addColorStop(1, 'rgba(254,102,3,0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(x, y, 8, 0, Math.PI * 2);
+        ctx.fill();
+        // Core dot
+        ctx.fillStyle = `rgba(254,102,3,${fade.toFixed(2)})`;
+        ctx.beginPath();
+        ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Nodes
+      nodes.forEach((n, idx) => {
+        if (n.dead) {
+          ctx.fillStyle = 'rgba(80,78,76,0.22)';
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+          return;
+        }
+        const isSource = idx === srcIdx;
+        const fireStrength = n.fireTimer / 10; // 1.0 → 0.0 as timer counts down
+        if (fireStrength > 0) {
+          const glowR = isSource ? 24 : 18;
+          const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
+          grd.addColorStop(0, `rgba(254,102,3,${(0.55 * fireStrength).toFixed(2)})`);
+          grd.addColorStop(1, 'rgba(254,102,3,0)');
+          ctx.fillStyle = grd;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        const r = isSource
+          ? 5 + fireStrength * 2
+          : 2.5 + fireStrength * 2.5;
+        const alpha = isSource
+          ? 0.85
+          : (0.22 + fireStrength * 0.78);
+        ctx.fillStyle = `rgba(254,102,3,${alpha.toFixed(2)})`;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        // Source: persistent outer ring
+        if (isSource) {
+          ctx.strokeStyle = `rgba(254,102,3,${(0.3 + fireStrength * 0.4).toFixed(2)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 10, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      });
+    }
+
+    // Slider + auto-play
+    const slider = document.getElementById('neuroAge');
+    let ageVal = 0;
+    let autoPlay = true;
+
+    if (slider) {
+      slider.addEventListener('input', () => {
+        ageVal = +slider.value;
+        autoPlay = false;
+      });
+    }
+
+    function loop() {
+      if (autoPlay) {
+        ageVal += 0.038;
+        if (ageVal > 100) ageVal = 0;
+        if (slider) slider.value = ageVal;
+      }
+      tick(ageVal);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  })();
+  </script>
 </body>
 </html>
