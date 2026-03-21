@@ -5,22 +5,24 @@
 
 const TEAM_MEMBERS = [
   { 
-    name: 'Dr. Soumya Banerjee',        
-    role: 'CEO & Co-Founder',                               
-    rank: 1, 
-    initials: 'SB',  
-    photo: null,                          
-    linkedin: 'https://www.linkedin.com/in/soumya-banerjee83/',      
-    email: 's.banerjee@juvionls.com' 
+    name: 'Dr. Soumya Banerjee',
+    role: 'CEO & Co-Founder',
+    rank: 1,
+    initials: 'SB',
+    photo: null,
+    linkedin: 'https://www.linkedin.com/in/soumya-banerjee83/',
+    email: 's.banerjee@juvionls.com',
+    bio: 'Neuroscientist with a PhD from Miami University and research experience at Columbia and EPFL. He leads Juvion\'s work on therapeutics and healthy aging.'
   },
-  { 
-    name: 'Prof. Dr. Brian D. McCabe',  
-    role: 'Co-Founder, PhD',                                
-    rank: 2, 
-    initials: 'BM',  
-    photo: null,                          
-    linkedin: 'https://www.linkedin.com/in/briandmccabe/',           
-    email: 'b.mccabe@juvionls.com' 
+  {
+    name: 'Prof. Dr. Brian D. McCabe',
+    role: 'Co-Founder, PhD',
+    rank: 2,
+    initials: 'BM',
+    photo: null,
+    linkedin: 'https://www.linkedin.com/in/briandmccabe/',
+    email: 'b.mccabe@juvionls.com',
+    bio: 'Professor at EPFL and Director of the Laboratory of Neural Genetics and Disease. His research focuses on motor system aging and neurodegenerative disorders, informing Juvion\'s scientific direction.'
   },
   { 
     name: 'Laly Robyr', 
