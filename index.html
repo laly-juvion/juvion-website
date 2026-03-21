@@ -353,7 +353,7 @@
     function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
 
     // Build nodes
-    const N = 550;
+    const N = 150;
     const nodes = Array.from({length: N}, () => ({
       x: rand(20, W - 20),
       y: rand(20, H - 20),
@@ -458,7 +458,7 @@
         if (nodes[nb].refractory > 0) return;  // in refractory period — no echo
         // Propagation probability: ~70% close, ~40% far — wave attenuates naturally
         if (Math.random() > 0.7 * (1 - d / MAX_DIST * 0.4)) return;
-        const delay = Math.round(3 + (d / medianEdge) * 5); // 3–8 frames
+        const delay = Math.round(2 + (d / medianEdge) * 2); // 2–4 frames
         nodes[nb].pendingFire = delay;
         // Spawn signal packet with matching travel time
         signals.push({
