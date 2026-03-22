@@ -1271,6 +1271,8 @@ a { text-decoration: none; color: inherit; }
 .partner-logo:hover { opacity: 0.85; }
 
 /* ── News ─────────────────────────────────────────────────────── */
+.news-grid--no-image .news-image { display: none; }
+
 .news-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

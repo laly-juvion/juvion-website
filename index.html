@@ -97,6 +97,7 @@
       <a href="#home"      class="page-subnav-link">Home</a>
       <a href="#approach"  class="page-subnav-link">Approach</a>
       <a href="#science"   class="page-subnav-link">Science</a>
+      <a href="#news"      class="page-subnav-link">News</a>
       <a href="#team"      class="page-subnav-link">Team</a>
     </div>
   </div>
@@ -202,6 +203,17 @@
       <div class="section-footer-cta reveal">
         <a href="news.html#publications" class="btn-ghost">View all publications →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- ── NEWS ───────────────────────────────────────────────── -->
+  <section id="news" class="section">
+    <div class="container">
+      <div class="section-header-row reveal">
+        <h2 class="section-heading">News</h2>
+        <a href="news.html" class="btn-ghost">View all →</a>
+      </div>
+      <div id="newsGrid" class="news-grid news-grid--no-image"></div>
     </div>
   </section>
 
@@ -565,11 +577,17 @@
     const slider = document.getElementById('neuroAge');
     let ageVal = 0;
     let autoPlay = true;
+    let resumeTimer = null;
 
     if (slider) {
       slider.addEventListener('input', () => {
         ageVal = +slider.value;
         autoPlay = false;
+        clearTimeout(resumeTimer);
+      });
+      slider.addEventListener('pointerup', () => {
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => { autoPlay = true; }, 1500);
       });
     }
 
@@ -580,10 +598,10 @@
     let oldPause = 0;
     function loop() {
       if (autoPlay) {
-        if (ageVal >= 100 && oldPause < 180) {
-          oldPause++;             // hold at Old for ~3s (180 frames)
+        if (ageVal >= 100 && oldPause < 300) {
+          oldPause++;             // hold at Old for ~5s (300 frames)
         } else {
-          if (oldPause >= 180) { ageVal = 0; oldPause = 0; }
+          if (oldPause >= 300) { ageVal = 0; oldPause = 0; }
           ageVal += 0.333;
           if (ageVal > 100) ageVal = 100;
         }
