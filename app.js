@@ -184,20 +184,26 @@ function advisorCardHTML(m, delay) {
 
 
 function renderTeam() {
-  const featuredEl  = document.getElementById('teamFeatured');
-  const coreGrid    = document.getElementById('teamCoreGrid');
-  const expandedEl  = document.getElementById('teamExpanded');
-  const collaboratorList = document.getElementById('teamCollaboratorList');  
-  const advisorList = document.getElementById('teamAdvisorList');
-  const boardList   = document.getElementById('teamBoardList');
-  const expandBtn   = document.getElementById('teamExpandBtn');
+  const featuredEl       = document.getElementById('teamFeatured');
+  const coreGrid         = document.getElementById('teamCoreGrid');
+  const expandedEl       = document.getElementById('teamExpanded');
+  const collaboratorList = document.getElementById('teamCollaboratorList');
+  const advisorList      = document.getElementById('teamAdvisorList');
+  const boardList        = document.getElementById('teamBoardList');
+  const expandBtn        = document.getElementById('teamExpandBtn');
   if (!expandedEl) return;
 
-  const sorted        = [...TEAM_MEMBERS].sort((a, b) => a.rank - b.rank);
-  const featured      = sorted.slice(0, 2);
-  const rest          = sorted.slice(2);
-  const coreMembers   = rest.filter(m => m.group !== 'collaborator');
-  // const collaborators = rest.filter(m => m.group === 'collaborator');
+  // Prefer content/team.js (TEAM array); fall back to legacy data.js arrays
+  const teamSrc = typeof TEAM !== 'undefined' ? TEAM : null;
+
+  const coreRaw        = teamSrc ? teamSrc.filter(m => m.group === 'core')         : [...TEAM_MEMBERS];
+  const collaborators  = teamSrc ? teamSrc.filter(m => m.group === 'collaborator') : [...COLLABORATORS];
+  const advisors       = teamSrc ? teamSrc.filter(m => m.group === 'advisor')      : [...ADVISORS];
+  const board          = teamSrc ? teamSrc.filter(m => m.group === 'board')        : [...BOARD_MEMBERS];
+
+  const sorted     = coreRaw.sort((a, b) => (a.rank || 0) - (b.rank || 0));
+  const featured   = sorted.slice(0, 2);
+  const coreMembers = sorted.slice(2);
 
   if (featuredEl) {
     featuredEl.innerHTML = featured.map((m, i) => teamFeaturedPanelHTML(m, i ? `${i * 0.1}s` : null)).join('');
@@ -208,20 +214,16 @@ function renderTeam() {
     coreGrid.innerHTML = coreMembers.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
   }
 
-  /*const collabGrid = document.getElementById('teamCollaboratorsGrid');
-  if (collabGrid) {
-    collabGrid.innerHTML = collaborators.map((m, i) => teamCardHTML(m, i ? `${i * 0.06}s` : null)).join('');
-  }*/
-
   if (collaboratorList) {
-    collaboratorList.innerHTML = COLLABORATORS.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
+    collaboratorList.innerHTML = collaborators.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
   }
 
   if (advisorList) {
-    advisorList.innerHTML = ADVISORS.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
+    advisorList.innerHTML = advisors.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
   }
+
   if (boardList) {
-    boardList.innerHTML = BOARD_MEMBERS.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
+    boardList.innerHTML = board.map((m, i) => advisorCardHTML(m, i ? `${i * 0.1}s` : null)).join('');
   }
 
   if (expandBtn) {
@@ -242,7 +244,8 @@ function renderTeam() {
 /* ── Render: Publications ───────────────────────────────────── */
 function renderPublications(containerEl) {
   if (!containerEl) return;
-  containerEl.innerHTML = PUBLICATIONS.map((p, i) => `
+  const src = typeof PUBLICATIONS !== 'undefined' ? PUBLICATIONS : [];
+  containerEl.innerHTML = src.map((p, i) => `
     <a href="${p.doi}" class="pub-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
       <div class="pub-journal">${p.journal}</div>
       <h3 class="pub-title">${p.title}</h3>
@@ -255,29 +258,118 @@ function renderPublications(containerEl) {
   containerEl.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
+/* ── Render: Partners ───────────────────────────────────────── */
+function renderPartners() {
+  const track = document.getElementById('partnersTrack');
+  if (!track) return;
+  const src = typeof PARTNERS !== 'undefined' ? PARTNERS : [];
+  const logo = p => `<div class="partner-logo"><img src="${p.logo}" alt="${p.name}"${p.height ? ` style="height:${p.height}px"` : ''}></div>`;
+  track.innerHTML = src.map(logo).join('') + src.map(logo).join('');
+}
+
+/* ── Render: Jobs ───────────────────────────────────────────── */
+function renderJobs() {
+  const el = document.getElementById('jobsList');
+  if (!el) return;
+  const src = typeof JOBS !== 'undefined' ? JOBS : [];
+  if (!src.length) {
+    el.innerHTML = `<div class="job-card job-card--empty"><p class="job-card__empty-text">There are no available positions at the moment. Check back soon or send an open application below.</p></div>`;
+    return;
+  }
+  el.innerHTML = src.map((j, i) => `
+    <div class="job-card reveal" style="--delay:${i * 0.1}s">
+      <div class="job-card__meta">
+        <span class="job-tag">${j.department}</span>
+        <span class="job-location">${j.location}</span>
+        <span class="job-type">${j.type}</span>
+      </div>
+      <h3 class="job-card__title">${j.title}</h3>
+      <p class="job-card__desc">${j.description}</p>
+    </div>`).join('');
+  el.querySelectorAll('.reveal').forEach(e => revealObserver.observe(e));
+}
+
+/* ── Render: Pipeline ───────────────────────────────────────── */
+function renderPipeline() {
+  const chart  = document.getElementById('pipelineChart');
+  const detail = document.getElementById('pipelineDetails');
+  const src    = typeof PIPELINE !== 'undefined' ? PIPELINE : [];
+
+  if (chart) {
+    chart.innerHTML = src.map((c, i) => `
+      <div class="pipeline-row${i === src.length - 1 ? ' pipeline-row--last' : ''}">
+        <div class="pipeline-compound">
+          <span class="pipeline-compound-id">${c.id}</span>
+          <span class="pipeline-compound-area">${c.area}</span>
+        </div>
+        <div class="pipeline-bar pipeline-bar--solid pipeline-bar--${c.barLevel}"
+             style="grid-column: 2 / ${c.chartColEnd}; width: ${c.chartWidth}">
+          <div class="pb-body"></div><div class="pb-tip"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  if (detail) {
+    detail.innerHTML = src.map((c, i) => {
+      const stagesHTML = c.stages.map((s, si) => {
+        const nextIsFuture = c.stages[si + 1] && c.stages[si + 1].status === 'future';
+        const arrow = si < c.stages.length - 1
+          ? `<span class="pcd-stage-arrow${nextIsFuture ? ' pcd-stage-arrow--muted' : ''}">→</span>`
+          : '';
+        return `<span class="pcd-stage pcd-stage--${s.status}">${s.name}</span>${arrow}`;
+      }).join('');
+      return `
+        <section class="section${i % 2 === 1 ? ' section--surface' : ''}" id="${c.id.toLowerCase().replace(/-/g, '-')}">
+          <div class="container">
+            <div class="pipeline-compound-detail reveal">
+              <div class="pcd-header">
+                <div class="pcd-tag pipeline-bar--solid pipeline-bar--${c.barLevel}">
+                  <div class="pb-body"></div><div class="pb-tip"></div>
+                </div>
+                <div>
+                  <h2 class="pcd-id">${c.id}</h2>
+                  <p class="pcd-area">${c.areaDetail}</p>
+                </div>
+              </div>
+              <div class="pcd-stages">${stagesHTML}</div>
+              <div class="pcd-body">${c.description.map(p => `<p>${p}</p>`).join('')}</div>
+            </div>
+          </div>
+        </section>`;
+    }).join('');
+    detail.querySelectorAll('.reveal').forEach(e => revealObserver.observe(e));
+  }
+}
+
 /* ── Render: News ───────────────────────────────────────────── */
 function renderNews(containerEl, limit) {
   if (!containerEl) return;
-  let items = NEWS_ITEMS;
+  let items = typeof NEWS_ITEMS !== 'undefined' ? NEWS_ITEMS : [];
   if (limit) items = items.slice(0, limit);
-  containerEl.innerHTML = items.map((n, i) => `
+  containerEl.innerHTML = items.map((n, i) => {
+    const hasPreview = n.previewImage && !n.previewImage.includes('placehold.co');
+    const imageHTML = hasPreview
+      ? `<img src="${n.previewImage}" alt="" loading="lazy">`
+      : `<img src="assets/JuvionLogo.png" alt="" class="news-logo-fallback">`;
+    return `
     <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
-      <div class="news-image">
-        <img src="${n.previewImage}" alt="" loading="lazy">
+      <div class="news-image${hasPreview ? '' : ' news-image--fallback'}">
+        ${imageHTML}
       </div>
       <div class="news-body">
         <div class="news-tag">${n.tag}</div>
         <h3 class="news-title">${n.title}</h3>
         <p class="news-date">${n.date}</p>
       </div>
-    </a>`).join('');
+    </a>`;
+  }).join('');
   containerEl.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
 /* ── Render: News Accordion (news.html) ─────────────────────── */
 function renderNewsAccordion(containerEl) {
   if (!containerEl) return;
-  const items = NEWS_ITEMS;
+  const items = typeof NEWS_ITEMS !== 'undefined' ? NEWS_ITEMS : [];
   containerEl.innerHTML = items.map((n, i) => `
     <div class="news-row${i === 0 ? ' news-row--expanded' : ''}" data-idx="${i}">
       <div class="news-row-summary" role="button" tabindex="0" aria-expanded="${i === 0}">
@@ -340,14 +432,6 @@ function renderNewsHub() {
 /* ── Drosophila Flies ───────────────────────────────────────── */
 const FLY_SVG = `<img src="assets/drosophila.svg" width="28" height="28" alt="" style="display:block;">`;
 
-function parseCsv(text) {
-  const [header, ...rows] = text.trim().split('\n');
-  const keys = header.split(',').map(k => k.trim());
-  return rows.map(row => {
-    const vals = row.split(',').map(v => v.trim());
-    return Object.fromEntries(keys.map((k, i) => [k, vals[i] ?? '']));
-  });
-}
 
 function rand(min, max) { return min + Math.random() * (max - min); }
 
@@ -432,7 +516,7 @@ class Fly {
   }
 }
 
-async function initFlies() {
+function initFlies() {
   const layer   = document.getElementById('flyLayer');
   const tooltip = document.getElementById('flyTooltip');
   if (!layer || !tooltip) return;
@@ -440,11 +524,8 @@ async function initFlies() {
   setTimeout(buildZones, 200);
   window.addEventListener('resize', buildZones, { passive: true });
 
-  let customers = [];
-  try {
-    const text = await fetch('customers.csv').then(r => r.text());
-    customers = parseCsv(text);
-  } catch { return; }
+  const customers = typeof CUSTOMERS !== 'undefined' ? CUSTOMERS : [];
+  if (!customers.length) return;
 
   let activeFly = null, tooltipHovered = false;
 
@@ -527,4 +608,7 @@ renderTeam();
 renderPublications(document.getElementById('pubGrid'));
 renderNews(document.getElementById('newsGrid'), 4);
 renderNewsHub();
+renderPartners();
+renderJobs();
+renderPipeline();
 if (document.getElementById('flyLayer')) initFlies();

@@ -436,7 +436,7 @@ a { text-decoration: none; color: inherit; }
   color: var(--text-sec);
 }
 
-.approach-media { position: relative; }
+.approach-media { position: relative; min-width: 0; overflow: hidden; }
 
 .approach-img {
   width: 100%;
@@ -725,6 +725,14 @@ a { text-decoration: none; color: inherit; }
 
 .section-heading em {
   font-style: italic;
+  color: var(--brand);
+}
+.section-heading .heading-brand {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--brand);
 }
 
@@ -2111,6 +2119,7 @@ a { text-decoration: none; color: inherit; }
   .section-header-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .approach-box { padding: 2rem 1.5rem; }
   .approach-img { height: 240px; }
+  .survival-chart-wrap { height: 240px; }
   .drosophila-facts { grid-template-columns: 1fr; }
   .measurement-box { padding: 1.75rem 1.5rem; }
   .additional-features { gap: 1rem; }
@@ -2584,15 +2593,18 @@ body { position: relative; }
 .survival-chart-wrap {
   position: relative;
   width: 100%;
+  min-width: 0;
   background: var(--elevated);
   border-radius: var(--radius);
+  border: 1px solid var(--border);
   padding: 1.25rem 1.25rem 0.75rem;
-  height: 340px;
+  height: 320px;   /* matches .approach-img default height */
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Standardise all measurement-box graph containers */
 .measurement-box .approach-img {
-  height: 340px;
   object-fit: contain;
   background: var(--elevated);
   padding: 1rem;
