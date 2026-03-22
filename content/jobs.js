@@ -21,7 +21,7 @@
 //                      Create a new form at formspree.io, copy the endpoint, paste here.
 //                      If omitted, the Apply button redirects to the open application form.
 //
-// To add a position, copy the template below, remove the "//" and fill in:
+// ── Full-time template ─────────────────────────────────────────
 //
 // {
 //   title:            "Research Scientist",
@@ -36,33 +36,37 @@
 //   ],
 //   requirements: [
 //     "PhD in neuroscience, biology, or a related field.",
-//     "Experience with Drosophila models.",
+//     "Experience with Drosophila or other model organisms.",
 //   ],
 //   niceToHave: [
 //     "Familiarity with machine learning tools.",
 //   ],
 //   formspree: "https://formspree.io/f/yourFormId",
 // },
+//
+// ── Internship template ────────────────────────────────────────
+//
+// {
+//   title:            "Research Intern",
+//   department:       "R&D",
+//   location:         "Lausanne, Switzerland",
+//   type:             "Internship",
+//   description:      "One-sentence summary shown on the card.",
+//   about:            "Longer description of the internship and what the student will work on.",
+//   responsibilities: [
+//     "Assist with experiments on the FlyGym platform.",
+//     "Support data collection and analysis.",
+//   ],
+//   requirements: [
+//     "Currently enrolled in a Master's or PhD programme in biology or a related field.",
+//     "Available for at least 3 months.",
+//   ],
+//   niceToHave: [
+//     "Prior lab experience.",
+//   ],
+//   formspree: "https://formspree.io/f/yourFormId",
+// },
 
 const JOBS = [
-  {
-    title:            'Research Scientist',
-    department:       'R&D',
-    location:         'Lausanne, Switzerland',
-    type:             'Part-time',
-    description:      'Short description of the role and what you will be working on.',
-    about:            'Longer description of the role and its context within Juvion.',
-    responsibilities: [
-      'Design and execute experiments on the FlyGym platform.',
-      'Analyse behavioural and molecular data.',
-    ],
-    requirements: [
-      'PhD in neuroscience, biology, or a related field.',
-      'Experience with Drosophila or other model organisms.',
-    ],
-    niceToHave: [
-      'Familiarity with machine learning tools.',
-    ],
-    formspree: '',  // paste your Formspree endpoint here, e.g. "https://formspree.io/f/yourFormId"
-  },
+  // Add job entries here using the templates above.
 ];

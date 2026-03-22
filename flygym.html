@@ -51,7 +51,7 @@
       <div class="nav-links">
         <a href="index.html"    class="nav-link">Home</a>
         <a href="flygym.html"   class="nav-link">FlyGym</a>
-        <a href="pipeline.html" class="nav-link">Pipeline</a>
+        <a href="products.html" class="nav-link">Products</a>
         <a href="news.html"     class="nav-link">News &amp; Publications</a>
         <a href="career.html"   class="nav-link">Careers</a>
         <a href="contact.html"  class="nav-cta">Contact</a>
@@ -63,7 +63,7 @@
     <div class="nav-mobile" id="navMobile">
       <a href="index.html"    class="nav-mobile-link">Home</a>
       <a href="flygym.html"   class="nav-mobile-link">FlyGym</a>
-      <a href="pipeline.html" class="nav-mobile-link">Pipeline</a>
+      <a href="products.html" class="nav-mobile-link">Products</a>
       <a href="news.html"     class="nav-mobile-link">News &amp; Publications</a>
       <a href="career.html"   class="nav-mobile-link">Careers</a>
       <a href="contact.html"  class="nav-mobile-link">Contact</a>
@@ -237,28 +237,6 @@
         </div>
       </div>
 
-      <!-- Shared biology -->
-      <h3 class="team-group-label reveal" style="margin-top:3rem">Shared biology with humans</h3>
-      <div class="disease-table-wrap reveal" style="--delay:0.1s;margin-top:1rem">
-        <p class="disease-table-title">Interventions for human diseases being discovered in <em>Drosophila</em></p>
-        <table class="disease-table">
-          <thead>
-            <tr>
-              <th>Disease</th>
-              <th><em>Drosophila</em> gene / pathway</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Alzheimer's disease</td><td>tau, A&beta;42, App-like (Appl)</td></tr>
-            <tr><td>Parkinson's disease</td><td>PINK1, parkin (park), LRRK2</td></tr>
-            <tr><td>ALS</td><td>TBPH (TDP-43), cabeza (FUS)</td></tr>
-            <tr><td>Huntington's disease</td><td>huntingtin (htt), polyQ expansion</td></tr>
-            <tr><td>Aging &amp; longevity</td><td>Trio, InR (insulin receptor), dFOXO</td></tr>
-            <tr><td>Epilepsy</td><td>para (SCN1A), eas (KCNQ)</td></tr>
-            <tr><td>Fragile X syndrome</td><td>dfmr1 (FMR1)</td></tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </section>
 
@@ -308,8 +286,10 @@
           <p class="measurement-desc">Automated locomotion tracking and neuromuscular function quantification. Gait, speed, endurance, and grip strength decline are the most predictive biomarkers of aging — measured simultaneously across large fly populations.</p>
         </div>
         <div class="approach-media">
-          <img src="https://placehold.co/400x240/101010/1a1a1a?text=Mobility+Graph" alt="Mobility graph" loading="lazy" class="approach-img">
-          <p class="approach-media-caption">Locomotion metrics — graph coming soon</p>
+          <video class="approach-img" autoplay muted loop playsinline style="background:#0d0d0d">
+            <source src="assets/flygym/mobility_flies.mp4" type="video/mp4">
+          </video>
+          <p class="approach-media-caption">Locomotion tracking — mobility performance</p>
         </div>
       </div>
 
@@ -424,7 +404,7 @@
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="flygym.html">FlyGym</a></li>
-          <li><a href="pipeline.html">Pipeline</a></li>
+          <li><a href="products.html">Products</a></li>
           <li><a href="news.html">News &amp; Publications</a></li>
           <li><a href="career.html">Careers</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -466,7 +446,7 @@
   <script src="content/news.js"></script>
   <script src="content/publications.js"></script>
   <script src="content/jobs.js"></script>
-  <script src="content/pipeline.js"></script>
+  <script src="content/products.js"></script>
   <script src="app.js"></script>
   <script>
     // ── Survival Chart ────────────────────────────────────────────
@@ -589,7 +569,7 @@
     const NS = 'http://www.w3.org/2000/svg';
 
     const tubes = [
-      { y:20,  h:100, color:'#fe6603', opacity:0.9,  minSpeed:0.5, maxSpeed:1.2, drift:0.2, count:10, isOld:false },
+      { y:20,  h:100, color:'#fe6603', opacity:0.9,  minSpeed:0.9, maxSpeed:2.0, drift:0.3, count:10, isOld:false },
       { y:178, h:100, color:'#5A5755', opacity:0.6,  minSpeed:0.4, maxSpeed:0.9, drift:0, gravity:0.35, count:10, isOld:true },
     ];
     const W = 460, PAD = 18;

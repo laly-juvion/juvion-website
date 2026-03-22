@@ -72,7 +72,7 @@
       <div class="nav-links">
         <a href="index.html"    class="nav-link">Home</a>
         <a href="flygym.html"   class="nav-link">FlyGym</a>
-        <a href="pipeline.html" class="nav-link">Pipeline</a>
+        <a href="products.html" class="nav-link">Products</a>
         <a href="news.html"     class="nav-link">News &amp; Publications</a>
         <a href="career.html"   class="nav-link">Careers</a>
         <a href="contact.html"  class="nav-cta">Contact</a>
@@ -84,7 +84,7 @@
     <div class="nav-mobile" id="navMobile">
       <a href="index.html"    class="nav-mobile-link">Home</a>
       <a href="flygym.html"   class="nav-mobile-link">FlyGym</a>
-      <a href="pipeline.html" class="nav-mobile-link">Pipeline</a>
+      <a href="products.html" class="nav-mobile-link">Products</a>
       <a href="news.html"     class="nav-mobile-link">News &amp; Publications</a>
       <a href="career.html"   class="nav-mobile-link">Careers</a>
       <a href="contact.html"  class="nav-mobile-link">Contact</a>
@@ -97,7 +97,6 @@
       <a href="#home"      class="page-subnav-link">Home</a>
       <a href="#approach"  class="page-subnav-link">Approach</a>
       <a href="#science"   class="page-subnav-link">Science</a>
-      <a href="#news"      class="page-subnav-link">News</a>
       <a href="#team"      class="page-subnav-link">Team</a>
     </div>
   </div>
@@ -121,7 +120,7 @@
       </div>
       <div class="hero-right reveal">
         <div class="neuro-wrap" aria-hidden="true">
-          <canvas id="neuroCvs" class="neuro-canvas" width="560" height="350"></canvas>
+          <canvas id="neuroCvs" class="neuro-canvas" width="700" height="440"></canvas>
           <div class="neuro-controls">
             <span class="neuro-label">Young</span>
             <input type="range" id="neuroAge" class="neuro-slider" min="0" max="100" value="0" aria-label="Age slider">
@@ -163,8 +162,10 @@
       <!-- Box 2: FlyGym -->
       <div class="approach-box approach-box--reverse reveal" style="--delay:0.1s">
         <div class="approach-media">
-          <img src="https://placehold.co/560x380/101010/1a1a1a?text=Fly+Tracking+Video" alt="FlyGym fly tracking" loading="lazy" class="approach-img">
-          <p class="approach-media-caption">Real-time locomotion tracking — video coming soon</p>
+          <video class="approach-img" autoplay muted loop playsinline style="background:#0d0d0d">
+            <source src="assets/flygym/tracking.mp4" type="video/mp4">
+          </video>
+          <p class="approach-media-caption">Real-time locomotion tracking</p>
         </div>
         <div class="approach-text">
           <h3 class="approach-box-title">FlyGym:<br> Our platform technology</h3>
@@ -201,17 +202,6 @@
       <div class="section-footer-cta reveal">
         <a href="news.html#publications" class="btn-ghost">View all publications →</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ── NEWS ───────────────────────────────────────────────── -->
-  <section id="news" class="section">
-    <div class="container">
-      <div class="section-header-row reveal">
-        <h2 class="section-heading">News</h2>
-        <a href="news.html" class="btn-ghost">View all →</a>
-      </div>
-      <div id="newsGrid" class="news-grid"></div>
     </div>
   </section>
 
@@ -286,7 +276,7 @@
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="flygym.html">FlyGym</a></li>
-          <li><a href="pipeline.html">Pipeline</a></li>
+          <li><a href="products.html">Products</a></li>
           <li><a href="news.html">News &amp; Publications</a></li>
           <li><a href="career.html">Careers</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -321,7 +311,7 @@
   <script src="content/news.js"></script>
   <script src="content/publications.js"></script>
   <script src="content/jobs.js"></script>
-  <script src="content/pipeline.js"></script>
+  <script src="content/products.js"></script>
   <script src="app.js"></script>
 
   <!-- ── Neural Network Hero Animation ─────────────────────── -->
@@ -330,7 +320,7 @@
     const cvs = document.getElementById('neuroCvs');
     if (!cvs) return;
     const ctx = cvs.getContext('2d');
-    const W = 560, H = 350;
+    const W = 700, H = 440;
 
     function rand(a, b) { return a + Math.random() * (b - a); }
     function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }

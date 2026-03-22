@@ -30,7 +30,7 @@ const PIPELINE = [
     areaDetail:  'Mobility · Neuromuscular Health · Neuromuscular Communication · Sarcopenia',
     barLevel:    'l3',
     chartColEnd: 6,
-    chartWidth:  '87.5%',
+    chartWidth:  '80%',
     stages: [
       { name: 'Discovery',      status: 'reached' },
       { name: 'Pre-clinical',   status: 'reached' },
@@ -39,8 +39,7 @@ const PIPELINE = [
       { name: 'Market Entry',   status: 'future'  },
     ],
     description: [
-      'Juvion-001 brings together two powerful plant-derived compounds to help the body stay strong and mobile with age. In multiple studies, it has shown a clear ability to improve motor function through midlife and beyond.',
-      'Backed by scientific research, Juvion-001 represents a new step forward in supporting movement and independence as we age. It is expected to launch in select markets in 2027, offering a targeted solution for maintaining motor health over time.',
+      'Juvion-001 brings together two naturally derived compounds. In multiple studies in mice and Drosophila, it has shown significant improvement in motor function throughout life. Juvion-001 is patent pending and targets neuromuscular health, supporting movement and independence as we age. It is expected to launch in select markets in 2027.',
     ],
   },
   {
