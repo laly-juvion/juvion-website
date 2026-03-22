@@ -335,18 +335,18 @@
     function rand(a, b) { return a + Math.random() * (b - a); }
     function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
 
-    // Build nodes
+    // Build nodes — distributed within an ellipse so the canvas looks organic
     const N = 250;
-    const nodes = Array.from({length: N}, () => ({
-      x: rand(20, W - 20),
-      y: rand(20, H - 20),
-      potential: 0,
-      deathAge: Infinity, // assigned below after MST analysis
-      fireTimer: 0,
-      pendingFire: 0,
-      refractory: 0,
-      dead: false,
-    }));
+    const cx = W / 2, cy = H / 2;
+    const rx = W * 0.46, ry = H * 0.44;
+    const nodes = Array.from({length: N}, () => {
+      let x, y;
+      do {
+        x = rand(0, W);
+        y = rand(0, H);
+      } while (((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 > 1);
+      return { x, y, potential: 0, deathAge: Infinity, fireTimer: 0, pendingFire: 0, refractory: 0, dead: false };
+    });
 
     // All candidate pairs sorted by distance
     const MAX_DIST = 200;
@@ -568,6 +568,7 @@
           ctx.stroke();
         }
       });
+
     }
 
     // Slider + auto-play

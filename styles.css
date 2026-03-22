@@ -299,6 +299,8 @@ a { text-decoration: none; color: inherit; }
   width: 100%;
   height: auto;
   display: block;
+  -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 45%, transparent 100%);
 }
 
 .neuro-controls {
