@@ -122,7 +122,7 @@
       </div>
       <div class="hero-right reveal">
         <div class="neuro-wrap" aria-hidden="true">
-          <canvas id="neuroCvs" class="neuro-canvas" width="480" height="300"></canvas>
+          <canvas id="neuroCvs" class="neuro-canvas" width="560" height="350"></canvas>
           <div class="neuro-controls">
             <span class="neuro-label">Young</span>
             <input type="range" id="neuroAge" class="neuro-slider" min="0" max="100" value="0" aria-label="Age slider">
@@ -355,13 +355,13 @@
     const cvs = document.getElementById('neuroCvs');
     if (!cvs) return;
     const ctx = cvs.getContext('2d');
-    const W = 480, H = 300;
+    const W = 560, H = 350;
 
     function rand(a, b) { return a + Math.random() * (b - a); }
     function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
 
     // Build nodes
-    const N = 150;
+    const N = 250;
     const nodes = Array.from({length: N}, () => ({
       x: rand(20, W - 20),
       y: rand(20, H - 20),
@@ -434,7 +434,7 @@
     }
 
     // ~10% of nodes (source + innermost core) survive at max age; rest die 30→95
-    const IMMORTAL = Math.round(N * 0.10) - 1; // extra survivors besides source
+    const IMMORTAL = Math.round(N * 0.50) - 1; // extra survivors besides source
     const mortal = deathOrder.length - IMMORTAL;
     deathOrder.forEach((nodeIdx, rank) => {
       if (rank >= mortal) {
@@ -446,7 +446,12 @@
     });
     nodes[srcIdx].deathAge = Infinity;
     let srcTimer = 0;
-    const SRC_INTERVAL = 70; // frames between source pulses (~2.3s at 60fps)
+    let currentAge = 0;
+    function getSrcInterval() {
+      if (currentAge < 30) return 12;  // Young: dense lightning (~0.2s at 60fps)
+      if (currentAge < 65) return 32;  // Middle: noticeably slower
+      return 70;                        // Old: sparse (already well-rated)
+    }
 
     // Compute median edge length for travel-time scaling
     const edgeLengths = edges.map(e => e[2]).sort((a, b) => a - b);
@@ -458,14 +463,15 @@
     function fireNode(idx) {
       const n = nodes[idx];
       n.fireTimer = 10;
-      n.refractory = 160; // ~2.7s immunity after firing
+      n.refractory = 40; // ~0.67s immunity after firing
       // Schedule each live neighbor to fire after delay proportional to edge length
       adj[idx].forEach(([nb, d]) => {
         if (nodes[nb].dead) return;
         if (nodes[nb].pendingFire > 0) return; // already scheduled
         if (nodes[nb].refractory > 0) return;  // in refractory period — no echo
-        // Propagation probability: ~70% close, ~40% far — wave attenuates naturally
-        if (Math.random() > 0.7 * (1 - d / MAX_DIST * 0.4)) return;
+        // Propagation probability: near-total in Young, attenuating in older ages
+        const spreadChance = currentAge < 30 ? 0.97 : 0.7;
+        if (Math.random() > spreadChance * (1 - d / MAX_DIST * 0.4)) return;
         const delay = Math.round(2 + (d / medianEdge) * 2); // 2–4 frames
         nodes[nb].pendingFire = delay;
         // Spawn signal packet with matching travel time
@@ -478,13 +484,22 @@
       });
     }
 
+    function ageColor(alpha) {
+      const t = Math.min(currentAge / 100, 1);
+      const r = Math.round(254 - t * 124); // 254 → 130
+      const g = Math.round(102 - t * 52);  // 102 → 50
+      const b = Math.round(3   + t * 12);  //   3 → 15
+      return `rgba(${r},${g},${b},${typeof alpha === 'number' ? alpha.toFixed(2) : alpha})`;
+    }
+
     function tick(age) {
+      currentAge = age;
       // Mark dead neurons (source is immortal)
       nodes.forEach((n, i) => { if (i !== srcIdx) n.dead = n.deathAge < age; });
 
-      // Source fires on fixed interval
+      // Source fires on age-dependent interval
       srcTimer++;
-      if (srcTimer >= SRC_INTERVAL) { srcTimer = 0; fireNode(srcIdx); }
+      if (srcTimer >= getSrcInterval()) { srcTimer = 0; fireNode(srcIdx); }
 
       // Count down pending fires; fire when counter hits 0
       nodes.forEach((n, idx) => {
@@ -525,14 +540,14 @@
         const fade = 1 - s.t * 0.6;
         // Glow halo
         const grd = ctx.createRadialGradient(x, y, 0, x, y, 8);
-        grd.addColorStop(0, `rgba(254,102,3,${(0.5 * fade).toFixed(2)})`);
-        grd.addColorStop(1, 'rgba(254,102,3,0)');
+        grd.addColorStop(0, ageColor(0.5 * fade));
+        grd.addColorStop(1, ageColor(0));
         ctx.fillStyle = grd;
         ctx.beginPath();
         ctx.arc(x, y, 8, 0, Math.PI * 2);
         ctx.fill();
         // Core dot
-        ctx.fillStyle = `rgba(254,102,3,${fade.toFixed(2)})`;
+        ctx.fillStyle = ageColor(fade);
         ctx.beginPath();
         ctx.arc(x, y, 2.5, 0, Math.PI * 2);
         ctx.fill();
@@ -552,8 +567,8 @@
         if (fireStrength > 0) {
           const glowR = isSource ? 24 : 18;
           const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
-          grd.addColorStop(0, `rgba(254,102,3,${(0.55 * fireStrength).toFixed(2)})`);
-          grd.addColorStop(1, 'rgba(254,102,3,0)');
+          grd.addColorStop(0, ageColor(0.55 * fireStrength));
+          grd.addColorStop(1, ageColor(0));
           ctx.fillStyle = grd;
           ctx.beginPath();
           ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
@@ -565,13 +580,13 @@
         const alpha = isSource
           ? 0.85
           : (0.22 + fireStrength * 0.78);
-        ctx.fillStyle = `rgba(254,102,3,${alpha.toFixed(2)})`;
+        ctx.fillStyle = ageColor(alpha);
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
         ctx.fill();
         // Source: persistent outer ring
         if (isSource) {
-          ctx.strokeStyle = `rgba(254,102,3,${(0.3 + fireStrength * 0.4).toFixed(2)})`;
+          ctx.strokeStyle = ageColor(0.3 + fireStrength * 0.4);
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.arc(n.x, n.y, 10, 0, Math.PI * 2);
@@ -592,10 +607,20 @@
       });
     }
 
+    // Pre-seed signals so Young stage is immediately active
+    srcTimer = 11;
+    fireNode(srcIdx);
+
+    let oldPause = 0;
     function loop() {
       if (autoPlay) {
-        ageVal += 0.038;
-        if (ageVal > 100) ageVal = 0;
+        if (ageVal >= 100 && oldPause < 180) {
+          oldPause++;             // hold at Old for ~3s (180 frames)
+        } else {
+          if (oldPause >= 180) { ageVal = 0; oldPause = 0; }
+          ageVal += 0.333;
+          if (ageVal > 100) ageVal = 100;
+        }
         if (slider) slider.value = ageVal;
       }
       tick(ageVal);

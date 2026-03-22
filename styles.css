@@ -289,7 +289,7 @@ a { text-decoration: none; color: inherit; }
 /* ── Neural Network Hero Animation ──────────────────────────── */
 .neuro-wrap {
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -308,12 +308,14 @@ a { text-decoration: none; color: inherit; }
 }
 
 .neuro-label {
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 600;
   font-family: Inter, sans-serif;
-  color: #5A5755;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
 }
+.neuro-controls .neuro-label:first-child { color: rgba(254,102,3,0.95); }
+.neuro-controls .neuro-label:last-child  { color: rgba(90,34,13,0.85); }
 
 .neuro-slider {
   flex: 1;
@@ -1290,6 +1292,20 @@ a { text-decoration: none; color: inherit; }
 
 .news-image img { transition: transform 0.5s ease; }
 .news-card:hover .news-image img { transform: scale(1.06); }
+
+.news-image--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--elevated);
+}
+.news-logo-fallback {
+  width: 48px;
+  height: auto;
+  opacity: 0.12;
+  filter: grayscale(1);
+}
+.news-card:hover .news-logo-fallback { transform: none; }
 
 .news-body { padding: 1.5rem; }
 
