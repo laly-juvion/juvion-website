@@ -15,8 +15,8 @@ const TEAM_MEMBERS = [
     bio: 'Neuroscientist with a PhD from Miami University and research experience at Columbia and EPFL. He leads Juvion\'s work on therapeutics and healthy aging.'
   },
   {
-    name: 'Prof. Dr. Brian D. McCabe',
-    role: 'Co-Founder, PhD',
+    name: 'Professor Brian McCabe',
+    role: 'Co-Founder',
     rank: 2,
     initials: 'BM',
     photo: null,
@@ -76,7 +76,7 @@ const ADVISORS = [
 
 const BOARD_MEMBERS = [
   { name: 'Dr. Soumya Banerjee',  role: 'CEO & Co-Founder', initials: 'SB', linkedin: 'https://www.linkedin.com/in/soumya-banerjee83/' },
-  { name: 'Prof. Michael Friese', role: 'Board Member',      initials: 'MF', linkedin: "https://www.linkedin.com/in/michaelfriebe/" },
+  { name: 'Prof. Michael Friebe', role: 'Board Member',      initials: 'MF', linkedin: "https://www.linkedin.com/in/michaelfriebe/" },
 ];
 
 const PUBLICATIONS = [

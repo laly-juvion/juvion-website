@@ -2336,6 +2336,16 @@ body { position: relative; }
   opacity: 0.45;
   pointer-events: none;
 }
+.job-card--empty {
+  pointer-events: none;
+  border-style: dashed;
+  opacity: 0.6;
+}
+.job-card__empty-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
 
 .job-card__info {
   display: flex;
@@ -2633,6 +2643,15 @@ body { position: relative; }
 
 .pipeline-stage--reached {
   color: rgba(254,102,3,0.8);
+}
+.pipeline-stage--complete {
+  color: rgba(254,102,3,0.9);
+  font-weight: 700;
+}
+.pipeline-stage--started {
+  color: rgba(254,102,3,0.7);
+  background: rgba(254,102,3,0.08);
+  border-radius: 4px;
 }
 
 /* Compound label cell */
