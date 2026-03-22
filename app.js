@@ -276,15 +276,18 @@ function renderJobs() {
     el.innerHTML = `<div class="job-card job-card--empty"><p class="job-card__empty-text">There are no available positions at the moment. Check back soon or send an open application below.</p></div>`;
     return;
   }
+  const typeClass = t => ({ 'Full-time': 'fulltime', 'Part-time': 'parttime', 'Internship': 'internship' }[t] || 'fulltime');
   el.innerHTML = src.map((j, i) => `
     <div class="job-card reveal" style="--delay:${i * 0.1}s">
-      <div class="job-card__meta">
-        <span class="job-tag">${j.department}</span>
-        <span class="job-location">${j.location}</span>
-        <span class="job-type">${j.type}</span>
+      <div class="job-card__left">
+        <h3 class="job-card__title">${j.title}</h3>
+        <div class="job-card__meta">
+          <span class="job-card__team">${j.department}</span>
+          <span class="job-card__sep">·</span>
+          <span class="job-card__badge job-card__badge--${typeClass(j.type)}">${j.type}</span>
+        </div>
       </div>
-      <h3 class="job-card__title">${j.title}</h3>
-      <p class="job-card__desc">${j.description}</p>
+      <a href="job.html?id=${i}" class="job-card__view">View role →</a>
     </div>`).join('');
   el.querySelectorAll('.reveal').forEach(e => revealObserver.observe(e));
 }
