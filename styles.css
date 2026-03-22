@@ -2751,7 +2751,6 @@ body { position: relative; }
   border-radius: var(--radius);
   padding: 1.75rem 2rem 1.5rem;
   overflow-x: auto;
-  min-width: 500px;
 }
 
 /* Every row (header + data) shares the same 6-column grid */
@@ -2760,6 +2759,7 @@ body { position: relative; }
   grid-template-columns: 180px repeat(5, 1fr);
   align-items: center;
   min-height: 56px;
+  min-width: 560px;
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
