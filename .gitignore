@@ -2,4 +2,4 @@
 temporary screenshots/
 node_modules/
 feedback.md
-.DS_Store
+**/.DS_Store
