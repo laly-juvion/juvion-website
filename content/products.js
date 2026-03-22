@@ -30,7 +30,7 @@ const PIPELINE = [
     areaDetail:  'Mobility · Neuromuscular Health · Neuromuscular Communication · Sarcopenia',
     barLevel:    'l3',
     chartColEnd: 6,
-    chartWidth:  '80%',
+    chartWidth:  '82%',
     stages: [
       { name: 'Discovery',      status: 'reached' },
       { name: 'Pre-clinical',   status: 'reached' },

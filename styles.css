@@ -2658,6 +2658,11 @@ body { position: relative; }
   border-bottom-color: var(--brand);
 }
 
+@media (max-width: 640px) {
+  .page-subnav { display: none; }
+  #nav.has-subnav { border-bottom-color: var(--border); }
+}
+
 /* ── Pillar header (icon + title inline) ─────────────────────── */
 .pillar-header {
   display: flex;
