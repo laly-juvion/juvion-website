@@ -37,7 +37,7 @@ const TEAM = [
   {
     group:    'core',
     name:     'Laly Robyr',
-    role:     'Lab Head',
+    role:     'Robotics Enineer',
     rank:     3,
     initials: 'LR',
     photo:    'assets/team/laly-robyr.png',
@@ -57,7 +57,7 @@ const TEAM = [
   {
     group:    'core',
     name:     'Sofia Domingues',
-    role:     'Head of Business Development',
+    role:     'Business Development Associate',
     rank:     5,
     initials: 'SD',
     photo:    'assets/team/sofia-domingues.png',
@@ -77,7 +77,7 @@ const TEAM = [
   {
     group:    'collaborator',
     name:     'Dr. Victor Lobato Rios',
-    role:     'Head of Engineering',
+    role:     'Platform Innovation Engineer',
     initials: 'VL',
     linkedin: 'https://www.linkedin.com/in/victor-lobato-rios-986756301',
     email:    null,
