@@ -569,43 +569,6 @@ function initFlies() {
   requestAnimationFrame(tick);
 }
 
-/* ── Page Subnav active highlight ───────────────────────────── */
-const pageSubnav = document.getElementById('pageSubnav');
-if (pageSubnav) {
-  nav.classList.add('has-subnav');
-  pageSubnav.style.top = nav.offsetHeight + 'px';
-
-  const subnavLinks = Array.from(pageSubnav.querySelectorAll('.page-subnav-link'));
-  const subnavTargets = subnavLinks
-    .map(link => document.querySelector(link.getAttribute('href')))
-    .filter(Boolean);
-
-  if (subnavTargets.length) {
-    // Set first link active by default
-    subnavLinks[0].classList.add('active');
-
-    const subnavObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            subnavLinks.forEach(l => l.classList.remove('active'));
-            const active = pageSubnav.querySelector(
-              `.page-subnav-link[href="#${entry.target.id}"]`
-            );
-            if (active) {
-              active.classList.add('active');
-              active.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-            }
-          }
-        });
-      },
-      { threshold: 0.25, rootMargin: `-${nav.offsetHeight + pageSubnav.offsetHeight}px 0px -40% 0px` }
-    );
-
-    subnavTargets.forEach(el => subnavObserver.observe(el));
-  }
-}
-
 /* ── Init ────────────────────────────────────────────────────── */
 renderTeam();
 renderPublications(document.getElementById('pubGrid'));
