@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Careers — Juvion Health Sciences</title>
+  <title>Careers | Juvion Health Sciences</title>
 
   <meta name="description" content="Join Juvion Health Sciences. Work at the intersection of biology and AI to accelerate drug discovery for neurodegenerative diseases.">
   <meta name="robots" content="index, follow">
@@ -11,7 +11,7 @@
 
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://juvionhealthsciences.com/career.html">
-  <meta property="og:title"       content="Careers — Juvion Health Sciences">
+  <meta property="og:title"       content="Careers | Juvion Health Sciences">
   <meta property="og:description" content="Join Juvion Health Sciences. Work at the intersection of biology and AI to accelerate drug discovery for neurodegenerative diseases.">
   <meta property="og:image"       content="https://juvionhealthsciences.com/assets/JuvionLogo.png">
 
@@ -89,7 +89,7 @@
           <span>Careers</span>
         </div>
         <h1 class="page-hero-heading">Join the <em>Mission</em></h1>
-        <p class="page-hero-sub">Help us decode the biology of ageing and build the tools that bring better treatments to patients faster. We're a small team doing ambitious science — every role has real impact.</p>
+        <p class="page-hero-sub">Help us decode the biology of ageing and build the tools that bring better treatments to patients faster. We're a small team doing ambitious science. Every role has real impact.</p>
         <div class="career-hero-actions">
           <a href="#apply" class="btn-primary">Open Application</a>
           <a href="#positions" class="btn-ghost">
@@ -117,7 +117,7 @@
             </svg>
           </div>
           <h3 class="pillar-title">Science First</h3>
-          <p class="pillar-text">Work at the intersection of biology and AI — building platforms grounded in rigorous experimental science, not hype.</p>
+          <p class="pillar-text">Work at the intersection of biology and AI, building platforms grounded in rigorous experimental science, not hype.</p>
         </div>
 
         <div class="pillar-card">
@@ -247,7 +247,7 @@
     <div class="container">
       <div class="section-header reveal">
         <h2 class="section-heading">Open <em>Application</em></h2>
-        <p class="section-sub">Tell us about yourself — we'll reach out when there's a fit.</p>
+        <p class="section-sub">Tell us about yourself. We'll reach out when there's a fit.</p>
       </div>
       <div class="contact-layout reveal">
 
@@ -379,14 +379,14 @@
         try {
           const data = new FormData(careerForm);
           data.set('_replyto', careerForm.querySelector('[name="email"]').value);
-          data.set('_subject', 'Open Application — Juvion Careers');
+          data.set('_subject', 'Open Application | Juvion Careers');
           const res = await fetch('https://formspree.io/f/mvzwyzrg', {
             method: 'POST',
             headers: { 'Accept': 'application/json' },
             body: data,
           });
           if (res.ok) {
-            careerStatus.textContent = 'Application sent — we\'ll be in touch if there\'s a fit.';
+            careerStatus.textContent = 'Application sent. We\'ll be in touch if there\'s a fit.';
             careerStatus.style.color = '#2a9d5c';
             careerForm.reset();
           } else {

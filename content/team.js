@@ -37,7 +37,7 @@ const TEAM = [
   {
     group:    'core',
     name:     'Laly Robyr',
-    role:     'Robotics Enineer',
+    role:     'Robotics Engineer',
     rank:     3,
     initials: 'LR',
     photo:    'assets/team/laly-robyr.png',
