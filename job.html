@@ -36,29 +36,29 @@
   <!-- ── NAVIGATION ─────────────────────────────────────────── -->
   <nav id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand">
+      <a href="/" class="nav-brand">
         <img src="assets/JuvionLogo.png" class="nav-logo-icon" alt="Juvion Health Sciences">
         <span class="logo-sub" style="margin-left:0">Juvion Health Sciences</span>
       </a>
       <div class="nav-links">
-        <a href="index.html"    class="nav-link">Home</a>
-        <a href="flygym.html"   class="nav-link">FlyGym</a>
-        <a href="products.html" class="nav-link">Products</a>
-        <a href="news.html"     class="nav-link">News &amp; Publications</a>
-        <a href="career.html"   class="nav-link">Careers</a>
-        <a href="contact.html"  class="nav-cta">Contact</a>
+        <a href="/"    class="nav-link">Home</a>
+        <a href="/flygym"   class="nav-link">FlyGym</a>
+        <a href="/products" class="nav-link">Products</a>
+        <a href="/news"     class="nav-link">News &amp; Publications</a>
+        <a href="/career"   class="nav-link">Careers</a>
+        <a href="/contact"  class="nav-cta">Contact</a>
       </div>
       <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="nav-mobile" id="navMobile">
-      <a href="index.html"    class="nav-mobile-link">Home</a>
-      <a href="flygym.html"   class="nav-mobile-link">FlyGym</a>
-      <a href="products.html" class="nav-mobile-link">Products</a>
-      <a href="news.html"     class="nav-mobile-link">News &amp; Publications</a>
-      <a href="career.html"   class="nav-mobile-link">Careers</a>
-      <a href="contact.html"  class="nav-mobile-link">Contact</a>
+      <a href="/"    class="nav-mobile-link">Home</a>
+      <a href="/flygym"   class="nav-mobile-link">FlyGym</a>
+      <a href="/products" class="nav-mobile-link">Products</a>
+      <a href="/news"     class="nav-mobile-link">News &amp; Publications</a>
+      <a href="/career"   class="nav-mobile-link">Careers</a>
+      <a href="/contact"  class="nav-mobile-link">Contact</a>
     </div>
   </nav>
 
@@ -67,9 +67,9 @@
     <div class="container">
       <div class="page-hero-inner reveal" id="jobHero">
         <div class="page-breadcrumb">
-          <a href="index.html">Home</a>
+          <a href="/">Home</a>
           <span>→</span>
-          <a href="career.html">Careers</a>
+          <a href="/career">Careers</a>
           <span>→</span>
           <span id="breadcrumbTitle">Open Position</span>
         </div>
@@ -90,7 +90,7 @@
   <footer id="contact" class="footer">
     <div class="container footer-grid">
       <div class="footer-col">
-        <a href="index.html" class="nav-brand footer-brand">
+        <a href="/" class="nav-brand footer-brand">
           <img src="assets/JuvionLogo.png" class="nav-logo-icon" alt="Juvion Health Sciences">
           <span class="logo-sub" style="margin-left:0">Juvion Health Sciences</span>
         </a>
@@ -107,12 +107,12 @@
       <div class="footer-col">
         <h4 class="footer-heading">Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="flygym.html">FlyGym</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="news.html">News &amp; Publications</a></li>
-          <li><a href="career.html">Careers</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/flygym">FlyGym</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/news">News &amp; Publications</a></li>
+          <li><a href="/career">Careers</a></li>
+          <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -123,7 +123,7 @@
           <button type="submit" class="newsletter-btn" aria-label="Subscribe">→</button>
         </form>
         <div class="footer-contact-info">
-          <p>info@juvionls.com</p>
+          <p>info@juvionhs.com</p>
           <p>Lausanne, Switzerland</p>
         </div>
       </div>
@@ -154,7 +154,7 @@
       if (!job) {
         document.getElementById('jobHeroTitle').textContent = 'Position not found';
         document.getElementById('jobDetail').innerHTML =
-          '<p class="text-muted">This position could not be found. <a href="career.html" style="color:var(--brand)">Back to Careers →</a></p>';
+          '<p class="text-muted">This position could not be found. <a href="/career" style="color:var(--brand)">Back to Careers →</a></p>';
         return;
       }
 
@@ -209,7 +209,7 @@
 
         <div class="job-detail-apply">
           <button id="applyToggleBtn" class="btn-primary">Apply for this role →</button>
-          <a href="career.html" class="btn-ghost">← All positions</a>
+          <a href="/career" class="btn-ghost">← All positions</a>
         </div>
 
         <div id="apply-form" class="job-apply-form-wrap job-apply-form-wrap--collapsed">
@@ -249,7 +249,7 @@
               </div>
               <div class="contact-info-block">
                 <h3 class="contact-info-heading">Reach us directly</h3>
-                <a href="mailto:info@juvionls.com" class="contact-info-link">info@juvionls.com</a>
+                <a href="mailto:info@juvionhs.com" class="contact-info-link">info@juvionhs.com</a>
               </div>
               <div class="contact-info-block">
                 <h3 class="contact-info-heading">Location</h3>
@@ -312,7 +312,7 @@
             throw new Error('server');
           }
         } catch {
-          status.textContent = 'Something went wrong. Please email info@juvionls.com directly.';
+          status.textContent = 'Something went wrong. Please email info@juvionhs.com directly.';
           status.style.color = 'rgba(255,80,80,0.85)';
         }
         btn.textContent = 'Send Application →';

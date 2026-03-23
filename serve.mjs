@@ -27,6 +27,8 @@ const mimeTypes = {
 const server = createServer(async (req, res) => {
   let urlPath = req.url.split('?')[0];
   if (urlPath === '/') urlPath = '/index.html';
+  // Mimic Vercel cleanUrls: try appending .html for extension-less paths
+  if (!extname(urlPath)) urlPath += '.html';
   const filePath = join(__dirname, urlPath);
 
   try {

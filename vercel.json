@@ -1,3 +1,11 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/flygym.html",   "destination": "/flygym",   "permanent": true },
+    { "source": "/products.html", "destination": "/products", "permanent": true },
+    { "source": "/news.html",     "destination": "/news",     "permanent": true },
+    { "source": "/career.html",   "destination": "/career",   "permanent": true },
+    { "source": "/contact.html",  "destination": "/contact",  "permanent": true },
+    { "source": "/job.html",      "destination": "/job",      "permanent": true }
+  ]
 }
