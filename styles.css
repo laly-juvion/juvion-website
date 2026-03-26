@@ -2131,10 +2131,11 @@ a { text-decoration: none; color: inherit; }
   .section { padding: 5rem 0; }
   .hero-heading { font-size: 3rem; }
   .hero-grid { padding-top: 2rem; padding-bottom: 4rem; }
-  .stats-grid,
+    .stats-grid,
   .stats-grid--4 { grid-template-columns: 1fr 1fr; gap: 0; }
   .stat-divider { display: none; }
-  .stat-item { border-bottom: 1px solid var(--border); }
+  .stats-grid--4 .stat-item:nth-child(1),
+  .stats-grid--4 .stat-item:nth-child(3) { border-bottom: 1px solid var(--border); }
   .stats-bar { padding: 2.5rem 0; }
   .pillars-grid { grid-template-columns: 1fr; gap: 1rem; }
   .pub-grid { grid-template-columns: 1fr; }
