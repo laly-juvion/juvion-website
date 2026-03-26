@@ -321,6 +321,13 @@ function renderPipeline() {
           : '';
         return `<span class="pcd-stage pcd-stage--${s.status}">${s.name}</span>${arrow}`;
       }).join('');
+      const metaHTML = (c.target || c.indication || c.whySelected || c.timeline) ? `
+        <dl class="pcd-meta">
+          ${c.target      ? `<div class="pcd-meta-row"><dt>Targets</dt><dd>${c.target}</dd></div>` : ''}
+          ${c.indication  ? `<div class="pcd-meta-row"><dt>Indication</dt><dd>${c.indication}</dd></div>` : ''}
+          ${c.whySelected ? `<div class="pcd-meta-row"><dt>Why selected</dt><dd>${c.whySelected}</dd></div>` : ''}
+          ${c.timeline    ? `<div class="pcd-meta-row"><dt>Timeline</dt><dd>${c.timeline}</dd></div>` : ''}
+        </dl>` : '';
       return `
         <section class="section${i % 2 === 1 ? ' section--surface' : ''}" id="${c.id.toLowerCase().replace(/-/g, '-')}">
           <div class="container">
@@ -329,13 +336,17 @@ function renderPipeline() {
                 <div class="pcd-tag pipeline-bar--solid pipeline-bar--${c.barLevel}">
                   <div class="pb-body"></div><div class="pb-tip"></div>
                 </div>
-                <div>
+                <div class="pcd-identity">
                   <h2 class="pcd-id">${c.id}</h2>
-                  <p class="pcd-area">${c.areaDetail}</p>
+                  <span class="pcd-area">${c.areaDetail}</span>
+                  ${c.title ? `<p class="pcd-title">${c.id}: ${c.title}</p>` : ''}
                 </div>
               </div>
               <div class="pcd-stages">${stagesHTML}</div>
-              <div class="pcd-body">${c.description.map(p => `<p>${p}</p>`).join('')}</div>
+              <div class="pcd-grid">
+                <div class="pcd-body">${c.description.map(p => `<p>${p}</p>`).join('')}</div>
+                ${metaHTML}
+              </div>
             </div>
           </div>
         </section>`;
@@ -362,6 +373,7 @@ function renderNews(containerEl, limit) {
       <div class="news-body">
         <div class="news-tag">${n.tag}</div>
         <h3 class="news-title">${n.title}</h3>
+        ${n.excerpt ? `<p class="news-excerpt">${n.excerpt}</p>` : ''}
         <p class="news-date">${n.date}</p>
       </div>
     </a>`;
@@ -608,9 +620,21 @@ if (pageSubnav) {
           }
         });
       },
-      { threshold: 0.25, rootMargin: `-${nav.offsetHeight + pageSubnav.offsetHeight}px 0px -40% 0px` }
+      { threshold: 0.15, rootMargin: `-${nav.offsetHeight + pageSubnav.offsetHeight}px 0px -15% 0px` }
     );
 
     subnavTargets.forEach(el => subnavObserver.observe(el));
+
+    // Edge case: activate last subnav link when scrolled to page bottom
+    window.addEventListener('scroll', () => {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 80) {
+        subnavLinks.forEach(l => l.classList.remove('active'));
+        const lastLink = subnavLinks[subnavLinks.length - 1];
+        if (lastLink) {
+          lastLink.classList.add('active');
+          lastLink.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        }
+      }
+    }, { passive: true });
   }
 }
