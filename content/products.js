@@ -44,7 +44,8 @@ const PIPELINE = [
       { name: 'Market Entry',   status: 'future'  },
     ],
     description: [
-      'Juvion-001 brings together two naturally derived compounds. In multiple studies in mice and Drosophila, it has shown significant improvement in motor function throughout life. Juvion-001 is patent pending and targets neuromuscular health, supporting movement and independence as we age. It is expected to launch in select markets in 2027.',
+      'Juvion-001 improves age-dependent mobility decline by more than 40% throughout life. It is a patent-pending solution that targets neuromuscular health, supports movement, reduces falls, helps prevent conditions such as sarcopenia and motor neuropathy, and, importantly, maintains independence regardless of age. It is expected to launch in select markets in 2027.',
+      'Juvion-001 brings together two naturally derived compounds. In multiple studies in mice and Drosophila, it has shown significant improvement in motor function throughout life.',
     ],
   },
   {
