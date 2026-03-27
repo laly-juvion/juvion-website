@@ -58,7 +58,6 @@
       <div class="nav-links">
         <a href="/"    class="nav-link">Home</a>
         <a href="/flygym"   class="nav-link">FlyGym</a>
-        <a href="/flygym#work-with-us" class="nav-link">Partner with Us</a>
         <a href="/products" class="nav-link">Products</a>
         <a href="/news"     class="nav-link">News &amp; Publications</a>
         <a href="/career"   class="nav-link">Careers</a>
@@ -71,7 +70,6 @@
     <div class="nav-mobile" id="navMobile">
       <a href="/"    class="nav-mobile-link">Home</a>
       <a href="/flygym"   class="nav-mobile-link">FlyGym</a>
-      <a href="/flygym#work-with-us" class="nav-mobile-link">Partner with Us</a>
       <a href="/products" class="nav-mobile-link">Products</a>
       <a href="/news"     class="nav-mobile-link">News &amp; Publications</a>
       <a href="/career"   class="nav-mobile-link">Careers</a>
@@ -239,7 +237,7 @@
         <div class="wwu-step">
           <div class="wwu-step-num">03</div>
           <h3 class="wwu-step-title">Receive a full data report</h3>
-          <p class="wwu-step-text">You receive a complete analysis package with statistical results, visualizations, and scientific interpretation.</p>
+          <p class="wwu-step-text">Within 60 days, you receive a complete analysis package with statistical results, visualizations, and scientific interpretation.</p>
         </div>
       </div>
 
@@ -250,12 +248,33 @@
           <li>Full behavioral dataset across all measured endpoints (mobility, lifespan, grip strength)</li>
           <li>PDF summary report with statistical analysis and compound comparison</li>
           <li>Call with the Juvion science team to review findings and discuss next steps</li>
-          <li>Sample report: <a href="#" class="wwu-sample-link">Download an example report ↗</a></li>
+          <li>Sample report: <a href="#" class="wwu-sample-link" id="sampleReportCta">Download a personalized example report ↗</a></li>
         </ul>
         <button class="btn-primary wwu-cta" id="feasibilityCta">Book a feasibility call</button>
       </div>
     </div>
   </section>
+
+  <!-- ── SAMPLE REPORT MODAL ───────────────────────────────── -->
+  <div class="feasibility-modal" id="sampleReportModal" role="dialog" aria-modal="true" aria-label="Download sample report">
+    <div class="feasibility-modal-backdrop" id="sampleReportBackdrop"></div>
+    <div class="feasibility-modal-box">
+      <button class="feasibility-modal-close" id="sampleReportClose" aria-label="Close">✕</button>
+      <h2 class="feasibility-modal-title">Download Sample Report</h2>
+      <p class="feasibility-modal-sub">Enter your details and we'll generate a personalized example FlyGym screening report for your organization.</p>
+      <form class="feasibility-form" id="sampleReportForm">
+        <div class="contact-field">
+          <label for="srCompany" class="contact-label">Company name</label>
+          <input type="text" id="srCompany" name="company" placeholder="Your organization" class="contact-input" required>
+        </div>
+        <div class="contact-field">
+          <label for="srContact" class="contact-label">Contact name <span class="contact-label-optional">(optional)</span></label>
+          <input type="text" id="srContact" name="contact" placeholder="Your name" class="contact-input">
+        </div>
+        <button type="submit" class="contact-submit">Generate &amp; Download PDF →</button>
+      </form>
+    </div>
+  </div>
 
   <!-- ── FEASIBILITY MODAL ──────────────────────────────────── -->
   <div class="feasibility-modal" id="feasibilityModal" role="dialog" aria-modal="true" aria-label="Book a feasibility call">
@@ -770,6 +789,199 @@
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
+  })();
+  </script>
+
+  <!-- ── SAMPLE REPORT MODAL JS ────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2/dist/jspdf.umd.min.js"></script>
+  <script>
+  (function() {
+    const modal    = document.getElementById('sampleReportModal');
+    const openBtn  = document.getElementById('sampleReportCta');
+    const closeBtn = document.getElementById('sampleReportClose');
+    const backdrop = document.getElementById('sampleReportBackdrop');
+    const form     = document.getElementById('sampleReportForm');
+    if (!modal || !openBtn) return;
+
+    function openModal()  { modal.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { modal.classList.remove('is-open'); document.body.style.overflow = ''; }
+
+    openBtn.addEventListener('click', e => { e.preventDefault(); openModal(); });
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const company = document.getElementById('srCompany').value.trim() || 'Your Organization';
+      const contact = document.getElementById('srContact').value.trim();
+      const today   = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+      const W = 210, H = 297;
+
+      // ── Cover page ──────────────────────────────────────────
+      // Background
+      doc.setFillColor(8, 8, 8);
+      doc.rect(0, 0, W, H, 'F');
+
+      // Brand accent bar
+      doc.setFillColor(254, 102, 3);
+      doc.rect(0, 0, 6, H, 'F');
+
+      // Company name chip
+      doc.setFillColor(30, 28, 25);
+      doc.roundedRect(18, 28, 80, 10, 2, 2, 'F');
+      doc.setFontSize(8);
+      doc.setTextColor(254, 102, 3);
+      doc.setFont('helvetica', 'normal');
+      doc.text('PREPARED FOR', 22, 34.5);
+      doc.setTextColor(242, 239, 233);
+      doc.text(company.toUpperCase(), 22 + 36, 34.5);
+
+      // Confidential tag
+      doc.setFontSize(7);
+      doc.setTextColor(120, 116, 110);
+      doc.text('SAMPLE REPORT  ·  CONFIDENTIAL', W - 20, 34.5, { align: 'right' });
+
+      // Main heading
+      doc.setFontSize(32);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(242, 239, 233);
+      doc.text('FlyGym', 18, 90);
+      doc.setFontSize(22);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(254, 102, 3);
+      doc.text('Screening Report', 18, 102);
+
+      // Divider line
+      doc.setDrawColor(50, 48, 44);
+      doc.setLineWidth(0.4);
+      doc.line(18, 112, W - 18, 112);
+
+      // Subtitle block
+      doc.setFontSize(10);
+      doc.setTextColor(160, 155, 148);
+      doc.setFont('helvetica', 'normal');
+      const subtitle = [
+        'This report presents a sample output of the FlyGym behavioral screening',
+        'platform, illustrating the depth of data and analysis delivered to partners.',
+        '',
+        'Assays performed: Mobility · Lifespan · Grip strength · Humanized disease models',
+      ];
+      let y = 122;
+      subtitle.forEach(line => { doc.text(line, 18, y); y += 6; });
+
+      // Meta block
+      y = 175;
+      doc.setFontSize(8);
+      doc.setTextColor(120, 116, 110);
+      doc.text('DATE', 18, y);
+      doc.text('PLATFORM', 80, y);
+      doc.text('STUDY DURATION', 140, y);
+      y += 5;
+      doc.setFontSize(9);
+      doc.setTextColor(242, 239, 233);
+      doc.text(today, 18, y);
+      doc.text('FlyGym v3.0', 80, y);
+      doc.text('60 days', 140, y);
+
+      if (contact) {
+        y += 10;
+        doc.setFontSize(8);
+        doc.setTextColor(120, 116, 110);
+        doc.text('CONTACT', 18, y);
+        y += 5;
+        doc.setFontSize(9);
+        doc.setTextColor(242, 239, 233);
+        doc.text(contact, 18, y);
+      }
+
+      // Footer
+      doc.setFontSize(7);
+      doc.setTextColor(80, 78, 74);
+      doc.text('Juvion Health Sciences  ·  EPFL Innovation Park, Lausanne  ·  juvionhs.com', W / 2, H - 12, { align: 'center' });
+      doc.text('This is a sample report. Data shown is illustrative only.', W / 2, H - 8, { align: 'center' });
+
+      // ── Page 2: Executive Summary ──────────────────────────
+      doc.addPage();
+      doc.setFillColor(8, 8, 8);
+      doc.rect(0, 0, W, H, 'F');
+      doc.setFillColor(254, 102, 3);
+      doc.rect(0, 0, 6, H, 'F');
+
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(242, 239, 233);
+      doc.text('Executive Summary', 18, 36);
+      doc.setDrawColor(50, 48, 44);
+      doc.line(18, 40, W - 18, 40);
+
+      const summaryLines = doc.splitTextToSize(
+        'The compound submitted by ' + company + ' was screened across the full FlyGym behavioral assay panel over a 60-day study period. Results indicate a statistically significant improvement in age-dependent mobility, with treated cohorts maintaining locomotor performance 38% above control at day 42 (p < 0.01). Lifespan extension of 18% was observed relative to the untreated control group. Grip strength data revealed a dose-dependent response consistent with preservation of neuromuscular junction function. No adverse toxicity signals were detected at the tested concentration range.',
+        W - 36
+      );
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(200, 196, 190);
+      doc.text(summaryLines, 18, 50);
+
+      // Key findings chips
+      y = 50 + summaryLines.length * 5 + 10;
+      doc.setFontSize(8);
+      doc.setTextColor(120, 116, 110);
+      doc.text('KEY FINDINGS', 18, y);
+      y += 7;
+      const findings = ['+38% mobility vs control', '+18% lifespan', 'No toxicity detected', 'NMJ function preserved'];
+      findings.forEach((f, i) => {
+        doc.setFillColor(30, 28, 25);
+        doc.roundedRect(18 + i * 48, y - 5, 44, 9, 1.5, 1.5, 'F');
+        doc.setFontSize(7.5);
+        doc.setTextColor(254, 102, 3);
+        doc.text(f, 18 + i * 48 + 22, y, { align: 'center' });
+      });
+
+      y += 18;
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(242, 239, 233);
+      doc.text('Mobility Performance', 18, y);
+      doc.setDrawColor(50, 48, 44);
+      doc.line(18, y + 4, W - 18, y + 4);
+
+      y += 14;
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(200, 196, 190);
+      const mobLines = doc.splitTextToSize(
+        'Locomotion tracking was performed continuously across the full study duration using FlyGym\'s automated camera array. Distance traveled per 10-minute window was averaged across cohorts of n=30 per group. The treated cohort maintained significantly higher locomotor activity throughout the aging period, with divergence from control becoming statistically significant from day 20 onward.',
+        W - 36
+      );
+      doc.text(mobLines, 18, y);
+
+      // Placeholder chart area
+      y += mobLines.length * 5 + 8;
+      doc.setFillColor(18, 16, 14);
+      doc.roundedRect(18, y, W - 36, 55, 2, 2, 'F');
+      doc.setFontSize(8);
+      doc.setTextColor(80, 78, 74);
+      doc.text('[Mobility performance chart — illustrative data]', W / 2, y + 28, { align: 'center' });
+      doc.setFontSize(7);
+      doc.text('Figure 1. Mean locomotor distance (cm/10 min) over lifespan. Treated (orange) vs. Control (grey).', W / 2, y + 57, { align: 'center' });
+
+      // Footer p2
+      doc.setFontSize(7);
+      doc.setTextColor(80, 78, 74);
+      doc.text('Juvion Health Sciences  ·  SAMPLE REPORT', W / 2, H - 8, { align: 'center' });
+      doc.text('2', W - 18, H - 8, { align: 'right' });
+
+      // ── Save ─────────────────────────────────────────────────
+      const filename = 'FlyGym_Sample_Report_' + company.replace(/\s+/g, '_') + '.pdf';
+      doc.save(filename);
+      closeModal();
+      form.reset();
+    });
   })();
   </script>
 

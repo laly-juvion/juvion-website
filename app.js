@@ -325,7 +325,6 @@ function renderPipeline() {
         <dl class="pcd-meta">
           ${c.target      ? `<div class="pcd-meta-row"><dt>Targets</dt><dd>${c.target}</dd></div>` : ''}
           ${c.indication  ? `<div class="pcd-meta-row"><dt>Indication</dt><dd>${c.indication}</dd></div>` : ''}
-          ${c.whySelected ? `<div class="pcd-meta-row"><dt>Why selected</dt><dd>${c.whySelected}</dd></div>` : ''}
           ${c.timeline    ? `<div class="pcd-meta-row"><dt>Timeline</dt><dd>${c.timeline}</dd></div>` : ''}
         </dl>` : '';
       return `
@@ -339,7 +338,7 @@ function renderPipeline() {
                 <div class="pcd-identity">
                   <h2 class="pcd-id">${c.id}</h2>
                   <span class="pcd-area">${c.areaDetail}</span>
-                  ${c.title ? `<p class="pcd-title">${c.id}: ${c.title}</p>` : ''}
+                  ${c.title ? `<p class="pcd-title">${c.title}</p>` : ''}
                 </div>
               </div>
               <div class="pcd-stages">${stagesHTML}</div>

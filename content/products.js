@@ -44,7 +44,6 @@ const PIPELINE = [
       { name: 'Market Entry',   status: 'future'  },
     ],
     description: [
-      'Juvion-001 improves age-dependent mobility decline by more than 40% throughout life. It is a patent-pending solution that targets neuromuscular health, supports movement, reduces falls, helps prevent conditions such as sarcopenia and motor neuropathy, and, importantly, maintains independence regardless of age. It is expected to launch in select markets in 2027.',
       'Juvion-001 brings together two naturally derived compounds. In multiple studies in mice and Drosophila, it has shown significant improvement in motor function throughout life.',
     ],
   },
@@ -56,7 +55,7 @@ const PIPELINE = [
     target:      'NMJ function and hippocampal-equivalent neural circuits',
     indication:  'Combined age-related cognitive and physical decline',
     whySelected: 'Dual behavioral screens in FlyGym revealed improvements in both locomotion and associative memory assays, identifying this compound as a rare dual-endpoint candidate.',
-    timeline:    'Pre-clinical phase, expected regulatory entry 2026',
+    timeline:    'Pre-clinical phase, expected regulatory entry 2027',
     barLevel:    'l2',
     chartColEnd: 4,
     chartWidth:  '100%',
@@ -68,7 +67,7 @@ const PIPELINE = [
       { name: 'Market Entry',   status: 'future'  },
     ],
     description: [
-      'Juvion-002 is a combination of natural compounds designed to support both mobility and memory as we age. It targets the connection between physical movement and cognitive strength, helping maintain independence and quality of life over time.',
+      'Juvion-002 supports both mobility and memory as we age. It targets the connection between physical movement and cognitive strength, helping maintain independence and quality of life over time.',
     ],
   },
   {
@@ -79,7 +78,7 @@ const PIPELINE = [
     target:      'Skeletal muscle atrophy pathways and motor neuron integrity',
     indication:  'Sarcopenia and age-related muscle decline',
     whySelected: 'FlyGym grip strength and lifespan assays identified robust efficacy signals at early-stage screening, with dose-dependent improvements in muscle function across aging fly cohorts.',
-    timeline:    'Discovery complete, pre-clinical entry planned 2026',
+    timeline:    'Discovery complete, expected regulatory entry 2027',
     barLevel:    'l1',
     chartColEnd: 3,
     chartWidth:  '100%',
