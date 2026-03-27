@@ -45,12 +45,12 @@ const TEAM = [
     email:    'l.robyr@juvionls.com',
   },
   {
-    group:    'collaborator', // Will be core when we get a picture
+    group:    'core', 
     name:     'Sebastien Guilmot',
     role:     'Platform Manager',
     rank:     4,
     initials: 'SG',
-    photo:    null,
+    photo:    'assets/team/sebastien-guilmot.png',
     linkedin: 'https://www.linkedin.com/in/sebastien-guilmot/',
     email:    null,
   },
