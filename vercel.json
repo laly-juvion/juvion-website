@@ -1,6 +1,12 @@
 {
   "cleanUrls": true,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.juvionhs.com" }],
+      "destination": "https://juvionhs.com/:path*",
+      "permanent": true
+    },
     { "source": "/flygym.html",   "destination": "/flygym",   "permanent": true },
     { "source": "/products.html", "destination": "/products", "permanent": true },
     { "source": "/news.html",     "destination": "/news",     "permanent": true },
