@@ -133,7 +133,7 @@ function teamFeaturedPanelHTML(m, delay) {
   return `
     <div class="team-featured-panel reveal"${style}>
       <div class="tfp-photo">
-        <img src="${imgSrc}" alt="${m.name}" loading="lazy">
+        <img src="${imgSrc}" alt="${m.name}" width="500" height="500" loading="lazy">
       </div>
       <div class="tfp-content">
         <div class="tfp-name">${m.name}</div>
@@ -155,7 +155,7 @@ function teamCardHTML(m, delay) {
   return `
     <div class="team-card reveal"${style}>
       <div class="team-photo">
-        <img src="${imgSrc}" alt="${m.name}" loading="lazy">
+        <img src="${imgSrc}" alt="${m.name}" width="500" height="500" loading="lazy">
       </div>
       <div class="team-info">
         <div class="team-name">${m.name}</div>
