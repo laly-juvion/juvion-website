@@ -26,7 +26,7 @@ const TEAM = [
   {
     group:    'core',
     name:     'Professor Brian McCabe',
-    role:     'Co-Founder',
+    role:     'Co-Founder & Chairman of the Scientific Advisory Board',
     rank:     2,
     initials: 'BM',
     photo:    'assets/team/brian-mccabe.png',
