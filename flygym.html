@@ -264,12 +264,12 @@
       <p class="feasibility-modal-sub">Enter your details and we'll generate a personalized example FlyGym screening report for your organization.</p>
       <form class="feasibility-form" id="sampleReportForm">
         <div class="contact-field">
-          <label for="srCompany" class="contact-label">Company name</label>
-          <input type="text" id="srCompany" name="company" placeholder="Your organization" class="contact-input" required>
+          <label for="srCompany" class="contact-label">Company name <span class="contact-label-optional">(optional)</span></label>
+          <input type="text" id="srCompany" name="company" placeholder="Your organization" class="contact-input">
         </div>
         <div class="contact-field">
-          <label for="srContact" class="contact-label">Contact name <span class="contact-label-optional">(optional)</span></label>
-          <input type="text" id="srContact" name="contact" placeholder="Your name" class="contact-input">
+          <label for="srCompound" class="contact-label">Compound <span class="contact-label-optional">(optional)</span></label>
+          <input type="text" id="srCompound" name="compound" placeholder="e.g. natural extract, peptide..." class="contact-input">
         </div>
         <button type="submit" class="contact-submit">Generate &amp; Download PDF →</button>
       </form>
@@ -813,9 +813,17 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const company = document.getElementById('srCompany').value.trim() || 'Your Organization';
-      const contact = document.getElementById('srContact').value.trim();
-      const today   = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      const company  = document.getElementById('srCompany').value.trim();
+      const compound = document.getElementById('srCompound').value.trim();
+      const displayCompany = company || 'Your Organization';
+      const today    = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      // Always send to Formspree
+      fetch('https://formspree.io/f/xkopgyyr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ company: company || '(anonymous)', compound: compound || '(not provided)', source: 'Sample Report Download' }),
+      }).catch(() => {});
 
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ unit: 'mm', format: 'a4' });
@@ -838,7 +846,7 @@
       doc.setFont('helvetica', 'normal');
       doc.text('PREPARED FOR', 22, 34.5);
       doc.setTextColor(242, 239, 233);
-      doc.text(company.toUpperCase(), 22 + 36, 34.5);
+      doc.text(displayCompany.toUpperCase(), 22 + 36, 34.5);
 
       // Confidential tag
       doc.setFontSize(7);
@@ -887,15 +895,15 @@
       doc.text('FlyGym v3.0', 80, y);
       doc.text('60 days', 140, y);
 
-      if (contact) {
+      if (compound) {
         y += 10;
         doc.setFontSize(8);
         doc.setTextColor(120, 116, 110);
-        doc.text('CONTACT', 18, y);
+        doc.text('COMPOUND', 18, y);
         y += 5;
         doc.setFontSize(9);
         doc.setTextColor(242, 239, 233);
-        doc.text(contact, 18, y);
+        doc.text(compound, 18, y);
       }
 
       // Footer
@@ -919,7 +927,7 @@
       doc.line(18, 40, W - 18, 40);
 
       const summaryLines = doc.splitTextToSize(
-        'The compound submitted by ' + company + ' was screened across the full FlyGym behavioral assay panel over a 60-day study period. Results indicate a statistically significant improvement in age-dependent mobility, with treated cohorts maintaining locomotor performance 38% above control at day 42 (p < 0.01). Lifespan extension of 18% was observed relative to the untreated control group. Grip strength data revealed a dose-dependent response consistent with preservation of neuromuscular junction function. No adverse toxicity signals were detected at the tested concentration range.',
+        'The compound submitted by ' + displayCompany + ' was screened across the full FlyGym behavioral assay panel over a 60-day study period. Results indicate a statistically significant improvement in age-dependent mobility, with treated cohorts maintaining locomotor performance 38% above control at day 42 (p < 0.01). Lifespan extension of 18% was observed relative to the untreated control group. Grip strength data revealed a dose-dependent response consistent with preservation of neuromuscular junction function. No adverse toxicity signals were detected at the tested concentration range.',
         W - 36
       );
       doc.setFontSize(9);
@@ -977,7 +985,7 @@
       doc.text('2', W - 18, H - 8, { align: 'right' });
 
       // ── Save ─────────────────────────────────────────────────
-      const filename = 'FlyGym_Sample_Report_' + company.replace(/\s+/g, '_') + '.pdf';
+      const filename = 'FlyGym_Sample_Report_' + displayCompany.replace(/\s+/g, '_') + '.pdf';
       doc.save(filename);
       closeModal();
       form.reset();
