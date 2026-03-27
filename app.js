@@ -362,7 +362,7 @@ function renderNews(containerEl, limit) {
   containerEl.innerHTML = items.map((n, i) => {
     const hasPreview = n.previewImage && !n.previewImage.includes('placehold.co');
     const imageHTML = hasPreview
-      ? `<img src="${n.previewImage}" alt="" loading="lazy">`
+      ? `<img src="${n.previewImage}" alt="${n.title}" loading="lazy">`
       : `<img src="assets/JuvionLogo.png" alt="" class="news-logo-fallback">`;
     return `
     <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
@@ -399,7 +399,7 @@ function renderNewsAccordion(containerEl) {
         </div>
         ${n.media && n.media.src ? (n.media.type === 'video'
           ? `<video src="${n.media.src}" class="news-row-img" autoplay loop muted playsinline></video>`
-          : `<img src="${n.media.src}" alt="" class="news-row-img" loading="lazy">`) : ''}
+          : `<img src="${n.media.src}" alt="${n.title}" class="news-row-img" loading="lazy">`) : ''}
       </div>
     </div>`).join('');
 
@@ -428,7 +428,7 @@ function renderNewsHub() {
   if (useCaseEl) {
     useCaseEl.innerHTML = USE_CASES.map((n, i) => `
       <a href="${n.href}" class="news-card reveal group" ${i ? `style="--delay:${i * 0.1}s"` : ''}>
-        <div class="news-image"><img src="${n.image}" alt="" loading="lazy"></div>
+        <div class="news-image"><img src="${n.image}" alt="${n.title}" loading="lazy"></div>
         <div class="news-body">
           ${n.id ? `<div class="pipeline-meta"><span class="pipeline-id">${n.id}</span><span class="pipeline-status">${n.status}</span></div>` : ''}
           <h3 class="news-title">${n.title}</h3>
