@@ -27,12 +27,116 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "MedicalOrganization"],
     "name": "Juvion Health Sciences",
     "url": "https://juvionhs.com",
     "logo": "https://juvionhs.com/assets/JuvionLogo.png",
     "description": "Science-backed therapeutics to preserve neuromuscular pathways for healthy aging.",
-    "address": { "@type": "PostalAddress", "addressLocality": "Lausanne", "addressCountry": "CH" }
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "EPFL Innovation Park, Bâtiment C",
+      "addressLocality": "Lausanne",
+      "postalCode": "1015",
+      "addressRegion": "VD",
+      "addressCountry": "CH"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/juvion-health-sciences/"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Soumya Banerjee",
+      "sameAs": "https://www.linkedin.com/in/soumya-banerjee83/"
+    },
+    "knowsAbout": [
+      "Neuromuscular junction therapeutics",
+      "Healthy aging",
+      "Drosophila behavioral screening",
+      "Drug discovery",
+      "Sarcopenia"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "general",
+      "availableLanguage": ["English", "French"]
+    }
+  }
+  </script>
+
+  <!-- Team Person Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Juvion Health Sciences Core Team",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Person",
+          "name": "Dr. Soumya Banerjee",
+          "jobTitle": "CEO & Co-Founder",
+          "affiliation": { "@type": "Organization", "name": "Juvion Health Sciences" },
+          "sameAs": "https://www.linkedin.com/in/soumya-banerjee83/"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Person",
+          "name": "Professor Brian McCabe",
+          "jobTitle": "Co-Founder & Chairman of the Scientific Advisory Board",
+          "affiliation": { "@type": "Organization", "name": "Juvion Health Sciences" },
+          "sameAs": "https://www.linkedin.com/in/briandmccabe/"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Person",
+          "name": "Laly Robyr",
+          "jobTitle": "Robotics Engineer",
+          "affiliation": { "@type": "Organization", "name": "Juvion Health Sciences" },
+          "sameAs": "https://www.linkedin.com/in/laly-robyr-121024305/"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Person",
+          "name": "Sebastien Guilmot",
+          "jobTitle": "Platform Manager",
+          "affiliation": { "@type": "Organization", "name": "Juvion Health Sciences" },
+          "sameAs": "https://www.linkedin.com/in/sebastien-guilmot/"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "Person",
+          "name": "Sofia Domingues",
+          "jobTitle": "Business Development Associate",
+          "affiliation": { "@type": "Organization", "name": "Juvion Health Sciences" },
+          "sameAs": "https://www.linkedin.com/in/sofiamelodomingues/"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "Person",
+          "name": "Priyanka Dutta Passecker",
+          "jobTitle": "Chief, Platform Operations",
+          "affiliation": { "@type": "Organization", "name": "Juvion Health Sciences" },
+          "sameAs": "https://www.linkedin.com/in/priyankaduttapassecker/"
+        }
+      }
+    ]
   }
   </script>
 
@@ -209,7 +313,7 @@
   <section class="lab-image-section">
     <div class="container">
       <div class="lab-image-wrap reveal">
-        <img src="./assets/lab_work.jpeg" alt="Juvion laboratory" loading="lazy">
+        <img src="./assets/lab_work.jpeg" alt="Scientists at Juvion Health Sciences working in the EPFL neuromuscular research lab" loading="lazy">
         <div class="lab-image-overlay"></div>
         <div class="lab-image-caption">
           <span class="lab-image-caption-tag">Lausanne, Switzerland</span>
