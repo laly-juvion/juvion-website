@@ -66,7 +66,7 @@ const TEAM = [
   },
   {
     group:    'core',
-    name:     'Priyanka Dutta Passecker',
+    name:     'Dr. Priyanka Dutta Passecker',
     role:     'Chief, Platform Operations',
     rank:     6,
     initials: 'PD',
